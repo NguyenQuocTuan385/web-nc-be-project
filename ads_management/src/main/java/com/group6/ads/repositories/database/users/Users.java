@@ -1,5 +1,6 @@
-package com.group6.ads.entities;
-import com.fasterxml.jackson.annotation.JsonBackReference;
+package com.group6.ads.repositories.database.users;
+import com.group6.ads.repositories.database.properties.Property;
+import com.group6.ads.repositories.database.roles.Roles;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
@@ -30,5 +31,5 @@ public class Users {
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
-    private Properties properties;
+    private Property property;
 }

@@ -1,6 +1,7 @@
-package com.group6.ads.entities;
+package com.group6.ads.repositories.database.roles;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.group6.ads.repositories.database.users.Users;
 import jakarta.persistence.*;
 import lombok.*;
 

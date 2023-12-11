@@ -1,8 +1,8 @@
-package com.group6.ads.services;
+package com.group6.ads.services.roles;
 
-import com.group6.ads.dtos.RoleCreateDTO;
-import com.group6.ads.entities.Roles;
-import com.group6.ads.repositories.RoleRepository;
+import com.group6.ads.controllers.roles.models.RoleCreateDTO;
+import com.group6.ads.repositories.database.roles.Roles;
+import com.group6.ads.repositories.database.roles.RoleRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 

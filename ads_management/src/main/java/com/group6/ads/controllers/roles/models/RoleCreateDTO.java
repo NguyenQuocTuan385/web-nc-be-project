@@ -1,4 +1,4 @@
-package com.group6.ads.dtos;
+package com.group6.ads.controllers.roles.models;
 
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.Size;

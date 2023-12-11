@@ -1,8 +1,8 @@
-package com.group6.ads.services;
+package com.group6.ads.services.users;
 
-import com.group6.ads.dtos.UserCreateDTO;
-import com.group6.ads.entities.Users;
-import com.group6.ads.repositories.UserRepository;
+import com.group6.ads.controllers.users.models.UserCreateDTO;
+import com.group6.ads.repositories.database.users.Users;
+import com.group6.ads.repositories.database.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
@@ -28,7 +28,7 @@ public class UserServiceImpl implements UserService {
                 .birthday(users.getBirthday())
                 .avatar(users.getAvatar())
                 .roles(users.getRoles())
-                .properties(users.getProperties())
+                .property(users.getProperty())
                 .build();
         return UserRepository.save(usersCreated);
 

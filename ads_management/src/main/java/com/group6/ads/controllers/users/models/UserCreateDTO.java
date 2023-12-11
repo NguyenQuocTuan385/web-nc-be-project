@@ -1,14 +1,13 @@
-package com.group6.ads.dtos;
+package com.group6.ads.controllers.users.models;
 
-import com.group6.ads.entities.Properties;
-import com.group6.ads.entities.Roles;
+import com.group6.ads.repositories.database.properties.Property;
+import com.group6.ads.repositories.database.roles.Roles;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
-import lombok.Builder;
 import lombok.Data;
 
 import java.time.LocalDate;
@@ -38,5 +37,5 @@ public class UserCreateDTO {
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
-    private Properties properties;
+    private Property property;
 }
