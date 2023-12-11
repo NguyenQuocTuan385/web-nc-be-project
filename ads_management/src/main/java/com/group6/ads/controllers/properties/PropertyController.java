@@ -14,19 +14,31 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${api.prefix}/properties")
+@RequestMapping("${api.prefix}/districts")
 public class PropertyController {
     @NonNull
     final PropertyService propertyService;
 
-    @GetMapping("")
-    ResponseEntity<List<Property>> getAllRoles() {
-        return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAll());
+    @GetMapping
+    ResponseEntity<List<Property>> findAllDistrict() {
+        return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAllByPropertyParentId(1));
+    }
+    @GetMapping("{propertyParentId}")
+    ResponseEntity<List<Property>> findAllByPropertyParentId(@PathVariable Integer propertyParentId) {
+        return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAllByPropertyParentId(propertyParentId));
     }
 
-    @PostMapping("")
-    ResponseEntity<Property> createRoles(@RequestBody @Valid PropertyRequest properties) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(propertyService.createProperties(properties));
+    @PostMapping
+    ResponseEntity<Property> save(@RequestBody @Valid PropertyRequest properties) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(propertyService.save(properties));
     }
-
+    @PutMapping("{id}")
+    ResponseEntity<Property> update(@PathVariable Integer id, @RequestBody @Valid PropertyRequest propertyRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(propertyService.update(id, propertyRequest));
+    }
+    @DeleteMapping("{id}")
+    ResponseEntity<Void> delete(@PathVariable Integer id) {
+        propertyService.delete(id);
+        return ResponseEntity.status(HttpStatus.OK).build();
+    }
 }

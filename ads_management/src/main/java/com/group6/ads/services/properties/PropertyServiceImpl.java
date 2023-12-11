@@ -12,18 +12,36 @@ import java.util.List;
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
     private final PropertyRepository propertyRepository;
-    @Override
-    public List<Property> findAll() {
-        return propertyRepository.findAll();
-    }
 
     @Override
-    public Property createProperties(PropertyRequest properties) {
+    public Property save(PropertyRequest properties) {
         Property propertyCreated = Property.builder()
                 .propertyParentId(properties.getPropertyParentId())
                 .code(properties.getCode())
                 .name(properties.getName())
                 .build();
         return propertyRepository.save(propertyCreated);
+    }
+
+    @Override
+    public List<Property> findAllByPropertyParentId(Integer propertyParentId) {
+        return propertyRepository.findAllByPropertyParentId(propertyParentId);
+    }
+
+    @Override
+    public void delete(Integer id) {
+        if(propertyRepository.existsByPropertyParentId(id)) {
+            throw new RuntimeException("Property has child");
+        }
+        propertyRepository.deleteById(id);
+    }
+
+    @Override
+    public Property update(Integer id, PropertyRequest propertyRequest) {
+        Property property = propertyRepository.findById(id).orElseThrow(() -> new RuntimeException("Property not found"));
+        property.setPropertyParentId(propertyRequest.getPropertyParentId());
+        property.setCode(propertyRequest.getCode());
+        property.setName(propertyRequest.getName());
+        return propertyRepository.save(property);
     }
 }
