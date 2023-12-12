@@ -12,7 +12,7 @@ import lombok.*;
 @Table(name = "properties")
 public class Property {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Integer propertyParentId;
     private String name;
