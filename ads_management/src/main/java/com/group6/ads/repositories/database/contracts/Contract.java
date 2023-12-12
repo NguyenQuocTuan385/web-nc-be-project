@@ -6,8 +6,6 @@ import com.group6.ads.repositories.database.advertises.Advertise;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Date;
-import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Getter

@@ -8,7 +8,7 @@ import lombok.Data;
 import java.time.LocalDateTime;
 
 @Data
-public class ContractRequest {
+public class ContractUpdateRequest {
     @NotBlank
     private String companyName;
 
@@ -32,4 +32,7 @@ public class ContractRequest {
 
     @NotNull(message = "Advertise Id must not be null")
     private Integer advertiseId;
+
+    @NotNull
+    private Integer status;
 }

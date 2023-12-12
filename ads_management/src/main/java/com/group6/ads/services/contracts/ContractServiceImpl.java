@@ -1,6 +1,8 @@
 package com.group6.ads.services.contracts;
 
 import com.group6.ads.controllers.contracts.models.ContractRequest;
+import com.group6.ads.controllers.contracts.models.ContractUpdateRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
 import com.group6.ads.repositories.database.contracts.Contract;
@@ -39,5 +41,29 @@ public class ContractServiceImpl implements ContractService{
                 .advertises(advertiseOfContract)
                 .build();
         return contractRepository.save(newContract);
+    }
+
+    @Override
+    public Contract updateContract(Long id, ContractUpdateRequest contractRequest) {
+        Advertise advertiseOfContract = advertiseRepository
+                .findById(contractRequest.getAdvertiseId())
+                .orElse(null);
+        Contract oldContract = contractRepository.findById(Math.toIntExact(id)).orElse(null);
+
+        if(oldContract == null){
+            throw new NotFoundException("Not found contract with id " + id);
+        }
+
+        oldContract.setStartAt(contractRequest.getStartAt());
+        oldContract.setEndAt(contractRequest.getEndAt());
+        oldContract.setCompanyName(contractRequest.getCompanyName());
+        oldContract.setCompanyEmail(contractRequest.getCompanyEmail());
+        oldContract.setCompanyPhone(contractRequest.getCompanyPhone());
+        oldContract.setCompanyAddress(contractRequest.getCompanyAddress());
+        oldContract.setImage(contractRequest.getImage());
+        oldContract.setStatus(contractRequest.getStatus());
+        oldContract.setAdvertises(advertiseOfContract);
+
+        return contractRepository.save(oldContract);
     }
 }
