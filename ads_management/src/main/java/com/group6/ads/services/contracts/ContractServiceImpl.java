@@ -66,4 +66,11 @@ public class ContractServiceImpl implements ContractService{
 
         return contractRepository.save(oldContract);
     }
+
+    @Override
+    public void deleteContract(Long id) {
+        if(contractRepository.existsById(Math.toIntExact(id)))
+            contractRepository.deleteById(Math.toIntExact(id));
+        else throw new NotFoundException("Can't Delete, can't find contract with id " + id);
+    }
 }

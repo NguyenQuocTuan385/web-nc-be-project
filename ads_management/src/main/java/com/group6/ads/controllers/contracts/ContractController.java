@@ -2,9 +2,7 @@ package com.group6.ads.controllers.contracts;
 
 import com.group6.ads.controllers.contracts.models.ContractRequest;
 import com.group6.ads.controllers.contracts.models.ContractUpdateRequest;
-import com.group6.ads.controllers.properties.models.PropertyRequest;
 import com.group6.ads.repositories.database.contracts.Contract;
-import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.services.contracts.ContractService;
 import jakarta.validation.Valid;
 import lombok.NonNull;
@@ -35,5 +33,11 @@ public class ContractController {
     @PutMapping("/{id}")
     ResponseEntity<Contract> updateContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(contractService.updateContract(id, contractRequest));
+    }
+
+    @DeleteMapping("/{id}")
+    ResponseEntity<String> deleteContract(@PathVariable Long id) {
+        contractService.deleteContract(id);
+        return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);
     }
 }
