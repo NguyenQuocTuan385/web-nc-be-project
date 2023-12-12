@@ -1,7 +1,9 @@
 package com.group6.ads.controllers.users.models;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.roles.Roles;
+import jakarta.persistence.Column;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
 import jakarta.validation.constraints.Email;
@@ -15,7 +17,7 @@ import java.time.LocalDate;
 @Data
 public class UserCreateDTO {
     @NotBlank(message = "Name must be not blank")
-    @Size(min = 1, max = 100, message = "Namme must be between 1 and 50")
+    @Size(min = 1, max = 100, message = "Name must be between 1 and 50")
     private String name;
     @NotBlank(message = "Email must be not blank")
     @Email(message = "Invalid email format")
@@ -31,11 +33,12 @@ public class UserCreateDTO {
 
     private String phone;
 
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Roles roles;
+    @NotNull(message = "Role Id must not be null")
+    @Column(name = "role_id")
+    private Integer roleId;
 
-    @ManyToOne
-    @JoinColumn(name = "property_id", nullable = false)
-    private Property property;
+    @NotNull(message = "Property Id must not be null")
+    @Column(name = "property_id")
+    private Integer propertyId;
+
 }

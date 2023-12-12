@@ -8,4 +8,6 @@ import java.util.List;
 public interface UserService {
     List<Users> findAll();
     Users createUsers(UserCreateDTO users);
+    Users updateUsers(UserCreateDTO users, Integer theId);
+
 }
