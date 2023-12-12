@@ -32,7 +32,8 @@ public class Contract {
     private String companyEmail;
     private String companyPhone;
     private String companyAddress;
-    private Boolean status;
+    private Integer status;
+    private String image;
 
     @ManyToOne
     @JoinColumn(name = "advertise_id", nullable = false)

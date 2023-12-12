@@ -34,7 +34,8 @@ public class ContractServiceImpl implements ContractService{
                 .companyEmail(contractRequest.getCompanyEmail())
                 .companyPhone(contractRequest.getCompanyPhone())
                 .companyAddress(contractRequest.getCompanyAddress())
-                .status(false)
+                .image(contractRequest.getImage())
+                .status(0)
                 .advertises(advertiseOfContract)
                 .build();
         return contractRepository.save(newContract);
