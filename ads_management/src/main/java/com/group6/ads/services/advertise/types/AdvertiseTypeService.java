@@ -15,4 +15,8 @@ public interface AdvertiseTypeService {
     List<AdvertiseType> findAll();
 
     AdvertiseType createAdvertiseType(AdvertiseTypeRequest advertiseTypeRequest);
+
+    AdvertiseType updateAdvertiseType(Integer id, AdvertiseTypeRequest advertiseTypeRequest);
+
+    void deleteAdvertiseType(Integer id);
 }

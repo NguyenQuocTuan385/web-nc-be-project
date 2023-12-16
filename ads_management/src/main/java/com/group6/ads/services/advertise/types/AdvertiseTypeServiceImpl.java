@@ -17,7 +17,7 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class AdvertiseTypeServiceImpl implements AdvertiseTypeService{
+public class AdvertiseTypeServiceImpl implements AdvertiseTypeService {
     @NonNull
     final AdvertiseTypeRepository advertiseTypeRepository;
 
@@ -34,4 +34,22 @@ public class AdvertiseTypeServiceImpl implements AdvertiseTypeService{
                 .build());
     }
 
+    @Override
+    public AdvertiseType updateAdvertiseType(Integer id, AdvertiseTypeRequest advertiseTypeRequest) {
+        AdvertiseType advertiseType = advertiseTypeRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Property not found"));
+
+        advertiseType.setName(advertiseTypeRequest.getName());
+        advertiseType.setDescription(advertiseTypeRequest.getDescription());
+        return advertiseTypeRepository.save(advertiseType);
+    }
+
+    @Override
+    public void deleteAdvertiseType(Integer id) {
+        AdvertiseType advertiseType = advertiseTypeRepository
+                .findById(id)
+                .orElseThrow(() -> new RuntimeException("Property not found"));
+        advertiseTypeRepository.delete(advertiseType);
+    }
 }
