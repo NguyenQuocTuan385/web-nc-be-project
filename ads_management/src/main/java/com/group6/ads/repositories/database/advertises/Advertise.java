@@ -34,7 +34,7 @@ public class Advertise {
     private Integer locationId;
     private Integer adsTypeId;
 
-    @OneToMany(mappedBy = "advertises", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<Contract> contracts;
+//    @OneToMany(mappedBy = "advertises", cascade = CascadeType.ALL)
+//    @JsonManagedReference
+    private Integer contracts;
 }

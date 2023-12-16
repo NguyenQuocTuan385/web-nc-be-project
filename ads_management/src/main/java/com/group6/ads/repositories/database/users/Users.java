@@ -24,12 +24,12 @@ public class Users {
     private String avatar;
     private String phone;
 
-
-    @ManyToOne
-    @JoinColumn(name = "role_id", nullable = false)
-    private Roles roles;
-
-    @ManyToOne
-    @JoinColumn(name = "property_id", nullable = false)
-    private Property property;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "role_id", nullable = false)
+    private Integer roles;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "property_id", nullable = false)
+    private Integer property;
 }

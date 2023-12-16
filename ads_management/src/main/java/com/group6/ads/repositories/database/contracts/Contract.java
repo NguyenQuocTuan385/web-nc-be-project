@@ -32,9 +32,9 @@ public class Contract {
     private String companyAddress;
     private Integer status;
     private String image;
-
-    @ManyToOne
-    @JoinColumn(name = "advertise_id", nullable = false)
-    @JsonBackReference
-    private Advertise advertises;
+//
+//    @ManyToOne
+//    @JoinColumn(name = "advertise_id", nullable = false)
+//    @JsonBackReference
+//    private Advertise advertises;
 }
