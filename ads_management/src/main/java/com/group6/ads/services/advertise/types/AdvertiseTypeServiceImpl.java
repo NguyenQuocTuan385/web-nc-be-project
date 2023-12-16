@@ -7,6 +7,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 
 /**
@@ -31,6 +32,7 @@ public class AdvertiseTypeServiceImpl implements AdvertiseTypeService {
         return advertiseTypeRepository.save(AdvertiseType.builder()
                 .name(advertiseTypeRequest.getName())
                 .description(advertiseTypeRequest.getDescription())
+                .createdAt(LocalDateTime.now())
                 .build());
     }
 

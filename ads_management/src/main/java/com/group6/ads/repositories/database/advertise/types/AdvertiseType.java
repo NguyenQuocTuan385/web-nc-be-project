@@ -15,6 +15,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Set;
 
 /**
@@ -36,5 +37,10 @@ public class AdvertiseType {
     private Integer id;
     private String name;
     private String description;
+    private LocalDateTime createdAt;
+
+    @OneToMany(mappedBy = "adsTypeId", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Advertise> advertises;
 }
 

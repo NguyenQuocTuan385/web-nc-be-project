@@ -1,7 +1,7 @@
 package com.group6.ads.services.users;
 
 import com.group6.ads.controllers.users.models.UserCreateDTO;
-import com.group6.ads.repositories.database.users.Users;
+import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.repositories.database.users.UserRepository;
 import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -14,23 +14,23 @@ public class UserServiceImpl implements UserService {
     private final UserRepository UserRepository;
 
     @Override
-    public List<Users> findAll() {
+    public List<User> findAll() {
         return UserRepository.findAll();
     }
 
     @Override
-    public Users createUsers(UserCreateDTO users) {
-        Users usersCreated = Users.builder()
+    public User createUsers(UserCreateDTO users) {
+        User userCreated = User.builder()
                 .name(users.getName())
                 .password(users.getPassword())
                 .email(users.getEmail())
                 .phone(users.getPhone())
                 .birthday(users.getBirthday())
                 .avatar(users.getAvatar())
-                .roles(users.getRoles())
-                .property(users.getProperty())
+//                .roles(users.getRoles())
+//                .property(users.getProperty())
                 .build();
-        return UserRepository.save(usersCreated);
+        return UserRepository.save(userCreated);
 
     }
 }
