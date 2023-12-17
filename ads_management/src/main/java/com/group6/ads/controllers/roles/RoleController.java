@@ -1,6 +1,6 @@
 package com.group6.ads.controllers.roles;
 
-import com.group6.ads.controllers.roles.models.RoleCreateDTO;
+import com.group6.ads.controllers.roles.models.RoleCreateRequest;
 import com.group6.ads.repositories.database.roles.Roles;
 import com.group6.ads.services.roles.RoleService;
 import jakarta.validation.Valid;
@@ -24,7 +24,7 @@ public class RoleController{
     }
 
     @PostMapping("")
-    ResponseEntity<Roles> createRoles(@RequestBody @Valid RoleCreateDTO roles) {
+    ResponseEntity<Roles> createRoles(@RequestBody @Valid RoleCreateRequest roles) {
         return ResponseEntity.status(HttpStatus.CREATED).body(roleService.createRoles(roles));
     }
 

@@ -14,27 +14,27 @@ import java.time.LocalDateTime;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "contract")
+@Table(name = "contracts")
 public class Contract {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
 
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime startAt;
-
-    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
-    private LocalDateTime endAt;
-
     private String companyName;
     private String companyEmail;
     private String companyPhone;
     private String companyAddress;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime startAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime endAt;
+
     private Integer status;
     private String image;
 
     @ManyToOne
     @JoinColumn(name = "advertise_id", nullable = false)
     @JsonBackReference
-    private Advertise advertises;
+    private Advertise advertise;
 }

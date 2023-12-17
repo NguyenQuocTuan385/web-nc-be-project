@@ -1,7 +1,7 @@
 package com.group6.ads.repositories.database.roles;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.users.Users;
+import com.group6.ads.repositories.database.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,7 +16,7 @@ import java.util.Set;
 @Table(name = "roles")
 public class Roles {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     @Column(name = "id")
     private Integer id;
 
@@ -24,5 +24,5 @@ public class Roles {
     private String description;
     @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
     @JsonManagedReference
-    private Set<Users> users;
+    private Set<User> users;
 }

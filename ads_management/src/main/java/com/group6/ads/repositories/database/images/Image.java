@@ -1,13 +1,13 @@
-package com.group6.ads.repositories.database.report.forms;
+package com.group6.ads.repositories.database.images;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.reports.Report;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.JoinColumn;
+import jakarta.persistence.ManyToOne;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -15,12 +15,10 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Set;
-
 /**
- * com.group6.ads.repositories.database.report.forms
+ * com.group6.ads.repositories.database.images
  * Create by Dang Ngoc Tien
- * Date 12/12/2023 - 12:54 PM
+ * Date 12/17/2023 - 12:10 AM
  * Description: ...
  */
 @Getter
@@ -29,15 +27,19 @@ import java.util.Set;
 @AllArgsConstructor
 @Entity
 @Builder
-@Table(name = "report_forms")
-public class ReportForm {
+@Table(name = "images")
+public class Image {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private String name;
-    private String description;
+    private String imgUrl;
+    private Integer locationEditId;
 
-    @OneToMany(mappedBy = "reportForm", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<Report> reports;
+    @ManyToOne
+    @JoinColumn(name = "location_id")
+    private Location location;
+
+    @ManyToOne
+    @JoinColumn(name = "report_id")
+    private Report report;
 }
