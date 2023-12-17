@@ -16,6 +16,6 @@ public class AdvertiseTypeRequest {
     @Size(min = 1, max = 50, message = "Name must be between 1 and 50")
     private String name;
     @NotBlank(message = "description is not blank")
-    @Size(min = 1, max = 256, message = "description must be between 1 and 50")
+    @Size(min = 1, max = 256, message = "description must be between 1 and 256")
     private String description;
 }
