@@ -36,10 +36,10 @@ public class Image {
     private Integer locationEditId;
 
     @ManyToOne
-    @JoinColumn(name = "location_id", nullable = false)
+    @JoinColumn(name = "location_id")
     private Location location;
 
     @ManyToOne
-    @JoinColumn(name = "report_id", nullable = false)
+    @JoinColumn(name = "report_id")
     private Report report;
 }
