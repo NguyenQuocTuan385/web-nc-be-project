@@ -1,4 +1,4 @@
-package com.group6.ads.repositories.database.localtions;
+package com.group6.ads.repositories.database.locations;
 
 import org.springframework.data.jpa.repository.JpaRepository;
 

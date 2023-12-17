@@ -1,7 +1,7 @@
 package com.group6.ads.repositories.database.properties;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.localtions.Location;
+import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.users.User;
 import jakarta.persistence.*;
 import lombok.*;

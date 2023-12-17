@@ -1,6 +1,6 @@
 package com.group6.ads.repositories.database.images;
 
-import com.group6.ads.repositories.database.localtions.Location;
+import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.reports.Report;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

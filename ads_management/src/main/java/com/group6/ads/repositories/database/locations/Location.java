@@ -1,4 +1,4 @@
-package com.group6.ads.repositories.database.localtions;
+package com.group6.ads.repositories.database.locations;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;

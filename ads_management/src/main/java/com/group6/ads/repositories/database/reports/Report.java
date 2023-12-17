@@ -3,7 +3,7 @@ package com.group6.ads.repositories.database.reports;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.images.Image;
-import com.group6.ads.repositories.database.localtions.Location;
+import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;

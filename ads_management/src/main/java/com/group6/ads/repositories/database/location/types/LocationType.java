@@ -1,7 +1,7 @@
 package com.group6.ads.repositories.database.location.types;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.localtions.Location;
+import com.group6.ads.repositories.database.locations.Location;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
