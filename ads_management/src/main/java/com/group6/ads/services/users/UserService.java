@@ -9,6 +9,4 @@ public interface UserService {
     List<User> findAll();
     User createUsers(UserRequest users);
     User updateUsers(UserRequest users, Integer theId);
-
-    List<User> findAll1();
 }
