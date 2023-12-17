@@ -1,6 +1,8 @@
 package com.group6.ads.services.reports;
 
+import com.group6.ads.controllers.report.forms.models.ReportUpdateRequest;
 import com.group6.ads.controllers.reports.models.ReportCreateRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
 import com.group6.ads.repositories.database.images.Image;
@@ -11,8 +13,9 @@ import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
 import com.group6.ads.repositories.database.reports.Report;
 import com.group6.ads.repositories.database.reports.ReportRepository;
-import com.group6.ads.repositories.database.roles.RoleRepository;
+import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -53,16 +56,48 @@ public class ReportServiceImpl implements ReportService{
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        // TODO: add image urls to image table after add new report
-//        LocationEd
-//        for (String image : imageUrlsList) {
-//            Image img = Image.builder()
-//                    .imgUrl(image)
-//                    .location(location)
-//                    .locationEditId()
-//                    .build();
-//        }
+        Report tmp = reportRepository.save(newReport);
 
-        return reportRepository.save(newReport);
+        // save img url to images table
+        for (String image : imageUrlsList) {
+            Image img = Image.builder()
+                    .imgUrl(image)
+                    .location(location)
+                    .locationEditId(location.getLocationEditId())
+                    .report(tmp)
+                    .build();
+
+            imageRepository.save(img);
+        }
+
+        return tmp;
+    }
+
+    @Override
+    public Report updateReport(ReportUpdateRequest reportRequest, Integer reportId) {
+        Report currentReport = reportRepository.findById(reportId).orElseThrow();
+
+        currentReport.setStatus(reportRequest.getStatus());
+        currentReport.setReply(reportRequest.getReply());
+
+        return reportRepository.save(currentReport);
+    }
+
+    @Override
+    @Transactional
+    public void deleteReport(Integer reportId) {
+        Report rp = reportRepository
+                .findById(reportId)
+                .orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
+
+        // delete image of this report
+        try{
+            imageRepository.deleteByReportId(reportId);
+        }
+        catch (Exception e) {
+            throw new NotFoundException("Not found Images with this id");
+        }
+
+        reportRepository.delete(rp);
     }
 }
