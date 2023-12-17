@@ -1,6 +1,7 @@
 package com.group6.ads.repositories.database.users;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group6.ads.repositories.database.properties.Property;
-import com.group6.ads.repositories.database.roles.Roles;
+import com.group6.ads.repositories.database.roles.Role;
 import jakarta.persistence.*;
 import lombok.*;
 import java.time.LocalDate;
@@ -24,10 +25,12 @@ public class User {
     private String avatar;
     private String phone;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
-    private Roles roles;
+    private Role roles;
 
+    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
