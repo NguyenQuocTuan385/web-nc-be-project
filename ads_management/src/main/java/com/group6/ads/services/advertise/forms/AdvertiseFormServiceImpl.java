@@ -29,10 +29,11 @@ public class AdvertiseFormServiceImpl implements AdvertiseFormService {
 
     @Override
     public AdvertiseForm create(AdvertiseFormRequest advertiseFormRequest) {
-        AdvertiseForm advertiseForm = new AdvertiseForm();
-        advertiseForm.setName(advertiseFormRequest.getName());
-        advertiseForm.setDescription(advertiseFormRequest.getDescription());
-        advertiseForm.setCreatedAt(LocalDateTime.now());
+        AdvertiseForm advertiseForm = AdvertiseForm.builder()
+                .name(advertiseFormRequest.getName())
+                .description(advertiseFormRequest.getDescription())
+                .createdAt(LocalDateTime.now())
+                .build();
         return advertiseFormRepository.save(advertiseForm);
     }
 
