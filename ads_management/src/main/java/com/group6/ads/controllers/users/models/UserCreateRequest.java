@@ -13,7 +13,7 @@ import lombok.Data;
 import java.time.LocalDate;
 
 @Data
-public class UserCreateDTO {
+public class UserCreateRequest {
     @NotBlank(message = "Name must be not blank")
     @Size(min = 1, max = 100, message = "Namme must be between 1 and 50")
     private String name;
@@ -33,9 +33,9 @@ public class UserCreateDTO {
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
-    private Integer roles;
+    private Roles roles;
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
-    private Integer property;
+    private Property property;
 }

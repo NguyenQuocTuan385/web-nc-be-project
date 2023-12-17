@@ -1,6 +1,6 @@
 package com.group6.ads.services.users;
 
-import com.group6.ads.controllers.users.models.UserCreateDTO;
+import com.group6.ads.controllers.users.models.UserCreateRequest;
 import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.repositories.database.users.UserRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public User createUsers(UserCreateDTO users) {
+    public User createUsers(UserCreateRequest users) {
         User userCreated = User.builder()
                 .name(users.getName())
                 .password(users.getPassword())
