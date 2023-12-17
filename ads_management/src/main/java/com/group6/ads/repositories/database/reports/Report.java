@@ -1,5 +1,6 @@
 package com.group6.ads.repositories.database.reports;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.images.Image;
@@ -49,14 +50,17 @@ public class Report {
 
     @ManyToOne
     @JoinColumn(name = "report_form_id", nullable = false)
+    @JsonBackReference
     private ReportForm reportForm;
 
     @ManyToOne
     @JoinColumn(name = "advertise_id", nullable = false)
+    @JsonBackReference
     private Advertise advertise;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
+    @JsonBackReference
     private Location location;
 
     @OneToMany(mappedBy = "report", cascade = CascadeType.ALL)
