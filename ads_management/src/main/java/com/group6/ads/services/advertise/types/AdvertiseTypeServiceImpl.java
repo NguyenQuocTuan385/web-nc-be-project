@@ -3,12 +3,13 @@ package com.group6.ads.services.advertise.types;
 import com.group6.ads.controllers.advertise.types.models.AdvertiseTypeRequest;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeRepository;
+import com.group6.ads.util.PageRequestCustom;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * com.group6.ads.services.adversite.types
@@ -23,8 +24,8 @@ public class AdvertiseTypeServiceImpl implements AdvertiseTypeService {
     final AdvertiseTypeRepository advertiseTypeRepository;
 
     @Override
-    public List<AdvertiseType> findAll() {
-        return advertiseTypeRepository.findAll();
+    public Page<AdvertiseType> findAll(String search, PageRequestCustom pageRequestCustom) {
+        return advertiseTypeRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
     @Override

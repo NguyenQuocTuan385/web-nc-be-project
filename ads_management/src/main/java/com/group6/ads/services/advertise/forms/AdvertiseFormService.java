@@ -2,7 +2,8 @@ package com.group6.ads.services.advertise.forms;
 
 import com.group6.ads.controllers.advertise.forms.models.AdvertiseFormRequest;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
-import jakarta.transaction.Transactional;
+import com.group6.ads.util.PageRequestCustom;
+import org.springframework.data.domain.Page;
 
 import java.util.List;
 
@@ -13,7 +14,7 @@ import java.util.List;
  * Description: ...
  */
 public interface AdvertiseFormService {
-    List<AdvertiseForm> findAll();
+    Page<AdvertiseForm> findAll(String search, PageRequestCustom pageRequestCustom);
 
     AdvertiseForm create(AdvertiseFormRequest advertiseFormRequest);
 

@@ -3,12 +3,13 @@ package com.group6.ads.services.advertise.forms;
 import com.group6.ads.controllers.advertise.forms.models.AdvertiseFormRequest;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;
+import com.group6.ads.util.PageRequestCustom;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 /**
  * com.group6.ads.services.advertise.forms
@@ -23,8 +24,8 @@ public class AdvertiseFormServiceImpl implements AdvertiseFormService {
     final AdvertiseFormRepository advertiseFormRepository;
 
     @Override
-    public List<AdvertiseForm> findAll() {
-        return advertiseFormRepository.findAll();
+    public Page<AdvertiseForm> findAll(String search, PageRequestCustom pageRequestCustom) {
+        return advertiseFormRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
     @Override
