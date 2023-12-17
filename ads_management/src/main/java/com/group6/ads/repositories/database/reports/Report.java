@@ -1,5 +1,6 @@
 package com.group6.ads.repositories.database.reports;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.images.Image;
@@ -45,6 +46,10 @@ public class Report {
     private String phone;
     private String content;
     private Integer status;
+    private String reply;
+    private String reportTypeName;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
 
     @ManyToOne

@@ -14,9 +14,8 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/roles")
-public class RoleController{
+public class RoleController {
     private final RoleService roleService;
-
 
     @GetMapping("")
     ResponseEntity<List<Roles>> getAllRoles() {

@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
                 .phone(users.getPhone())
                 .birthday(users.getBirthday())
                 .avatar(users.getAvatar())
-//                .roles(users.getRoles())
-//                .property(users.getProperty())
+                // .roles(users.getRoles())
+                // .property(users.getProperty())
                 .build();
         return UserRepository.save(userCreated);
 

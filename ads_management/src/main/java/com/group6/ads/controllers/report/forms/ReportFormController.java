@@ -27,7 +27,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/forms")
-public class ReportFormsController {
+public class ReportFormController {
     @NonNull
     final ReportFormService reportFormService;
 

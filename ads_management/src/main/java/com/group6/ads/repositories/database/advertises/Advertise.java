@@ -1,6 +1,7 @@
 package com.group6.ads.repositories.database.advertises;
 
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.group6.ads.repositories.database.advertise.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.repositories.database.locations.Location;
@@ -8,6 +9,7 @@ import com.group6.ads.repositories.database.reports.Report;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Timestamp;
 import java.util.Set;
 
 @Getter
@@ -24,6 +26,7 @@ public class Advertise {
     private Boolean licensing;
     private Double height;
     private Double width;
+    private Boolean statusEdit;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
@@ -31,11 +34,11 @@ public class Advertise {
 
     @ManyToOne
     @JoinColumn(name = "ads_type_id", nullable = false)
-    private AdvertiseType adsTypeId;
+    private AdvertiseType adsType;
 
-    private Boolean statusEdit;
-    private Integer statusEditId;
-
+    @ManyToOne
+    @JoinColumn(name = "advertise_edit_id", nullable = false)
+    private AdvertiseEdit advertiseEdit;
 
     @OneToMany(mappedBy = "advertise", cascade = CascadeType.ALL)
     @JsonManagedReference

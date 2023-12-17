@@ -14,7 +14,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class ContractServiceImpl implements ContractService{
+public class ContractServiceImpl implements ContractService {
     private final ContractRepository contractRepository;
     private final AdvertiseRepository advertiseRepository;
 
@@ -36,9 +36,9 @@ public class ContractServiceImpl implements ContractService{
                 .companyEmail(contractRequest.getCompanyEmail())
                 .companyPhone(contractRequest.getCompanyPhone())
                 .companyAddress(contractRequest.getCompanyAddress())
-                .image(contractRequest.getImage())
+                .imgUrl(contractRequest.getImage())
                 .status(0)
-//                .advertises(advertiseOfContract)
+                // .advertises(advertiseOfContract)
                 .build();
         return contractRepository.save(newContract);
     }
@@ -50,7 +50,7 @@ public class ContractServiceImpl implements ContractService{
                 .orElse(null);
         Contract oldContract = contractRepository.findById(Math.toIntExact(id)).orElse(null);
 
-        if(oldContract == null){
+        if (oldContract == null) {
             throw new NotFoundException("Not found contract with id " + id);
         }
 
@@ -60,17 +60,18 @@ public class ContractServiceImpl implements ContractService{
         oldContract.setCompanyEmail(contractRequest.getCompanyEmail());
         oldContract.setCompanyPhone(contractRequest.getCompanyPhone());
         oldContract.setCompanyAddress(contractRequest.getCompanyAddress());
-        oldContract.setImage(contractRequest.getImage());
+        oldContract.setImgUrl(contractRequest.getImage());
         oldContract.setStatus(contractRequest.getStatus());
-//        oldContract.setAdvertises(advertiseOfContract);
+        // oldContract.setAdvertises(advertiseOfContract);
 
         return contractRepository.save(oldContract);
     }
 
     @Override
     public void deleteContract(Long id) {
-        if(contractRepository.existsById(Math.toIntExact(id)))
+        if (contractRepository.existsById(Math.toIntExact(id)))
             contractRepository.deleteById(Math.toIntExact(id));
-        else throw new NotFoundException("Can't Delete, can't find contract with id " + id);
+        else
+            throw new NotFoundException("Can't Delete, can't find contract with id " + id);
     }
 }

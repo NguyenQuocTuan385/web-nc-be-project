@@ -1,6 +1,8 @@
 package com.group6.ads.repositories.database.location.types;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
+import com.group6.ads.repositories.database.location.edit.LocationEdit;
 import com.group6.ads.repositories.database.locations.Location;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -41,5 +43,11 @@ public class LocationType {
 
     @OneToMany(mappedBy = "locationType", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private Set<Location> locations;
+
+    @OneToMany(mappedBy = "locationType", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    @JsonIgnore
+    private Set<LocationEdit> locationEdits;
 }

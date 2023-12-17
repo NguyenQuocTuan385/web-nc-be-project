@@ -2,9 +2,9 @@ server:
   port: 8081
 spring:
   datasource:
-    url: jdbc:mysql://localhost:3306/ads_management
+    url: jdbc:mysql://localhost:3306/ads_management_v2
     username: root
-    password:
+    password: huuloc123
   jpa:
     hibernate:
       ddl-auto: update

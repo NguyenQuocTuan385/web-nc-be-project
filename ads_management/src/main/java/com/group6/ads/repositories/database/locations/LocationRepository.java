@@ -1,12 +1,17 @@
 package com.group6.ads.repositories.database.locations;
 
+import com.group6.ads.controllers.locations.models.LocationDetails;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-/**
- * com.group6.ads.repositories.database.localtions
- * Create by Dang Ngoc Tien
- * Date 12/17/2023 - 12:48 AM
- * Description: ...
- */
+import java.util.List;
+import java.util.Optional;
+
+@Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
+    @Query(value = "SELECT * FROM Locations", nativeQuery = true)
+    List<Location> findAllWithDetails();
+
+    Optional<LocationDetails> findLocationsById(Integer id);
 }

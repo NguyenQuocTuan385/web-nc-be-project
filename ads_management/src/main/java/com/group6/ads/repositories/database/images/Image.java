@@ -1,5 +1,6 @@
 package com.group6.ads.repositories.database.images;
 
+import com.group6.ads.repositories.database.location.edit.LocationEdit;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.reports.Report;
 import jakarta.persistence.Entity;
@@ -30,10 +31,9 @@ import lombok.Setter;
 @Table(name = "images")
 public class Image {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String imgUrl;
-    private Integer locationEditId;
 
     @ManyToOne
     @JoinColumn(name = "location_id")
@@ -42,4 +42,8 @@ public class Image {
     @ManyToOne
     @JoinColumn(name = "report_id")
     private Report report;
+
+    @ManyToOne
+    @JoinColumn(name = "location_edit_id")
+    private LocationEdit locationEdit;
 }
