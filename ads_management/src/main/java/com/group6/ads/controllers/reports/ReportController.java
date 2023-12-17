@@ -1,13 +1,12 @@
 package com.group6.ads.controllers.reports;
 
+import com.group6.ads.controllers.reports.models.ReportCreateRequest;
 import com.group6.ads.repositories.database.reports.Report;
 import com.group6.ads.services.reports.ReportService;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -20,5 +19,10 @@ public class ReportController {
     @GetMapping("")
     ResponseEntity<List<Report>> getAllReports(){
         return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll());
+    }
+
+    @PostMapping("")
+    ResponseEntity<Report> createReport(@RequestBody ReportCreateRequest reportCreateRequest){
+        return ResponseEntity.status(HttpStatus.OK).body(reportService.createReport(reportCreateRequest));
     }
 }

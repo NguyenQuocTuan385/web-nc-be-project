@@ -46,6 +46,8 @@ public class Report {
     private String phone;
     private String content;
     private Integer status;
+    private String reportTypeName;
+    private String reply;
     private LocalDateTime createdAt;
 
     @ManyToOne
