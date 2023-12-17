@@ -44,4 +44,11 @@ public class ReportFormServiceImpl implements ReportFormService {
         reportForm.setDescription(reportFormRequest.getDescription());
         return reportFormRepository.save(reportForm);
     }
+
+    @Override
+    public void delete(Integer id) {
+        ReportForm reportForm = reportFormRepository.findById(id)
+                .orElseThrow(() -> new NotFoundException("Report form not found"));
+        reportFormRepository.delete(reportForm);
+    }
 }

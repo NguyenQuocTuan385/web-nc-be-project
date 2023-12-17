@@ -2,6 +2,7 @@ package com.group6.ads.services.advertise.types;
 
 import com.group6.ads.controllers.advertise.types.models.AdvertiseTypeRequest;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
+import jakarta.transaction.Transactional;
 
 import java.util.List;
 
@@ -14,9 +15,12 @@ import java.util.List;
 public interface AdvertiseTypeService {
     List<AdvertiseType> findAll();
 
+    @Transactional
     AdvertiseType createAdvertiseType(AdvertiseTypeRequest advertiseTypeRequest);
 
+    @Transactional
     AdvertiseType updateAdvertiseType(Integer id, AdvertiseTypeRequest advertiseTypeRequest);
 
+    @Transactional
     void deleteAdvertiseType(Integer id);
 }
