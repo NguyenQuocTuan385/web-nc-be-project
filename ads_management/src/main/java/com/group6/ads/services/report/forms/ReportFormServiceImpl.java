@@ -4,8 +4,10 @@ import com.group6.ads.controllers.report.forms.models.ReportFormRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
+import com.group6.ads.util.PageRequestCustom;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -23,8 +25,8 @@ public class ReportFormServiceImpl implements ReportFormService {
     final ReportFormRepository reportFormRepository;
 
     @Override
-    public List<ReportForm> findAll() {
-        return reportFormRepository.findAll();
+    public Page<ReportForm> findAll(String search, PageRequestCustom pageRequestCustom) {
+        return reportFormRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
     @Override

@@ -2,9 +2,8 @@ package com.group6.ads.services.advertise.types;
 
 import com.group6.ads.controllers.advertise.types.models.AdvertiseTypeRequest;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
-import jakarta.transaction.Transactional;
-
-import java.util.List;
+import com.group6.ads.util.PageRequestCustom;
+import org.springframework.data.domain.Page;
 
 /**
  * com.group6.ads.services.adversite.types
@@ -13,7 +12,7 @@ import java.util.List;
  * Description: ...
  */
 public interface AdvertiseTypeService {
-    List<AdvertiseType> findAll();
+    Page<AdvertiseType> findAll(String search, PageRequestCustom pageRequestCustom);
 
     AdvertiseType createAdvertiseType(AdvertiseTypeRequest advertiseTypeRequest);
 
