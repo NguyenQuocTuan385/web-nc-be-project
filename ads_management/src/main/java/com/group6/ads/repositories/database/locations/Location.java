@@ -44,7 +44,7 @@ import java.util.Set;
 @Table(name = "locations")
 public class Location {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
     private Boolean planning;
     private Double latitude;

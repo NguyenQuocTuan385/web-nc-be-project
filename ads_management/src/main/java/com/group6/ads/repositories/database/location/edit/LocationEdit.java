@@ -1,15 +1,11 @@
 package com.group6.ads.repositories.database.location.edit;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
-import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.images.Image;
 import com.group6.ads.repositories.database.location.types.LocationType;
-import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.properties.Property;
-import com.group6.ads.repositories.database.reports.Report;
 import com.group6.ads.repositories.database.users.User;
 import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
@@ -53,6 +49,7 @@ public class LocationEdit {
     private String content;
 
     private LocalDateTime createdAt;
+    private LocalDateTime updatedAt;
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
