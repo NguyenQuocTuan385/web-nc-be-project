@@ -15,12 +15,9 @@ import java.util.List;
 public interface AdvertiseTypeService {
     List<AdvertiseType> findAll();
 
-    @Transactional
     AdvertiseType createAdvertiseType(AdvertiseTypeRequest advertiseTypeRequest);
 
-    @Transactional
     AdvertiseType updateAdvertiseType(Integer id, AdvertiseTypeRequest advertiseTypeRequest);
 
-    @Transactional
     void deleteAdvertiseType(Integer id);
 }

@@ -15,12 +15,9 @@ import java.util.List;
 public interface AdvertiseFormService {
     List<AdvertiseForm> findAll();
 
-    @Transactional
     AdvertiseForm create(AdvertiseFormRequest advertiseFormRequest);
 
-    @Transactional
     AdvertiseForm update(Integer id, AdvertiseFormRequest advertiseFormRequest);
 
-    @Transactional
     void delete(Integer id);
 }
