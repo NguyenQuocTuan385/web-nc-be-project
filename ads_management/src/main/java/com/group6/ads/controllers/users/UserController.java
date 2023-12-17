@@ -17,7 +17,6 @@ import java.util.List;
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/users")
 public class UserController {
-    @NonNull
     private final UserService userService;
 
     @GetMapping("")
@@ -33,10 +32,5 @@ public class UserController {
     @PutMapping("/{id}")
     public ResponseEntity<User> updateUsers(@RequestBody @Valid UserRequest users, @PathVariable Integer id) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.updateUsers(users, id));
-    }
-
-    @GetMapping("/test")
-    public ResponseEntity<List<User>> test() {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll1());
     }
 }
