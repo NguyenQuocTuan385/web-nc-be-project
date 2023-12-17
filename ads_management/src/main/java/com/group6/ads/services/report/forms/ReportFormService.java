@@ -18,4 +18,6 @@ public interface ReportFormService {
     ReportForm create(ReportFormRequest reportFormRequest);
 
     ReportForm update(Integer id, ReportFormRequest reportFormRequest);
+
+    void delete(Integer id);
 }

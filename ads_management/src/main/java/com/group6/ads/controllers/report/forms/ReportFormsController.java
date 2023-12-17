@@ -8,6 +8,7 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.DeleteMapping;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
@@ -44,5 +45,10 @@ public class ReportFormsController {
     @PutMapping("{id}")
     ResponseEntity<ReportForm> update(@PathVariable Integer id, @RequestBody @Valid ReportFormRequest reportFormRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(reportFormService.update(id, reportFormRequest));
+    }
+    @DeleteMapping("{id}")
+    ResponseEntity<Void> delete(@PathVariable Integer id) {
+        reportFormService.delete(id);
+        return ResponseEntity.ok().build();
     }
 }
