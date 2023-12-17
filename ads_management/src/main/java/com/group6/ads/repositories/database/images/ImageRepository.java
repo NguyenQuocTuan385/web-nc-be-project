@@ -1,6 +1,9 @@
 package com.group6.ads.repositories.database.images;
 
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Modifying;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.data.repository.query.Param;
 
 /**
  * com.group6.ads.repositories.database.images
@@ -9,4 +12,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
  * Description: ...
  */
 public interface ImageRepository extends JpaRepository<Image, Integer> {
+    void deleteByReportId(int reportId);
 }
