@@ -1,16 +1,9 @@
 package com.group6.ads.repositories.database.advertise.forms;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.location.edit.LocationEdit;
-import com.group6.ads.repositories.database.locations.Location;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -19,7 +12,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 /**
  * com.group6.ads.repositories.database.advertise.forms
@@ -40,17 +32,5 @@ public class AdvertiseForm {
     private Integer id;
     private String name;
     private String description;
-
-    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "adsForm", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<Location> locations;
-
-    @OneToMany(mappedBy = "adsForm", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<LocationEdit> locationEdits;
 }

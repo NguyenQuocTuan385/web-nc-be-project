@@ -34,6 +34,7 @@ public class Image {
     @GeneratedValue(strategy = GenerationType.AUTO)
     private Integer id;
     private String imgUrl;
+//    private Integer locationEditId;
 
     @ManyToOne
     @JoinColumn(name = "location_id")

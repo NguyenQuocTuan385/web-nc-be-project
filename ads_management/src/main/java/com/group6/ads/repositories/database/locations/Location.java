@@ -51,6 +51,7 @@ public class Location {
     private Double longitude;
     private String address;
     private Boolean statusEdit;
+//    private Integer locationEditId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

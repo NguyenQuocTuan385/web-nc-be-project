@@ -1,8 +1,8 @@
-package com.group6.ads.controllers.advertise.types;
+package com.group6.ads.controllers.advertise.forms;
 
-import com.group6.ads.controllers.advertise.types.models.AdvertiseTypeRequest;
-import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
-import com.group6.ads.services.advertise.types.AdvertiseTypeService;
+import com.group6.ads.controllers.advertise.forms.models.AdvertiseFormRequest;
+import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
+import com.group6.ads.services.advertise.forms.AdvertiseFormService;
 import com.group6.ads.util.PageRequestCustom;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
@@ -21,42 +21,42 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 /**
- * com.group6.ads.controllers.advetise.types
+ * com.group6.ads.controllers.advertise.forms
  * Create by Dang Ngoc Tien
- * Date 12/12/2023 - 11:27 PM
+ * Date 12/17/2023 - 9:16 AM
  * Description: ...
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${api.prefix}/advertise-types")
-public class AdvertiseTypesController {
+@RequestMapping("${api.prefix}/advertise-forms")
+public class AdvertiseFormController {
     @NonNull
-    final AdvertiseTypeService advertiseTypeService;
+    final AdvertiseFormService advertiseFormService;
 
     @GetMapping
-    ResponseEntity<Page<AdvertiseType>> findAl(
+    ResponseEntity<Page<AdvertiseForm>> findAll(
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(advertiseTypeService.findAll(search, pageRequestCustom));
+        return ResponseEntity.ok().body(advertiseFormService.findAll(search, pageRequestCustom));
     }
 
     @PostMapping
-    ResponseEntity<AdvertiseType> createAdvertiseType(@RequestBody @Valid AdvertiseTypeRequest advertiseTypeRequest) {
-        return ResponseEntity.ok(advertiseTypeService.createAdvertiseType(advertiseTypeRequest));
+    ResponseEntity<AdvertiseForm> create(@RequestBody @Valid AdvertiseFormRequest advertiseFormRequest) {
+        return ResponseEntity.ok().body(advertiseFormService.create(advertiseFormRequest));
     }
 
     @PutMapping("{id}")
-    ResponseEntity<AdvertiseType> updateAdvertiseType(@PathVariable Integer id, @RequestBody @Valid AdvertiseTypeRequest advertiseTypeRequest) {
-        return ResponseEntity.ok(advertiseTypeService.updateAdvertiseType(id, advertiseTypeRequest));
+    ResponseEntity<AdvertiseForm> update(@PathVariable Integer id, @RequestBody @Valid AdvertiseFormRequest advertiseFormRequest) {
+        return ResponseEntity.ok().body(advertiseFormService.update(id, advertiseFormRequest));
     }
 
     @DeleteMapping("{id}")
-    ResponseEntity<Void> deleteAdvertiseType(@PathVariable Integer id) {
-        advertiseTypeService.deleteAdvertiseType(id);
+    ResponseEntity<Void> delete(@PathVariable Integer id) {
+        advertiseFormService.delete(id);
         return ResponseEntity.ok().build();
     }
 }

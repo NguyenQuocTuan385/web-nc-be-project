@@ -1,21 +1,15 @@
 package com.group6.ads.repositories.database.report.forms;
 
-import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.reports.Report;
-import jakarta.persistence.CascadeType;
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-import jakarta.persistence.OneToMany;
 import jakarta.persistence.Table;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
-
-import java.util.Set;
 
 /**
  * com.group6.ads.repositories.database.report.forms
@@ -36,8 +30,4 @@ public class ReportForm {
     private Integer id;
     private String name;
     private String description;
-
-    @OneToMany(mappedBy = "reportForm", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<Report> reports;
 }

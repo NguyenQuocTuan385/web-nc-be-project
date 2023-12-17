@@ -15,4 +15,6 @@ import java.util.List;
 public interface ImageRepository extends JpaRepository<Image, Integer> {
     @Query(nativeQuery = true, value = "SELECT * FROM images WHERE location_id=:id")
     List<Image> findImageByLocationId(@Param("id") Integer id);
+
+    void deleteByReportId(int reportId);
 }
