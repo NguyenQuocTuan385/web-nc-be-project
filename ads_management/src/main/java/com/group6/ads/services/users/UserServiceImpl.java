@@ -1,6 +1,6 @@
 package com.group6.ads.services.users;
 
-import com.group6.ads.controllers.users.models.UserCreateDTO;
+import com.group6.ads.controllers.users.models.UserRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.properties.PropertyRepository;
@@ -26,7 +26,7 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Users createUsers(UserCreateDTO users) {
+    public Users createUsers(UserRequest users) {
         Property property=propertyRepository.findById(users.getPropertyId()).orElse(null);
         Roles roles=roleRepository.findById(users.getRoleId()).orElse(null);
         Users usersCreated = Users.builder()
@@ -43,12 +43,9 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
-    public Users updateUsers(UserCreateDTO users, Integer theId) {
-        Users foundUsers = UserRepository.findById(theId).orElse(null);
+    public Users updateUsers(UserRequest users, Integer theId) {
+        Users foundUsers = UserRepository.findById(theId).orElseThrow(() -> new NotFoundException("User not found"));
 
-        if (foundUsers == null) {
-            throw new NotFoundException("Cannot find actor with id = " + theId);
-        }
         foundUsers.setName(users.getName());
         foundUsers.setPassword(users.getPassword());
         foundUsers.setEmail(users.getEmail());

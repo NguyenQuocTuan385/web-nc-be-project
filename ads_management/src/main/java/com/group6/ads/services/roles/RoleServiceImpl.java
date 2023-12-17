@@ -1,6 +1,6 @@
 package com.group6.ads.services.roles;
 
-import com.group6.ads.controllers.roles.models.RoleCreateDTO;
+import com.group6.ads.controllers.roles.models.RoleRequest;
 import com.group6.ads.repositories.database.roles.Roles;
 import com.group6.ads.repositories.database.roles.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -19,7 +19,7 @@ public class RoleServiceImpl implements RoleService{
     }
 
     @Override
-    public Roles createRoles(RoleCreateDTO roles) {
+    public Roles createRoles(RoleRequest roles) {
         Roles rolesCreated = Roles.builder()
                 .code(roles.getCode())
                 .description(roles.getDescription())
