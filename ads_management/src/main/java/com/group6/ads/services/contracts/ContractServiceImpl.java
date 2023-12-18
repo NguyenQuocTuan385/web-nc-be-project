@@ -38,7 +38,7 @@ public class ContractServiceImpl implements ContractService {
                 .companyAddress(contractRequest.getCompanyAddress())
                 .imgUrl(contractRequest.getImage())
                 .status(0)
-                // .advertises(advertiseOfContract)
+                 .advertise(advertiseOfContract)
                 .build();
         return contractRepository.save(newContract);
     }
@@ -62,7 +62,7 @@ public class ContractServiceImpl implements ContractService {
         oldContract.setCompanyAddress(contractRequest.getCompanyAddress());
         oldContract.setImgUrl(contractRequest.getImage());
         oldContract.setStatus(contractRequest.getStatus());
-        // oldContract.setAdvertises(advertiseOfContract);
+         oldContract.setAdvertise(advertiseOfContract);
 
         return contractRepository.save(oldContract);
     }
