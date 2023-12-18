@@ -1,12 +1,11 @@
 package com.group6.ads.services.reports;
 
+import com.google.gson.Gson;
 import com.group6.ads.controllers.report.forms.models.ReportUpdateRequest;
 import com.group6.ads.controllers.reports.models.ReportCreateRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
-import com.group6.ads.repositories.database.images.Image;
-import com.group6.ads.repositories.database.images.ImageRepository;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.LocationRepository;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
@@ -15,7 +14,6 @@ import com.group6.ads.repositories.database.reports.Report;
 import com.group6.ads.repositories.database.reports.ReportRepository;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
-import org.aspectj.weaver.ast.Not;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -27,8 +25,8 @@ public class ReportServiceImpl implements ReportService{
     private final ReportRepository reportRepository;
     private final AdvertiseRepository advertiseRepository;
     private final ReportFormRepository reportFormRepository;
-    private final ImageRepository imageRepository;
     private final LocationRepository locationRepository;
+    private final Gson g;
 
     @Override
     public List<Report> findAll() {
@@ -42,6 +40,7 @@ public class ReportServiceImpl implements ReportService{
         Location location = locationRepository.findById(reportRequest.getLocationId()).orElseThrow();
         String[] imageUrlsList = reportRequest.getImageUrls();
 
+        System.out.println("Hello" + g.toJson(imageUrlsList));;
         Report newReport = Report.builder()
                 .fullName(reportRequest.getFullName())
                 .email(reportRequest.getEmail())
@@ -56,21 +55,22 @@ public class ReportServiceImpl implements ReportService{
                 .createdAt(LocalDateTime.now())
                 .build();
 
-        Report tmp = reportRepository.save(newReport);
+//        Report tmp = reportRepository.save(newReport);
 
         // save img url to images table
         for (String image : imageUrlsList) {
-            Image img = Image.builder()
-                    .imgUrl(image)
-                    .location(location)
-//                    .locationEditId(location.getLocationEditId())
-                    .report(tmp)
-                    .build();
-
-            imageRepository.save(img);
+            //Do something
+//            Image img = Image.builder()
+//                    .imgUrl(image)
+//                    .location(location)
+////                    .locationEditId(location.getLocationEditId())
+//                    .report(tmp)
+//                    .build();
+//
+//            imageRepository.save(img);
         }
 
-        return tmp;
+        return newReport;
     }
 
     @Override
@@ -89,14 +89,6 @@ public class ReportServiceImpl implements ReportService{
         Report rp = reportRepository
                 .findById(reportId)
                 .orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
-
-        // delete image of this report
-        try{
-            imageRepository.deleteByReportId(reportId);
-        }
-        catch (Exception e) {
-            throw new NotFoundException("Not found Images with this id");
-        }
 
         reportRepository.delete(rp);
     }

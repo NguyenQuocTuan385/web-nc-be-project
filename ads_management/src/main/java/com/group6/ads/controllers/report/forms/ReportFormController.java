@@ -29,7 +29,7 @@ import org.springframework.web.bind.annotation.RestController;
  */
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${api.prefix}/forms")
+@RequestMapping("${api.prefix}/report-forms")
 public class ReportFormController {
     @NonNull
     final ReportFormService reportFormService;

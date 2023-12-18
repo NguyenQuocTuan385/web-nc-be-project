@@ -6,7 +6,6 @@ import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertises.Advertise;
-import com.group6.ads.repositories.database.images.Image;
 import com.group6.ads.repositories.database.location.edit.LocationEdit;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.properties.Property;
@@ -28,13 +27,6 @@ import lombok.Setter;
 
 import java.time.LocalDateTime;
 import java.util.Set;
-
-/**
- * com.group6.ads.repositories.database.localtions
- * Create by Dang Ngoc Tien
- * Date 12/16/2023 - 11:18 PM
- * Description: ...
- */
 @Getter
 @Setter
 @NoArgsConstructor
@@ -84,10 +76,7 @@ public class Location {
     @JsonIgnore
     private Set<Report> reports;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<Image> images;
+    private String images;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     @JsonManagedReference

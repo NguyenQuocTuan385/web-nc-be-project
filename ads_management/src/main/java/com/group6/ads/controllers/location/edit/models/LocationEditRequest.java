@@ -1,17 +1,9 @@
 package com.group6.ads.controllers.location.edit.models;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-import com.group6.ads.repositories.database.images.Image;
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
-import lombok.AllArgsConstructor;
 import lombok.Data;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
-
-import java.time.LocalDateTime;
-import java.util.List;
 
 @Data
 public class LocationEditRequest {

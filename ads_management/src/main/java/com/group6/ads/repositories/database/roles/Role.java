@@ -22,7 +22,4 @@ public class Role {
 
     private String code;
     private String description;
-    @OneToMany(mappedBy = "roles", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<User> users;
 }

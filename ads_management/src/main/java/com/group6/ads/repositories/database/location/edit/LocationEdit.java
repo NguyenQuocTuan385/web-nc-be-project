@@ -3,7 +3,6 @@ package com.group6.ads.repositories.database.location.edit;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
-import com.group6.ads.repositories.database.images.Image;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.users.User;
@@ -71,8 +70,5 @@ public class LocationEdit {
     @JsonIgnore
     private Property property;
 
-    @OneToMany(mappedBy = "locationEdit", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<Image> images;
+    private String images;
 }

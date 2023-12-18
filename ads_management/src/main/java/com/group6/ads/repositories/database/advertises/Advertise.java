@@ -1,5 +1,6 @@
 package com.group6.ads.repositories.database.advertises;
 
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
@@ -10,6 +11,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Timestamp;
+import java.time.LocalDateTime;
 import java.util.Set;
 
 @Getter
@@ -47,4 +49,9 @@ public class Advertise {
     @OneToMany(mappedBy = "advertise", cascade = CascadeType.ALL)
     @JsonManagedReference
     private Set<Report> reports;
+
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime updatedAt;
 }

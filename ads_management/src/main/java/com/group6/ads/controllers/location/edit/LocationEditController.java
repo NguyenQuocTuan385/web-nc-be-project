@@ -17,7 +17,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/locations")
-@Tag(name = "Location ", description = "Location  API")
+@Tag(name = "Location ", description = "Location API")
 public class LocationEditController {
     @NonNull
     final LocationEditService locationEditService;

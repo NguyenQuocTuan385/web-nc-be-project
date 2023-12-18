@@ -40,14 +40,4 @@ public class LocationType {
     private String name;
     private String description;
     private LocalDateTime createdAt;
-
-    @OneToMany(mappedBy = "locationType", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<Location> locations;
-
-    @OneToMany(mappedBy = "locationType", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<LocationEdit> locationEdits;
 }

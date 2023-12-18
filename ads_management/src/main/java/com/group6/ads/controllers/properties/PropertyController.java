@@ -17,7 +17,7 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${api.prefix}/districts")
+@RequestMapping("${api.prefix}/properties")
 public class PropertyController {
     @NonNull
     final PropertyService propertyService;
