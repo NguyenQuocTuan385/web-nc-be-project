@@ -1,4 +1,4 @@
-package com.group6.ads.repositories.database.advertise.edit;
+package com.group6.ads.repositories.database.advertises.edit;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;

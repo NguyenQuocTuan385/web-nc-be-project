@@ -1,16 +1,12 @@
 package com.group6.ads.controllers.locations.models;
 
+
 import jakarta.validation.constraints.NotBlank;
 import jakarta.validation.constraints.NotNull;
 import lombok.Data;
-/**
- * com.group6.ads.controllers.locations.models
- * Create by Dang Ngoc Tien
- * Date 12/17/2023 - 11:34 PM
- * Description: ...
- */
+
 @Data
-public class LocationCreateRequest {
+public class LocationEditByRootRequest {
     private Boolean planning;
     @NotNull(message = "latitude must not be null")
     private Double latitude;

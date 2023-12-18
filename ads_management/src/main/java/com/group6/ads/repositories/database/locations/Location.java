@@ -3,10 +3,10 @@ package com.group6.ads.repositories.database.locations;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.advertise.edit.AdvertiseEdit;
+import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertises.Advertise;
-import com.group6.ads.repositories.database.location.edit.LocationEdit;
+import com.group6.ads.repositories.database.locations.edit.LocationEdit;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.reports.Report;
@@ -43,7 +43,6 @@ public class Location {
     private Double longitude;
     private String address;
     private Boolean statusEdit;
-//    private Integer locationEditId;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

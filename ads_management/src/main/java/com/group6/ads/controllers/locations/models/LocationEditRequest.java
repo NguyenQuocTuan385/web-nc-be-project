@@ -1,4 +1,4 @@
-package com.group6.ads.controllers.location.edit.models;
+package com.group6.ads.controllers.locations.models;
 
 
 import jakarta.validation.constraints.NotBlank;
@@ -7,6 +7,7 @@ import lombok.Data;
 
 @Data
 public class LocationEditRequest {
+    private Boolean planning;
     @NotNull(message = "latitude must not be null")
     private Double latitude;
     @NotNull(message = "longitude must not be null")
@@ -23,4 +24,5 @@ public class LocationEditRequest {
     private Integer userId;
     @NotBlank
     private String content;
+    private String imageUrls;
 }
