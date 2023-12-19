@@ -10,6 +10,7 @@ import com.group6.ads.repositories.database.reports.Report;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.io.Serializable;
 import java.time.LocalDateTime;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ import java.util.Set;
 @Entity
 @Builder
 @Table(name = "advertises")
-public class Advertise {
+public class Advertise implements Serializable {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
@@ -28,6 +29,7 @@ public class Advertise {
     private Double height;
     private Double width;
     private Boolean statusEdit;
+    private String imageUrls;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)

@@ -44,4 +44,9 @@ public class PropertyServiceImpl implements PropertyService{
         property.setName(propertyRequest.getName());
         return propertyRepository.save(property);
     }
+
+    @Override
+    public Page<Property> findAllDistrict(String search, PageRequestCustom pageRequestCustom) {
+        return propertyRepository.findAllDistrict(search, pageRequestCustom.pageRequest());
+    }
 }

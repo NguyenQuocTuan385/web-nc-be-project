@@ -1,6 +1,7 @@
 package com.group6.ads.services.advertises;
 
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeRepository;
 import com.group6.ads.repositories.database.advertises.Advertise;
@@ -22,21 +23,17 @@ import java.util.List;
  */
 @Service
 @RequiredArgsConstructor
-public class AdvertiseServiceImpl implements AdvertiseService{
+public class AdvertiseServiceImpl implements AdvertiseService {
     @NonNull
     final AdvertiseRepository advertiseRepository;
     @NonNull
     final AdvertiseTypeRepository advertiseTypeRepository;
     @NonNull
     final LocationRepository locationRepository;
+
     @Override
     public List<Advertise> findAllByLocationId(Integer locationId) {
         return advertiseRepository.findAllByLocationId(locationId);
-    }
-
-    @Override
-    public Advertise updateLocation(Integer advertiseId, Integer locationId) {
-        return null;
     }
 
     @Override
@@ -44,9 +41,9 @@ public class AdvertiseServiceImpl implements AdvertiseService{
         Location location = locationRepository
                 .findById(locationId)
                 .orElseThrow();
-       AdvertiseType advertiseType = advertiseTypeRepository
-               .findById(advertiseRequest.getAdsTypeId())
-               .orElseThrow();
+        AdvertiseType advertiseType = advertiseTypeRepository
+                .findById(advertiseRequest.getAdsTypeId())
+                .orElseThrow();
 
         Advertise newAdvertise = Advertise.builder()
                 .location(location)
@@ -54,11 +51,40 @@ public class AdvertiseServiceImpl implements AdvertiseService{
                 .height(advertiseRequest.getHeight())
                 .width(advertiseRequest.getWidth())
                 .adsType(advertiseType)
+                .imageUrls(advertiseRequest.getImageUrls())
                 .statusEdit(false)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
                 .build();
 
         return advertiseRepository.save(newAdvertise);
+    }
+
+    @Override
+    public Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest) {
+        AdvertiseType advertiseType = advertiseTypeRepository
+                .findById(advertiseRequest.getAdsTypeId())
+                .orElseThrow(() -> new NotFoundException("Advertise type not found"));
+        Advertise advertise = advertiseRepository
+                .findById(advertiseId)
+                .orElseThrow(() -> new NotFoundException("Advertise not found"));
+
+        advertise.setLicensing(advertiseRequest.getLicensing());
+        advertise.setHeight(advertiseRequest.getHeight());
+        advertise.setWidth(advertiseRequest.getWidth());
+        advertise.setAdsType(advertiseType);
+        advertise.setImageUrls(advertiseRequest.getImageUrls());
+        advertise.setStatusEdit(false);
+        advertise.setUpdatedAt(LocalDateTime.now());
+
+        return advertiseRepository.save(advertise);
+    }
+
+    @Override
+    public void delete(Integer advertiseId) {
+        Advertise advertise = advertiseRepository
+                .findById(advertiseId)
+                .orElseThrow(() -> new NotFoundException("Advertise not found"));
+        advertiseRepository.delete(advertise);
     }
 }

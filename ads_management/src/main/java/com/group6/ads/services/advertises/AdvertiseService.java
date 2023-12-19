@@ -14,7 +14,9 @@ import java.util.List;
 public interface AdvertiseService {
     List<Advertise> findAllByLocationId(Integer locationId);
 
-    Advertise updateLocation(Integer advertiseId, Integer locationId);
-
     Advertise create(Integer locationId, AdvertiseRequest advertiseRequest);
+
+    Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);
+
+    void delete(Integer advertiseId);
 }
