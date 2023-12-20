@@ -17,6 +17,7 @@ import org.springframework.web.bind.annotation.*;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/properties")
+@CrossOrigin("*")
 public class PropertyController {
     @NonNull
     final PropertyService propertyService;

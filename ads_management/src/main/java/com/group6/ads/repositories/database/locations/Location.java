@@ -1,24 +1,14 @@
 package com.group6.ads.repositories.database.locations;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
-import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.locations.edit.LocationEdit;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.reports.Report;
-import jakarta.persistence.CascadeType;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.OneToMany;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -43,11 +33,16 @@ public class Location {
     private Double longitude;
     private String address;
     private Boolean statusEdit;
+    private String images;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
+
+    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
+    @JsonManagedReference
+    private Set<Advertise> advertises;
 
     @ManyToOne
     @JoinColumn(name = "ads_form_id", nullable = false)
@@ -61,24 +56,11 @@ public class Location {
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "location_edit_id")
     private LocationEdit locationEdit;
 
     @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
     @JsonManagedReference
-    @JsonIgnore
-    private Set<Advertise> advertises;
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
     private Set<Report> reports;
-
-    private String images;
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<AdvertiseEdit> advertiseEdits;
 }

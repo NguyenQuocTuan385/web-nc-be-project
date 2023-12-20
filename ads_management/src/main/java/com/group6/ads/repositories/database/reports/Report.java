@@ -34,7 +34,7 @@ public class Report {
     private String email;
     private String phone;
     private String content;
-    private Integer status;
+    private Boolean status;
     private String reportTypeName;
     private String reply;
     private LocalDateTime createdAt;

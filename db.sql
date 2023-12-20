@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 18, 2023 at 04:01 PM
+-- Generation Time: Dec 20, 2023 at 08:11 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.2.21
 
@@ -32,7 +32,8 @@ CREATE TABLE `advertises` (
   `licensing` tinyint(1) DEFAULT NULL,
   `height` float DEFAULT NULL,
   `width` float DEFAULT NULL,
-  `img_url` text DEFAULT NULL,
+  `images` text DEFAULT NULL,
+  `pillar_quantity` int(11) DEFAULT NULL,
   `location_id` int(11) UNSIGNED NOT NULL,
   `ads_type_id` int(11) UNSIGNED NOT NULL,
   `status_edit` tinyint(1) DEFAULT NULL,
@@ -40,6 +41,40 @@ CREATE TABLE `advertises` (
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `updated_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `advertises`
+--
+
+INSERT INTO `advertises` (`id`, `licensing`, `height`, `width`, `images`, `pillar_quantity`, `location_id`, `ads_type_id`, `status_edit`, `advertise_edit_id`, `created_at`, `updated_at`) VALUES
+(1, 0, 15, 2.5, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 1, 1, NULL, NULL, '2023-12-19 08:05:18', '2023-12-19 08:05:18'),
+(2, 0, 12, 2.8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 1, 2, NULL, NULL, '2023-12-19 08:05:18', '2023-12-19 08:05:18'),
+(3, 0, 14, 2.2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 3, 2, 3, NULL, NULL, '2023-12-19 08:05:18', '2023-12-19 08:05:18'),
+(4, 0, 10, 2.6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 3, 4, NULL, NULL, '2023-12-19 08:05:18', '2023-12-19 08:05:18'),
+(5, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 4, 5, NULL, NULL, '2023-12-19 08:05:18', '2023-12-19 08:05:18'),
+(6, 0, 11, 2.4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 5, 6, NULL, NULL, '2023-12-19 08:05:18', '2023-12-19 08:05:18'),
+(7, 0, 12, 2.7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 2, 6, 7, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(8, 0, 14, 2.2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 2, 7, 8, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(9, 0, 10, 2.6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 8, 9, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(10, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 9, 10, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(11, 0, 11, 2.4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 10, 1, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(12, 0, 12, 2.7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 3, 10, 2, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(13, 0, 10, 2.8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 11, 3, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(14, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 12, 4, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(15, 0, 14, 2.2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 2, 13, 5, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(16, 0, 10, 2.6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 14, 6, NULL, NULL, '2023-12-19 08:05:29', '2023-12-19 08:05:29'),
+(17, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 15, 7, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(18, 0, 11, 2.4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 16, 8, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(19, 0, 12, 2.7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 3, 17, 9, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(20, 0, 10, 2.8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 18, 10, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(21, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 19, 1, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(23, 0, 14, 2.2, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 2, 20, 2, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(24, 0, 10, 2.6, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 21, 3, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(25, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 22, 4, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(26, 0, 11, 2.4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 23, 5, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(27, 0, 12, 2.7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 3, 24, 6, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(28, 0, 10, 2.8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 25, 7, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
+(29, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 26, 8, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35');
 
 -- --------------------------------------------------------
 
@@ -52,30 +87,13 @@ CREATE TABLE `advertises_edit` (
   `licensing` int(11) DEFAULT NULL,
   `height` float DEFAULT NULL,
   `width` float DEFAULT NULL,
-  `img_url` text DEFAULT NULL,
   `content` text NOT NULL,
   `location_id` int(11) UNSIGNED NOT NULL,
   `ads_type_id` int(11) UNSIGNED NOT NULL,
   `user_id` int(11) UNSIGNED NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `images` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `advertises_edit_seq`
---
-
-CREATE TABLE `advertises_edit_seq` (
-  `next_val` bigint(20) DEFAULT NULL
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Dumping data for table `advertises_edit_seq`
---
-
-INSERT INTO `advertises_edit_seq` (`next_val`) VALUES
-(1);
 
 -- --------------------------------------------------------
 
@@ -143,23 +161,9 @@ CREATE TABLE `contracts` (
   `start_at` datetime(6) DEFAULT NULL,
   `end_at` datetime(6) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `img_url` varchar(100) DEFAULT NULL,
   `advertise_id` int(10) UNSIGNED NOT NULL,
-  `created_at` timestamp NOT NULL DEFAULT current_timestamp()
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
--- --------------------------------------------------------
-
---
--- Table structure for table `images`
---
-
-CREATE TABLE `images` (
-  `id` int(11) NOT NULL,
-  `img_url` varchar(255) DEFAULT NULL,
-  `location_id` int(11) DEFAULT NULL,
-  `location_edit_id` int(11) DEFAULT NULL,
-  `report_id` int(11) DEFAULT NULL
+  `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
+  `images` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -189,36 +193,36 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `planning`, `longitude`, `latitude`, `address`, `images`, `status_edit`, `ads_form_id`, `location_type_id`, `property_id`, `location_edit_id`, `created_at`, `updated_at`) VALUES
-(1, 0, 106.682, 10.7647, '239 Đ. Nguyễn Văn Cừ, Phường 4, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 4, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
-(2, 0, 106.682, 10.7652, '1 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
-(3, 0, 106.682, 10.7659, '64-59 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
-(4, 0, 106.683, 10.7665, '337-335 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
-(5, 0, 106.681, 10.7649, '2-6 Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 4, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(6, 0, 106.681, 10.7649, '11-1 Đ. Hùng Vương, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 4, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(7, 0, 106.68, 10.7649, '20 Đ. Hùng Vương, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 6, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(8, 0, 106.681, 10.7657, '28 Đ. Lý Thái Tổ, Phường 2, Quận 3, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 9, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(9, 0, 106.68, 10.7659, '58 Đ. Lý Thái Tổ, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 6, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(10, 0, 106.683, 10.7611, '280 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(11, 0, 106.682, 10.7605, '273 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(12, 0, 106.683, 10.7608, '271 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(13, 0, 106.683, 10.7606, '213a Đ. Nguyễn Văn Cừ, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(14, 0, 106.683, 10.7632, '235 Đ. Nguyễn Văn Cừ, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 3, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(15, 0, 106.682, 10.7655, '63/4/52 Đ. Cống Quỳnh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 3, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(16, 0, 106.671, 10.7697, 'Đ. 3 Tháng 2, Phường 10, Quận 10, Thành phố Hồ Chí Minh 70040, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 7, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
-(17, 0, 106.672, 10.7704, '300 Đ. 3 Tháng 2, Phường 12, Quận 10, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 11, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(18, 0, 106.674, 10.7694, '609 Đ. Lê Hồng Phong, Phường 10, Quận 10, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 7, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(19, 0, 106.674, 10.7683, '535 Đ. Lê Hồng Phong, Phường 10, Quận 10, Thành phố Hồ Chí Minh 76000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 7, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(20, 0, 106.669, 10.7679, '407/6 Đ. Lý Thái Tổ, Phường 9, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 10, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(21, 0, 106.675, 10.7682, '665-667-669 Đ. Điện Biên Phủ, Phường 1, Quận 3, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 8, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(22, 0, 106.676, 10.7688, '643 Đ. Điện Biên Phủ, Phường 1, Quận 3, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 8, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(23, 0, 106.677, 10.7629, '78 Đ. Hùng Vương, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 6, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(24, 0, 106.678, 10.7636, '20 Đ. Hùng Vương, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 6, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(25, 0, 106.68, 10.7601, '196A, B, Đ. Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 4, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(26, 0, 106.681, 10.7603, '292a Đ. An Dương Vương, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 4, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(1, 1, 106.682, 10.7647, '239 Đ. Nguyễn Văn Cừ, Phường 4, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 4, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
+(2, 1, 106.682, 10.7652, '1 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
+(3, 1, 106.682, 10.7659, '64-59 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
+(4, 1, 106.683, 10.7665, '337-335 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
+(5, 1, 106.681, 10.7649, '2-6 Đ. Trần Phú, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 4, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(6, 1, 106.681, 10.7649, '11-1 Đ. Hùng Vương, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 4, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(7, 1, 106.68, 10.7649, '20 Đ. Hùng Vương, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 6, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(8, 1, 106.681, 10.7657, '28 Đ. Lý Thái Tổ, Phường 2, Quận 3, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 9, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(9, 1, 106.68, 10.7659, '58 Đ. Lý Thái Tổ, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 6, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(10, 1, 106.683, 10.7611, '280 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(11, 1, 106.682, 10.7605, '273 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(12, 1, 106.683, 10.7608, '271 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(13, 1, 106.683, 10.7606, '213a Đ. Nguyễn Văn Cừ, Phường 3, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 5, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(14, 1, 106.683, 10.7632, '235 Đ. Nguyễn Văn Cừ, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 3, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(15, 1, 106.682, 10.7655, '63/4/52 Đ. Cống Quỳnh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 3, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(16, 1, 106.671, 10.7697, 'Đ. 3 Tháng 2, Phường 10, Quận 10, Thành phố Hồ Chí Minh 70040, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 7, NULL, '2023-12-18 13:50:06', '2023-12-18 13:50:06'),
+(17, 1, 106.672, 10.7704, '300 Đ. 3 Tháng 2, Phường 12, Quận 10, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 11, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(18, 1, 106.674, 10.7694, '609 Đ. Lê Hồng Phong, Phường 10, Quận 10, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 7, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(19, 1, 106.674, 10.7683, '535 Đ. Lê Hồng Phong, Phường 10, Quận 10, Thành phố Hồ Chí Minh 76000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 7, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(20, 1, 106.669, 10.7679, '407/6 Đ. Lý Thái Tổ, Phường 9, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 10, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(21, 1, 106.675, 10.7682, '665-667-669 Đ. Điện Biên Phủ, Phường 1, Quận 3, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 8, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(22, 1, 106.676, 10.7688, '643 Đ. Điện Biên Phủ, Phường 1, Quận 3, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 8, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(23, 1, 106.677, 10.7629, '78 Đ. Hùng Vương, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 6, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(24, 1, 106.678, 10.7636, '20 Đ. Hùng Vương, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 6, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(25, 1, 106.68, 10.7601, '196A, B, Đ. Trần Bình Trọng, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 5, 4, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
+(26, 1, 106.681, 10.7603, '292a Đ. An Dương Vương, Phường 4, Quận 5, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 4, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
 (27, 0, 106.681, 10.7601, '283 Đ. An Dương Vương, Phường 3, Quận 5, Thành phố Hồ Chí Minh 700000, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 5, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
 (28, 0, 106.675, 10.7666, '498 Đ. Lê Hồng Phong, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 6, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
 (29, 0, 106.675, 10.767, '526 Tổ 53 Khu phố 4, Phường 1, Quận 10, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 6, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14'),
-(30, 0, 106.675, 10.7677, '346 Đ. Lý Thái Tổ, Phường 1, Quận 3, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 8, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14');
+(30, 1, 106.675, 10.7677, '346 Đ. Lý Thái Tổ, Phường 1, Quận 3, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 3, 8, NULL, '2023-12-18 13:50:14', '2023-12-18 13:50:14');
 
 -- --------------------------------------------------------
 
@@ -311,10 +315,10 @@ CREATE TABLE `reports` (
   `email` varchar(50) DEFAULT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
-  `status` int(11) DEFAULT NULL,
+  `status` bit(1) DEFAULT NULL,
   `reply` varchar(255) DEFAULT NULL,
   `images` text DEFAULT NULL,
-  `report_type_name` varchar(255) DEFAULT NULL,
+  `report_type_name` enum('LOCATION','ADVERTISE') DEFAULT NULL,
   `report_form_id` int(11) UNSIGNED NOT NULL,
   `advertise_id` int(11) UNSIGNED DEFAULT NULL,
   `location_id` int(11) UNSIGNED DEFAULT NULL,
@@ -427,12 +431,6 @@ ALTER TABLE `contracts`
   ADD KEY `contract_FK` (`advertise_id`);
 
 --
--- Indexes for table `images`
---
-ALTER TABLE `images`
-  ADD PRIMARY KEY (`id`);
-
---
 -- Indexes for table `locations`
 --
 ALTER TABLE `locations`
@@ -502,7 +500,7 @@ ALTER TABLE `users`
 -- AUTO_INCREMENT for table `advertises`
 --
 ALTER TABLE `advertises`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- AUTO_INCREMENT for table `advertises_edit`
@@ -529,16 +527,10 @@ ALTER TABLE `contracts`
   MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
 
 --
--- AUTO_INCREMENT for table `images`
---
-ALTER TABLE `images`
-  MODIFY `id` int(11) NOT NULL AUTO_INCREMENT;
-
---
 -- AUTO_INCREMENT for table `locations`
 --
 ALTER TABLE `locations`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=40;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT for table `locations_edit`
@@ -644,6 +636,7 @@ ALTER TABLE `reports`
 -- Constraints for table `users`
 --
 ALTER TABLE `users`
+  ADD CONSTRAINT `FKoplt72prvvkrr4w6rshifph0p` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`),
   ADD CONSTRAINT `fk_property_id` FOREIGN KEY (`property_id`) REFERENCES `properties` (`id`),
   ADD CONSTRAINT `fk_role_id` FOREIGN KEY (`role_id`) REFERENCES `roles` (`id`);
 COMMIT;

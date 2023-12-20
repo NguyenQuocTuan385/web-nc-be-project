@@ -1,6 +1,7 @@
 package com.group6.ads.services.location.types;
 
 import com.group6.ads.controllers.location.types.models.LocationTypeRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.location.types.LocationTypeRepository;
 import com.group6.ads.util.PageRequestCustom;
@@ -41,7 +42,7 @@ public class LocationTypeServiceImpl implements LocationTypeService{
     public LocationType update(Integer id, LocationTypeRequest locationTypeRequest) {
         LocationType locationType = locationTypeRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Location type not found"));
+                .orElseThrow(() -> new NotFoundException("Location type not found"));
         locationType.setName(locationTypeRequest.getName());
         locationType.setDescription(locationTypeRequest.getDescription());
         return locationTypeRepository.save(locationType);

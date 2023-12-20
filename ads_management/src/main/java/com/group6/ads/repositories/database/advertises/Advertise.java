@@ -1,5 +1,6 @@
 package com.group6.ads.repositories.database.advertises;
 
+import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
@@ -29,17 +30,19 @@ public class Advertise implements Serializable {
     private Double height;
     private Double width;
     private Boolean statusEdit;
-    private String imageUrls;
+    private String images;
+    private Integer pillarQuantity;
 
     @ManyToOne
     @JoinColumn(name = "location_id", nullable = false)
+    @JsonBackReference
     private Location location;
 
     @ManyToOne
     @JoinColumn(name = "ads_type_id", nullable = false)
     private AdvertiseType adsType;
 
-    @ManyToOne
+    @OneToOne
     @JoinColumn(name = "advertise_edit_id", nullable = false)
     private AdvertiseEdit advertiseEdit;
 

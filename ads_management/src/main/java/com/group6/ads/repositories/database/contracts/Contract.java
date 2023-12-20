@@ -31,7 +31,7 @@ public class Contract {
     private LocalDateTime endAt;
 
     private Integer status;
-    private String imgUrl;
+    private String images;
 
     @ManyToOne
     @JoinColumn(name = "advertise_id", nullable = false)

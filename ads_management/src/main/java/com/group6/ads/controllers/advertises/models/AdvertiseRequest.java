@@ -14,5 +14,7 @@ public class AdvertiseRequest {
     private Double height;
     private Double width;
     private Integer adsTypeId;
-    private String imageUrls;
+    private Integer locationId;
+    private Integer pillarQuantity;
+    private String images;
 }

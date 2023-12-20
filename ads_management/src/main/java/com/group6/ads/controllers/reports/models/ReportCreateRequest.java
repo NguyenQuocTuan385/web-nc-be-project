@@ -13,5 +13,5 @@ public class ReportCreateRequest {
     private Integer reportFormId;
     private Integer advertiseId;
     private Integer locationId;
-    private String[] imageUrls;
+    private String images;
 }

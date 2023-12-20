@@ -42,7 +42,7 @@ public class LocationEdit {
     private Double longitude;
     private String address;
     private String content;
-
+    private String images;
     private LocalDateTime createdAt;
     private LocalDateTime updatedAt;
 
@@ -65,6 +65,4 @@ public class LocationEdit {
     @JoinColumn(name = "property_id", nullable = false)
     @JsonIgnore
     private Property property;
-
-    private String images;
 }

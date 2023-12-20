@@ -28,6 +28,7 @@ public class AdvertiseEdit {
     private float height;
     private float width;
     private String content;
+    private String images;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

@@ -14,6 +14,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/reports")
+@CrossOrigin("*")
 public class ReportController {
     private final ReportService reportService;
 

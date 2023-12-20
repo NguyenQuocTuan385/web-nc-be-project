@@ -5,5 +5,5 @@ import lombok.Data;
 @Data
 public class ReportUpdateRequest {
     private String reply;
-    private Integer status;
+    private Boolean status;
 }

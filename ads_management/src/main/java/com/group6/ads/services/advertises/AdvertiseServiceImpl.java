@@ -51,7 +51,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
                 .height(advertiseRequest.getHeight())
                 .width(advertiseRequest.getWidth())
                 .adsType(advertiseType)
-                .imageUrls(advertiseRequest.getImageUrls())
+                .images(advertiseRequest.getImages())
                 .statusEdit(false)
                 .createdAt(LocalDateTime.now())
                 .updatedAt(LocalDateTime.now())
@@ -73,7 +73,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
         advertise.setHeight(advertiseRequest.getHeight());
         advertise.setWidth(advertiseRequest.getWidth());
         advertise.setAdsType(advertiseType);
-        advertise.setImageUrls(advertiseRequest.getImageUrls());
+        advertise.setImages(advertiseRequest.getImages());
         advertise.setStatusEdit(false);
         advertise.setUpdatedAt(LocalDateTime.now());
 

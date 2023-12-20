@@ -38,39 +38,23 @@ public class ReportServiceImpl implements ReportService{
         Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
         ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
         Location location = locationRepository.findById(reportRequest.getLocationId()).orElseThrow();
-        String[] imageUrlsList = reportRequest.getImageUrls();
 
-        System.out.println("Hello" + g.toJson(imageUrlsList));;
         Report newReport = Report.builder()
                 .fullName(reportRequest.getFullName())
                 .email(reportRequest.getEmail())
                 .phone(reportRequest.getPhone())
                 .content(reportRequest.getContent())
-                .status(0)
+                .status(false)
                 .reply(null)
                 .reportTypeName(reportRequest.getReportTypeName())
                 .reportForm(rpForm)
                 .advertise(ad)
                 .location(location)
                 .createdAt(LocalDateTime.now())
+                .images(reportRequest.getImages())
                 .build();
 
-//        Report tmp = reportRepository.save(newReport);
-
-        // save img url to images table
-        for (String image : imageUrlsList) {
-            //Do something
-//            Image img = Image.builder()
-//                    .imgUrl(image)
-//                    .location(location)
-////                    .locationEditId(location.getLocationEditId())
-//                    .report(tmp)
-//                    .build();
-//
-//            imageRepository.save(img);
-        }
-
-        return newReport;
+        return reportRepository.save(newReport);
     }
 
     @Override

@@ -3,6 +3,7 @@ package com.group6.ads.services.locations;
 import com.group6.ads.controllers.locations.models.LocationCreateRequest;
 import com.group6.ads.controllers.locations.models.LocationEditByRootRequest;
 import com.group6.ads.controllers.locations.models.LocationEditRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;
 import com.group6.ads.repositories.database.location.types.LocationType;
@@ -55,11 +56,11 @@ public class LocationServiceImpl implements LocationService {
 
     public Location create(LocationCreateRequest locationCreateRequest) {
         AdvertiseForm advertiseForm = advertiseFormRepository.findById(locationCreateRequest.getAdvertiseFormId())
-                .orElseThrow(() -> new RuntimeException("Advertise form not found"));
+                .orElseThrow(() -> new NotFoundException("Advertise form not found"));
         LocationType locationType = locationTypeRepository.findById(locationCreateRequest.getLocationTypeId())
-                .orElseThrow(() -> new RuntimeException("Location type not found"));
+                .orElseThrow(() -> new NotFoundException("Location type not found"));
         Property property = propertyRepository.findById(locationCreateRequest.getPropertyId())
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new NotFoundException("Property not found"));
 
         Location location = Location.builder()
                 .planning(locationCreateRequest.getPlanning())
@@ -71,7 +72,7 @@ public class LocationServiceImpl implements LocationService {
                 .locationType(locationType)
                 .property(property)
                 .createdAt(LocalDateTime.now())
-                .images(locationCreateRequest.getImageUrls())
+                .images(locationCreateRequest.getImages())
                 .build();
 
         return locationsRepository.save(location);
@@ -86,16 +87,16 @@ public class LocationServiceImpl implements LocationService {
     @Transactional
     public LocationEdit update(Integer locationId, LocationEditRequest locationEditRequest) {
         Location location = locationRepository.findById(locationId)
-                .orElseThrow(() -> new RuntimeException("Location not found"));
+                .orElseThrow(() -> new NotFoundException("Location not found"));
 
         Property property = propertyRepository.findById(locationEditRequest.getPropertyId())
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new NotFoundException("Property not found"));
         AdvertiseForm advertiseForm = advertiseFormRepository.findById(locationEditRequest.getAdvertiseFormId())
-                .orElseThrow(() -> new RuntimeException("Advertise form not found"));
+                .orElseThrow(() -> new NotFoundException("Advertise form not found"));
         LocationType locationType = locationTypeRepository.findById(locationEditRequest.getLocationTypeId())
-                .orElseThrow(() -> new RuntimeException("Location type not found"));
+                .orElseThrow(() -> new NotFoundException("Location type not found"));
         User user = userRepository.findById(locationEditRequest.getUserId())
-                .orElseThrow(() -> new RuntimeException("User not found"));
+                .orElseThrow(() -> new NotFoundException("User not found"));
 
         LocationEdit locationEdit = LocationEdit.builder()
                 .planning(locationEditRequest.getPlanning())
@@ -125,14 +126,14 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location updateByRoot(Integer locationId, LocationEditByRootRequest locationEditByRootRequest) {
         Location location = locationRepository.findById(locationId)
-                .orElseThrow(() -> new RuntimeException("Location not found"));
+                .orElseThrow(() -> new NotFoundException("Location not found"));
 
         Property property = propertyRepository.findById(locationEditByRootRequest.getPropertyId())
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new NotFoundException("Property not found"));
         AdvertiseForm advertiseForm = advertiseFormRepository.findById(locationEditByRootRequest.getAdvertiseFormId())
-                .orElseThrow(() -> new RuntimeException("Advertise form not found"));
+                .orElseThrow(() -> new NotFoundException("Advertise form not found"));
         LocationType locationType = locationTypeRepository.findById(locationEditByRootRequest.getLocationTypeId())
-                .orElseThrow(() -> new RuntimeException("Location type not found"));
+                .orElseThrow(() -> new NotFoundException("Location type not found"));
 
         location.setPlanning(locationEditByRootRequest.getPlanning());
         location.setLatitude(locationEditByRootRequest.getLatitude());
@@ -155,7 +156,7 @@ public class LocationServiceImpl implements LocationService {
     @Override
     public Location locationReview(Integer locationId, Boolean review) {
         Location location = locationRepository.findById(locationId)
-                .orElseThrow(() -> new RuntimeException("Location not found"));
+                .orElseThrow(() -> new NotFoundException("Location not found"));
         if (review) {
             Location locationNew = Location.builder()
                     .id(location.getId())
