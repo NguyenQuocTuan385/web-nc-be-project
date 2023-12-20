@@ -34,4 +34,3 @@ public class AdvertiseType {
     private String description;
     private LocalDateTime createdAt;
 }
-

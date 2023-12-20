@@ -27,8 +27,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public User createUser(UserRequest user) {
-        Property property=propertyRepository.findById(user.getPropertyId()).orElse(null);
-        Role role=roleRepository.findById(user.getRoleId()).orElse(null);
+        Property property = propertyRepository.findById(user.getPropertyId()).orElse(null);
+        Role role = roleRepository.findById(user.getRoleId()).orElse(null);
         User usersCreated = User.builder()
                 .name(user.getName())
                 .password(user.getPassword())
@@ -60,10 +60,9 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public void delete(Integer id) {
-        if(UserRepository.existsById(id)) {
+        if (UserRepository.existsById(id)) {
             UserRepository.deleteById(id);
-        }
-        else {
+        } else {
             throw new NotFoundException("User not found");
         }
     }

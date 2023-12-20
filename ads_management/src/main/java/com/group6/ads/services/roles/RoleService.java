@@ -7,8 +7,10 @@ import java.util.List;
 
 public interface RoleService {
     List<Role> findAll();
+
     Role createRole(RoleRequest role);
 
     Role updateRole(RoleRequest role, Integer theId);
+
     void delete(Integer id);
 }

@@ -1,12 +1,22 @@
 package com.group6.ads.repositories.database.locations;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
+import org.springframework.data.jpa.repository.Query;
+import org.springframework.stereotype.Repository;
 
-/**
- * com.group6.ads.repositories.database.localtions
- * Create by Dang Ngoc Tien
- * Date 12/17/2023 - 12:48 AM
- * Description: ...
- */
+@Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
+    @Query("SELECT l FROM Location l WHERE l.property.id = :propertyId AND l.address LIKE %:search%")
+    Page<Location> findAllByPropertyId(Integer propertyId, String search, Pageable pageable);
+
+    @Query("SELECT l FROM Location l WHERE l.address LIKE %:search%")
+    Page<Location> findAll(String search, Pageable pageable);
+
+    @Query("""
+              SELECT l FROM Location l
+              WHERE l.statusEdit = TRUE AND l.address LIKE %:search%
+            """)
+    Page<Location> findAllLocationReview(String search, Pageable pageable);
 }

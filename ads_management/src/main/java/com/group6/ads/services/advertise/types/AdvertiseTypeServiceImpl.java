@@ -1,6 +1,7 @@
 package com.group6.ads.services.advertise.types;
 
 import com.group6.ads.controllers.advertise.types.models.AdvertiseTypeRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeRepository;
 import com.group6.ads.util.PageRequestCustom;
@@ -41,7 +42,7 @@ public class AdvertiseTypeServiceImpl implements AdvertiseTypeService {
     public AdvertiseType updateAdvertiseType(Integer id, AdvertiseTypeRequest advertiseTypeRequest) {
         AdvertiseType advertiseType = advertiseTypeRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new NotFoundException("Property not found"));
 
         advertiseType.setName(advertiseTypeRequest.getName());
         advertiseType.setDescription(advertiseTypeRequest.getDescription());
@@ -52,7 +53,7 @@ public class AdvertiseTypeServiceImpl implements AdvertiseTypeService {
     public void deleteAdvertiseType(Integer id) {
         AdvertiseType advertiseType = advertiseTypeRepository
                 .findById(id)
-                .orElseThrow(() -> new RuntimeException("Property not found"));
+                .orElseThrow(() -> new NotFoundException("Property not found"));
         advertiseTypeRepository.delete(advertiseType);
     }
 }

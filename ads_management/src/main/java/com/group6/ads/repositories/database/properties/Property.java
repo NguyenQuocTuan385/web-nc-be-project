@@ -1,5 +1,6 @@
 package com.group6.ads.repositories.database.properties;
 
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.users.User;
@@ -25,9 +26,11 @@ public class Property {
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private Set<Location> locations;
 
     @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
     @JsonManagedReference
+    @JsonIgnore
     private Set<User> users;
 }

@@ -22,7 +22,7 @@ public class ContractUpdateRequest {
     private String companyAddress;
 
     @NotBlank
-    private String image;
+    private String images;
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime startAt;

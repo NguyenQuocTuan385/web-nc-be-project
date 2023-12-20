@@ -1,6 +1,7 @@
 package com.group6.ads.services.roles;
 
 import com.group6.ads.controllers.roles.models.RoleRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.roles.Role;
 import com.group6.ads.repositories.database.roles.RoleRepository;
 import lombok.RequiredArgsConstructor;
@@ -10,7 +11,7 @@ import java.util.List;
 
 @Service
 @RequiredArgsConstructor
-public class RoleServiceImpl implements RoleService{
+public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
 
     @Override
@@ -29,7 +30,7 @@ public class RoleServiceImpl implements RoleService{
 
     @Override
     public Role updateRole(RoleRequest role, Integer theId) {
-        Role foundRole = roleRepository.findById(theId).orElseThrow(() -> new RuntimeException("Role not found"));
+        Role foundRole = roleRepository.findById(theId).orElseThrow(() -> new NotFoundException("Role not found"));
 
         foundRole.setCode(role.getCode());
         foundRole.setDescription(role.getDescription());
@@ -43,7 +44,7 @@ public class RoleServiceImpl implements RoleService{
            roleRepository.deleteById(id);
         }
         else {
-            throw new RuntimeException("Role not found");
+            throw new NotFoundException("Role not found");
         }
     }
 }

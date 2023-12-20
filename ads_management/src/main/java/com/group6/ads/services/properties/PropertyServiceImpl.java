@@ -1,6 +1,7 @@
 package com.group6.ads.services.properties;
 
 import com.group6.ads.controllers.properties.models.PropertyRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.properties.PropertyRepository;
 import com.group6.ads.util.PageRequestCustom;
@@ -31,17 +32,22 @@ public class PropertyServiceImpl implements PropertyService{
     @Override
     public void delete(Integer id) {
         if(propertyRepository.existsByPropertyParentId(id)) {
-            throw new RuntimeException("Property has child");
+            throw new NotFoundException("Property has child");
         }
         propertyRepository.deleteById(id);
     }
 
     @Override
     public Property update(Integer id, PropertyRequest propertyRequest) {
-        Property property = propertyRepository.findById(id).orElseThrow(() -> new RuntimeException("Property not found"));
+        Property property = propertyRepository.findById(id).orElseThrow(() -> new NotFoundException("Property not found"));
         property.setPropertyParentId(propertyRequest.getPropertyParentId());
         property.setCode(propertyRequest.getCode());
         property.setName(propertyRequest.getName());
         return propertyRepository.save(property);
+    }
+
+    @Override
+    public Page<Property> findAllDistrict(String search, PageRequestCustom pageRequestCustom) {
+        return propertyRepository.findAllDistrict(search, pageRequestCustom.pageRequest());
     }
 }

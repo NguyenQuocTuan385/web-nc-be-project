@@ -14,4 +14,6 @@ public interface PropertyService {
     void delete(Integer id);
 
     Property update(Integer id, PropertyRequest propertyRequest);
+
+    Page<Property> findAllDistrict(String search, PageRequestCustom pageRequestCustom);
 }

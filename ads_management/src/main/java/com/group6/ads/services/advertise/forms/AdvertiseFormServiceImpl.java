@@ -1,6 +1,7 @@
 package com.group6.ads.services.advertise.forms;
 
 import com.group6.ads.controllers.advertise.forms.models.AdvertiseFormRequest;
+import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;
 import com.group6.ads.util.PageRequestCustom;
@@ -42,7 +43,7 @@ public class AdvertiseFormServiceImpl implements AdvertiseFormService {
     public AdvertiseForm update(Integer id, AdvertiseFormRequest advertiseFormRequest) {
         AdvertiseForm advertiseForm = advertiseFormRepository
                 .findById(id)
-                .orElseThrow( () -> new RuntimeException("Not found advertise form"));
+                .orElseThrow( () -> new NotFoundException("Not found advertise form"));
         advertiseForm.setName(advertiseFormRequest.getName());
         advertiseForm.setDescription(advertiseFormRequest.getDescription());
         return advertiseFormRepository.save(advertiseForm);
@@ -52,7 +53,7 @@ public class AdvertiseFormServiceImpl implements AdvertiseFormService {
     public void delete(Integer id) {
         AdvertiseForm advertiseForm = advertiseFormRepository
                 .findById(id)
-                .orElseThrow( () -> new RuntimeException("Not found advertise form"));
+                .orElseThrow( () -> new NotFoundException("Not found advertise form"));
         advertiseFormRepository.delete(advertiseForm);
     }
 }

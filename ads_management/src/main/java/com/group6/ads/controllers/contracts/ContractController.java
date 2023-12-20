@@ -16,6 +16,7 @@ import java.util.List;
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/contracts")
+@CrossOrigin("*")
 public class ContractController {
     @NonNull
     final ContractService contractService;
