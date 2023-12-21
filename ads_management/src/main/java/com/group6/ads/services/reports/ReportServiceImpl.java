@@ -12,8 +12,10 @@ import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
 import com.group6.ads.repositories.database.reports.Report;
 import com.group6.ads.repositories.database.reports.ReportRepository;
+import com.group6.ads.util.PageRequestCustom;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -26,11 +28,10 @@ public class ReportServiceImpl implements ReportService{
     private final AdvertiseRepository advertiseRepository;
     private final ReportFormRepository reportFormRepository;
     private final LocationRepository locationRepository;
-    private final Gson g;
 
     @Override
-    public List<Report> findAll() {
-        return reportRepository.findAll();
+    public Page<Report> findAll(String search, PageRequestCustom pageRequestCustom) {
+        return reportRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
     @Override

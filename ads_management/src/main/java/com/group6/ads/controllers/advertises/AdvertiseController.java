@@ -2,12 +2,16 @@ package com.group6.ads.controllers.advertises;
 
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
+import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.services.advertises.AdvertiseService;
+import com.group6.ads.util.PageRequestCustom;
 import io.swagger.v3.oas.annotations.Operation;
 import io.swagger.v3.oas.annotations.tags.Tag;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -30,8 +34,16 @@ public class AdvertiseController {
 
     @Operation(summary = "get all advertise by location id")
     @GetMapping("locations/{locationId}/advertises")
-    public ResponseEntity<List<Advertise>> findAllByLocationId(@PathVariable Integer locationId) {
-        return ResponseEntity.ok(advertiseService.findAllByLocationId(locationId));
+    public ResponseEntity<Page<Advertise>> findAllByLocationId(
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize,
+            @PathVariable Integer locationId) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+        return ResponseEntity.ok(advertiseService.findAllByLocationId(locationId, search, pageRequestCustom));
     }
     @Operation(summary = "cultural department create new advertise")
     @PostMapping("locations/{locationId}/advertises")

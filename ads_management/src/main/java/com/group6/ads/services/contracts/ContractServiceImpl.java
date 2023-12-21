@@ -7,7 +7,9 @@ import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
 import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.repositories.database.contracts.ContractRepository;
+import com.group6.ads.util.PageRequestCustom;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -19,8 +21,8 @@ public class ContractServiceImpl implements ContractService {
     private final AdvertiseRepository advertiseRepository;
 
     @Override
-    public List<Contract> findAll() {
-        return contractRepository.findAll();
+    public Page<Contract> findAll(String search, PageRequestCustom pageRequestCustom) {
+        return contractRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
     @Override
@@ -38,7 +40,7 @@ public class ContractServiceImpl implements ContractService {
                 .companyAddress(contractRequest.getCompanyAddress())
                 .images(contractRequest.getImages())
                 .status(0)
-//                 .advertise(advertiseOfContract)
+                .advertise(advertiseOfContract)
                 .build();
         return contractRepository.save(newContract);
     }
@@ -62,7 +64,7 @@ public class ContractServiceImpl implements ContractService {
         oldContract.setCompanyAddress(contractRequest.getCompanyAddress());
         oldContract.setImages(contractRequest.getImages());
         oldContract.setStatus(contractRequest.getStatus());
-//         oldContract.setAdvertise(advertiseOfContract);
+        oldContract.setAdvertise(advertiseOfContract);
 
         return contractRepository.save(oldContract);
     }
