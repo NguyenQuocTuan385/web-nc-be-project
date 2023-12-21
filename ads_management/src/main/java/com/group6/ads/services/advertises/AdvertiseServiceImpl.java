@@ -8,8 +8,11 @@ import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.LocationRepository;
+import com.group6.ads.repositories.database.properties.Property;
+import com.group6.ads.util.PageRequestCustom;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,8 +35,8 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     final LocationRepository locationRepository;
 
     @Override
-    public List<Advertise> findAllByLocationId(Integer locationId) {
-        return advertiseRepository.findAllByLocationId(locationId);
+    public Page<Advertise> findAllByLocationId(Integer locationId, String search, PageRequestCustom pageRequestCustom) {
+        return advertiseRepository.findAllByLocationId(locationId, search, pageRequestCustom.pageRequest());
     }
 
     @Override

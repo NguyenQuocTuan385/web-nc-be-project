@@ -4,9 +4,12 @@ import com.group6.ads.controllers.contracts.models.ContractRequest;
 import com.group6.ads.controllers.contracts.models.ContractUpdateRequest;
 import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.services.contracts.ContractService;
+import com.group6.ads.util.PageRequestCustom;
 import jakarta.validation.Valid;
+import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -22,8 +25,16 @@ public class ContractController {
     final ContractService contractService;
 
     @GetMapping("")
-    ResponseEntity<List<Contract>> getAllContracts() {
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll());
+    ResponseEntity<Page<Contract>> getAllContracts(
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize
+    ) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(search, pageRequestCustom));
     }
 
     @PostMapping("")
