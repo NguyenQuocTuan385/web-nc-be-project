@@ -2,6 +2,7 @@ package com.group6.ads.services.properties;
 
 import com.group6.ads.controllers.properties.models.PropertyRequest;
 import com.group6.ads.exceptions.NotFoundException;
+import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.properties.PropertyRepository;
 import com.group6.ads.util.PageRequestCustom;
@@ -16,8 +17,10 @@ public class PropertyServiceImpl implements PropertyService{
 
     @Override
     public Property save(PropertyRequest properties) {
+        Property propertyParent = propertyRepository.findById(properties.getPropertyParentId())
+                .orElseThrow(() -> new NotFoundException("Property not found"));
         Property propertyCreated = Property.builder()
-                .propertyParentId(properties.getPropertyParentId())
+                .propertyParent(propertyParent)
                 .code(properties.getCode())
                 .name(properties.getName())
                 .build();
@@ -40,7 +43,9 @@ public class PropertyServiceImpl implements PropertyService{
     @Override
     public Property update(Integer id, PropertyRequest propertyRequest) {
         Property property = propertyRepository.findById(id).orElseThrow(() -> new NotFoundException("Property not found"));
-        property.setPropertyParentId(propertyRequest.getPropertyParentId());
+        Property propertyParent = propertyRepository.findById(propertyRequest.getPropertyParentId())
+                .orElseThrow(() -> new NotFoundException("Property not found"));
+        property.setPropertyParent(propertyParent);
         property.setCode(propertyRequest.getCode());
         property.setName(propertyRequest.getName());
         return propertyRepository.save(property);

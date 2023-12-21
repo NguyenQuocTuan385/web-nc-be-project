@@ -1,16 +1,9 @@
 package com.group6.ads.repositories.database.reports;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
-import jakarta.persistence.Entity;
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.ManyToOne;
-import jakarta.persistence.Table;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -41,17 +34,14 @@ public class Report {
 
     @ManyToOne
     @JoinColumn(name = "report_form_id", nullable = false)
-    @JsonBackReference
     private ReportForm reportForm;
 
     @ManyToOne
-    @JoinColumn(name = "advertise_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "ads_id", nullable = false)
     private Advertise advertise;
 
     @ManyToOne
-    @JoinColumn(name = "location_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "location_id", nullable = true)
     private Location location;
 
     private String images;

@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 20, 2023 at 08:11 AM
+-- Generation Time: Dec 21, 2023 at 08:21 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.2.21
 
@@ -161,10 +161,18 @@ CREATE TABLE `contracts` (
   `start_at` datetime(6) DEFAULT NULL,
   `end_at` datetime(6) DEFAULT NULL,
   `status` int(11) DEFAULT NULL,
-  `advertise_id` int(10) UNSIGNED NOT NULL,
+  `ads_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `images` text DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `contracts`
+--
+
+INSERT INTO `contracts` (`id`, `company_name`, `company_email`, `company_phone`, `company_address`, `start_at`, `end_at`, `status`, `ads_id`, `created_at`, `images`) VALUES
+(1, 'Công ty TNHH ABC', 'Đường 1, Phường 1, Quận 1, TP.HCM', '0123456789', 'ctyst@gmail.com', '2023-12-25 00:00:00.000000', '2024-12-25 00:00:00.000000', 0, 2, '2023-12-21 04:04:05', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1702980254/gtl8wi5atyzx3sp49huk.jpg'),
+(2, 'Công ty TNHH ABC', 'Đường 1, Phường 1, Quận 1, TP.HCM', '0123456789', 'ctyst@gmail.com', '2023-12-25 00:00:00.000000', '2024-12-25 00:00:00.000000', 0, 2, '2023-12-21 04:04:05', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1702980254/gtl8wi5atyzx3sp49huk.jpg');
 
 -- --------------------------------------------------------
 
@@ -320,10 +328,17 @@ CREATE TABLE `reports` (
   `images` text DEFAULT NULL,
   `report_type_name` enum('LOCATION','ADVERTISE') DEFAULT NULL,
   `report_form_id` int(11) UNSIGNED NOT NULL,
-  `advertise_id` int(11) UNSIGNED DEFAULT NULL,
+  `ads_id` int(11) UNSIGNED DEFAULT NULL,
   `location_id` int(11) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Dumping data for table `reports`
+--
+
+INSERT INTO `reports` (`id`, `full_name`, `email`, `phone`, `content`, `status`, `reply`, `images`, `report_type_name`, `report_form_id`, `ads_id`, `location_id`, `created_at`) VALUES
+(1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', NULL, NULL, NULL, 'ADVERTISE', 1, 16, NULL, '2023-12-21 07:04:51');
 
 -- --------------------------------------------------------
 
@@ -428,7 +443,7 @@ ALTER TABLE `advertise_types`
 --
 ALTER TABLE `contracts`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `contract_FK` (`advertise_id`);
+  ADD KEY `contract_ibfk_1` (`ads_id`);
 
 --
 -- Indexes for table `locations`
@@ -468,7 +483,7 @@ ALTER TABLE `properties`
 --
 ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`),
-  ADD KEY `advertise_id` (`advertise_id`),
+  ADD KEY `advertise_id` (`ads_id`),
   ADD KEY `report_form_id` (`report_form_id`),
   ADD KEY `location_id` (`location_id`);
 
@@ -524,7 +539,7 @@ ALTER TABLE `advertise_types`
 -- AUTO_INCREMENT for table `contracts`
 --
 ALTER TABLE `contracts`
-  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(10) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT for table `locations`
@@ -554,7 +569,7 @@ ALTER TABLE `properties`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
 
 --
 -- AUTO_INCREMENT for table `report_forms`
@@ -598,7 +613,7 @@ ALTER TABLE `advertises_edit`
 -- Constraints for table `contracts`
 --
 ALTER TABLE `contracts`
-  ADD CONSTRAINT `contract_FK` FOREIGN KEY (`advertise_id`) REFERENCES `advertises` (`id`);
+  ADD CONSTRAINT `contract_ibfk_1` FOREIGN KEY (`ads_id`) REFERENCES `advertises` (`id`);
 
 --
 -- Constraints for table `locations`
@@ -628,7 +643,7 @@ ALTER TABLE `properties`
 -- Constraints for table `reports`
 --
 ALTER TABLE `reports`
-  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`advertise_id`) REFERENCES `advertises` (`id`),
+  ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`ads_id`) REFERENCES `advertises` (`id`),
   ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_form_id`) REFERENCES `report_forms` (`id`),
   ADD CONSTRAINT `reports_ibfk_4` FOREIGN KEY (`location_id`) REFERENCES `locations` (`id`);
 

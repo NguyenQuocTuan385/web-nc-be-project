@@ -7,3 +7,12 @@ spring:
     password:
 api:
   prefix: api
+logging:
+  level:
+    org:
+      hibernate:
+        SQL: DEBUG
+        type:
+          descriptor:
+            sql:
+              BasicBinder: TRACE

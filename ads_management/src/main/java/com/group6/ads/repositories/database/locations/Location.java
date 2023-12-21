@@ -1,13 +1,10 @@
 package com.group6.ads.repositories.database.locations;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
-import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.locations.edit.LocationEdit;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.properties.Property;
-import com.group6.ads.repositories.database.reports.Report;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -16,7 +13,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.time.LocalDateTime;
-import java.util.Set;
+
 @Getter
 @Setter
 @NoArgsConstructor
@@ -40,10 +37,6 @@ public class Location {
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime updatedAt;
 
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<Advertise> advertises;
-
     @ManyToOne
     @JoinColumn(name = "ads_form_id", nullable = false)
     private AdvertiseForm adsForm;
@@ -59,8 +52,4 @@ public class Location {
     @OneToOne
     @JoinColumn(name = "location_edit_id")
     private LocationEdit locationEdit;
-
-    @OneToMany(mappedBy = "location", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    private Set<Report> reports;
 }
