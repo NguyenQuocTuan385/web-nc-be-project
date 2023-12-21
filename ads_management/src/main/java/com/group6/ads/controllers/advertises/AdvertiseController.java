@@ -27,6 +27,7 @@ import java.util.List;
 public class AdvertiseController {
     @NonNull
     final AdvertiseService advertiseService;
+
     @Operation(summary = "get all advertise by location id")
     @GetMapping("locations/{locationId}/advertises")
     public ResponseEntity<List<Advertise>> findAllByLocationId(@PathVariable Integer locationId) {

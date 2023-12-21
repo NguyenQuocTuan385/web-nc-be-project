@@ -1,17 +1,13 @@
 package com.group6.ads.repositories.database.advertises.edit;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.fasterxml.jackson.annotation.JsonManagedReference;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
-import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.users.User;
 import jakarta.persistence.*;
 import lombok.*;
 
 import java.time.LocalDateTime;
-import java.util.Set;
 
 @Getter
 @Setter
@@ -44,9 +40,4 @@ public class AdvertiseEdit {
     @ManyToOne
     @JoinColumn(name = "user_id")
     private User user;
-
-    @OneToMany(mappedBy = "advertiseEdit", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<Advertise> advertises;
 }

@@ -20,17 +20,9 @@ public class Property {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer propertyParentId;
     private String name;
     private String code;
-
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<Location> locations;
-
-    @OneToMany(mappedBy = "property", cascade = CascadeType.ALL)
-    @JsonManagedReference
-    @JsonIgnore
-    private Set<User> users;
+    @ManyToOne
+    @JoinColumn(name = "property_parent_id", nullable = true)
+    private Property propertyParent;
 }

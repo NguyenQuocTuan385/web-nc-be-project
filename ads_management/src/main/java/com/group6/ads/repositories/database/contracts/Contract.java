@@ -1,6 +1,5 @@
 package com.group6.ads.repositories.database.contracts;
 
-import com.fasterxml.jackson.annotation.JsonBackReference;
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import jakarta.persistence.*;
@@ -34,7 +33,6 @@ public class Contract {
     private String images;
 
     @ManyToOne
-    @JoinColumn(name = "advertise_id", nullable = false)
-    @JsonBackReference
+    @JoinColumn(name = "ads_id", nullable = false)
     private Advertise advertise;
 }
