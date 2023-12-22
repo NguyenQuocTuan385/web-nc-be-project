@@ -1,6 +1,7 @@
 package com.group6.ads.controllers.properties;
 
 import com.group6.ads.controllers.properties.models.PropertyRequest;
+import com.group6.ads.controllers.properties.models.PropertyUpdateRequest;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.services.properties.PropertyService;
 import com.group6.ads.util.PageRequestCustom;
@@ -59,7 +60,7 @@ public class PropertyController {
 
     @Operation(summary = "cultural department update district")
     @PutMapping("{id}")
-    ResponseEntity<Property> update(@PathVariable Integer id, @RequestBody @Valid PropertyRequest propertyRequest) {
+    ResponseEntity<Property> update(@PathVariable Integer id, @RequestBody @Valid PropertyUpdateRequest propertyRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(propertyService.update(id, propertyRequest));
     }
 

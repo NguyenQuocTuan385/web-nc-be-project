@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface ContractService {
-    Page<Contract> findAll(String search, PageRequestCustom pageRequestCustom);
+    Page<Contract> findAll(Long propertyId, String search, PageRequestCustom pageRequestCustom);
 
     Contract createContract(ContractRequest contractRequest);
 
