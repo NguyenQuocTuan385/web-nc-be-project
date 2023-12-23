@@ -33,6 +33,6 @@ public class Contract {
     private String images;
 
     @ManyToOne
-    @JoinColumn(name = "ads_id", nullable = false)
+    @JoinColumn(name = "advertise_id", nullable = false)
     private Advertise advertise;
 }

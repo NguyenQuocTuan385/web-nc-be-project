@@ -24,9 +24,10 @@ public class ContractController {
     @NonNull
     final ContractService contractService;
 
-    @GetMapping("")
+    @GetMapping("properties/{propertyId}")
     ResponseEntity<Page<Contract>> getAllContracts(
-            @RequestParam(required = false, value = "status", defaultValue = "0")
+            @PathVariable Long propertyId,
+            @RequestParam(required = false, value = "status", defaultValue = "")
             Integer status,
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
@@ -36,7 +37,7 @@ public class ContractController {
             Integer pageSize
     ) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(search, status, pageRequestCustom));
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, search, status, pageRequestCustom));
     }
 
     @PostMapping("")
