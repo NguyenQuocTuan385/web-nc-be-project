@@ -25,12 +25,10 @@ public class User {
     private String avatar;
     private String phone;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
-    private Role roles;
+    private Role role;
 
-    @JsonIgnore
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
     private Property property;

@@ -37,7 +37,7 @@ public class UserServiceImpl implements UserService {
                 .birthday(user.getBirthday())
                 .avatar(user.getAvatar())
                 .property(property)
-                .roles(role)
+                .role(role)
                 .build();
         return UserRepository.save(usersCreated);
     }
@@ -53,7 +53,7 @@ public class UserServiceImpl implements UserService {
         foundUsers.setBirthday(user.getBirthday());
         foundUsers.setAvatar(user.getAvatar());
         foundUsers.setProperty(propertyRepository.findById(user.getPropertyId()).orElse(null));
-        foundUsers.setRoles(roleRepository.findById(user.getRoleId()).orElse(null));
+        foundUsers.setRole(roleRepository.findById(user.getRoleId()).orElse(null));
 
         return UserRepository.save(foundUsers);
     }

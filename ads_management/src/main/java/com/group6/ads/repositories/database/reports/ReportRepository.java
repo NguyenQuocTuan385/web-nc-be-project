@@ -18,4 +18,12 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
             WHERE (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
             """)
     Page<Report> findAll(String search, Pageable pageable);
+
+    @Query("""
+            SELECT r
+            FROM Report r
+            WHERE r.email = :email AND r.advertise.location.id = :locationId
+            AND (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
+            """)
+    Page<Report> findAllByEmailAndLocation(Integer locationId, String email, String search, Pageable pageable);
 }

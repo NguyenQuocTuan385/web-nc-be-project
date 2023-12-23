@@ -9,9 +9,10 @@ public class ReportCreateRequest {
     private String phone;
     private String content;
     private String reportTypeName;
-
+    private Double latitude;
+    private Double longitude;
+    private String address;
     private Integer reportFormId;
     private Integer advertiseId;
-    private Integer locationId;
     private String images;
 }

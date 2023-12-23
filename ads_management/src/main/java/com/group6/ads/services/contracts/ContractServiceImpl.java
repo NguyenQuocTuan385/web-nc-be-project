@@ -21,8 +21,13 @@ public class ContractServiceImpl implements ContractService {
     private final AdvertiseRepository advertiseRepository;
 
     @Override
-    public Page<Contract> findAll(Long propertyId, String search, Integer status, PageRequestCustom pageRequestCustom) {
+    public Page<Contract> findAll(Integer propertyId, String search, Integer status, PageRequestCustom pageRequestCustom) {
         return contractRepository.findAll(propertyId, search, status, pageRequestCustom.pageRequest());
+    }
+
+    @Override
+    public Page<Contract> findByAdvertiseId(Integer advertiseId, String search, PageRequestCustom pageRequestCustom) {
+        return contractRepository.findByAdvertiseId(advertiseId, search, pageRequestCustom.pageRequest());
     }
 
     @Override

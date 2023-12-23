@@ -27,9 +27,12 @@ public class Report {
     private String email;
     private String phone;
     private String content;
-    private Boolean status;
+    private Integer status;
     private String reportTypeName;
     private String reply;
+    private Double latitude;
+    private Double longitude;
+    private String address;
     private LocalDateTime createdAt;
 
     @ManyToOne
@@ -40,9 +43,6 @@ public class Report {
     @JoinColumn(name = "ads_id", nullable = false)
     private Advertise advertise;
 
-    @ManyToOne
-    @JoinColumn(name = "location_id", nullable = true)
-    private Location location;
 
     private String images;
 }

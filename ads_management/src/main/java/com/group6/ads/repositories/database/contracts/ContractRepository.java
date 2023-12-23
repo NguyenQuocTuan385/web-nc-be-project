@@ -13,5 +13,13 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
                 AND (c.status = :status OR :status IS NULL)
                 AND (c.companyName LIKE %:search% OR c.companyEmail LIKE %:search% OR c.companyPhone LIKE %:search% OR c.companyAddress LIKE %:search%)
             """)
-    Page<Contract> findAll(Long propertyId, String search, Integer status, Pageable pageable);
+    Page<Contract> findAll(Integer propertyId, String search, Integer status, Pageable pageable);
+
+    @Query("""
+            SELECT c
+            FROM Contract c, Advertise a
+            WHERE c.advertise.id = :advertiseId AND c.status = 1
+            AND (c.companyName LIKE %:search% OR c.companyEmail LIKE %:search% OR c.companyPhone LIKE %:search%)
+            """)
+    Page<Contract> findByAdvertiseId(Integer advertiseId, String search, Pageable pageable);
 }

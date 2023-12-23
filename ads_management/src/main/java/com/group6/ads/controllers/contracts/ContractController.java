@@ -18,15 +18,15 @@ import java.util.List;
 
 @RestController
 @RequiredArgsConstructor
-@RequestMapping("${api.prefix}/contracts")
+@RequestMapping("${api.prefix}/")
 @CrossOrigin("*")
 public class ContractController {
     @NonNull
     final ContractService contractService;
 
-    @GetMapping("properties/{propertyId}")
+    @GetMapping("properties/{propertyId}/contracts")
     ResponseEntity<Page<Contract>> getAllContracts(
-            @PathVariable Long propertyId,
+            @PathVariable Integer propertyId,
             @RequestParam(required = false, value = "status", defaultValue = "")
             Integer status,
             @RequestParam(required = false, value = "search", defaultValue = "")
@@ -40,17 +40,31 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, search, status, pageRequestCustom));
     }
 
-    @PostMapping("")
+    @GetMapping("advertises/{advertiseId}/contracts")
+    ResponseEntity<Page<Contract>> getAllContractsByAdvertise(
+            @PathVariable Integer advertiseId,
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize
+    ) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
+    }
+
+    @PostMapping("contracts")
     ResponseEntity<Contract> createContract(@RequestBody @Valid ContractRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(contractService.createContract(contractRequest));
     }
 
-    @PutMapping("/{id}")
+    @PutMapping("contracts/{id}")
     ResponseEntity<Contract> updateContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(contractService.updateContract(id, contractRequest));
     }
 
-    @DeleteMapping("/{id}")
+    @DeleteMapping("contracts/{id}")
     ResponseEntity<String> deleteContract(@PathVariable Long id) {
         contractService.deleteContract(id);
         return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);

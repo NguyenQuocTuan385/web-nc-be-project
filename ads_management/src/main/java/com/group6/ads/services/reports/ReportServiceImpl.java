@@ -19,7 +19,6 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
@@ -30,7 +29,10 @@ public class ReportServiceImpl implements ReportService{
     private final LocationRepository locationRepository;
 
     @Override
-    public Page<Report> findAll(String search, PageRequestCustom pageRequestCustom) {
+    public Page<Report> findAll(Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
+        if (email != null && locationId != null) {
+            return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
+        }
         return reportRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
@@ -38,19 +40,19 @@ public class ReportServiceImpl implements ReportService{
     public Report createReport(ReportCreateRequest reportRequest) {
         Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
         ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
-        Location location = locationRepository.findById(reportRequest.getLocationId()).orElseThrow();
 
         Report newReport = Report.builder()
                 .fullName(reportRequest.getFullName())
                 .email(reportRequest.getEmail())
                 .phone(reportRequest.getPhone())
                 .content(reportRequest.getContent())
-                .status(false)
                 .reply(null)
                 .reportTypeName(reportRequest.getReportTypeName())
+                .address(reportRequest.getAddress())
+                .latitude(reportRequest.getLatitude())
+                .longitude(reportRequest.getLongitude())
                 .reportForm(rpForm)
                 .advertise(ad)
-                .location(location)
                 .createdAt(LocalDateTime.now())
                 .images(reportRequest.getImages())
                 .build();
