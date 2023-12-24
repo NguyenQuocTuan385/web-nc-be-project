@@ -8,7 +8,9 @@ import com.group6.ads.repositories.database.roles.Role;
 import com.group6.ads.repositories.database.roles.RoleRepository;
 import com.group6.ads.repositories.database.users.UserRepository;
 import com.group6.ads.repositories.database.users.User;
+import com.group6.ads.util.PageRequestCustom;
 import lombok.RequiredArgsConstructor;
+import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -21,8 +23,14 @@ public class UserServiceImpl implements UserService {
     private final RoleRepository roleRepository;
 
     @Override
-    public List<User> findAll() {
-        return UserRepository.findAll();
+    public Page<User> findAll(Integer roleId, String search, PageRequestCustom pageRequestCustom) {
+        return roleId == null ? UserRepository.findAll(search,pageRequestCustom.pageRequest()) :
+                UserRepository.findAll(roleId,search,pageRequestCustom.pageRequest());
+    }
+
+    @Override
+    public User findById(Integer id) {
+        return UserRepository.findById(id).orElseThrow(() -> new NotFoundException("User not found"));
     }
 
     @Override
@@ -47,7 +55,12 @@ public class UserServiceImpl implements UserService {
         User foundUsers = UserRepository.findById(theId).orElseThrow(() -> new NotFoundException("User not found"));
 
         foundUsers.setName(user.getName());
-        foundUsers.setPassword(user.getPassword());
+        if(user.getPassword() != null
+                && !user.getPassword().isEmpty()
+                && !user.getPassword().equals("null"))
+        {
+            foundUsers.setPassword(user.getPassword());
+        }
         foundUsers.setEmail(user.getEmail());
         foundUsers.setPhone(user.getPhone());
         foundUsers.setBirthday(user.getBirthday());

@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
@@ -26,6 +28,7 @@ public class PropertyServiceImpl implements PropertyService{
                 .build();
         return propertyRepository.save(propertyCreated);
     }
+
 
     @Override
     public Page<Property> findAllByPropertyParentId(Integer propertyParentId, String search, PageRequestCustom pageRequestCustom) {
