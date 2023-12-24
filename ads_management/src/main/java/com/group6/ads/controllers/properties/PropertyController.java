@@ -15,6 +15,8 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
+import java.util.List;
+
 @RestController
 @RequiredArgsConstructor
 @RequestMapping("${api.prefix}/properties")
@@ -33,6 +35,12 @@ public class PropertyController {
             Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
         return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAllDistrict(search, pageRequestCustom));
+    }
+
+    @Operation(summary = "Find all districts no paging")
+    @GetMapping("all")
+    ResponseEntity<List<Property>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAll());
     }
 
     @Operation(summary = "Find all ward by district id")

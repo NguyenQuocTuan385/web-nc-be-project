@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
+
 @Service
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
@@ -25,6 +27,11 @@ public class PropertyServiceImpl implements PropertyService{
                 .name(properties.getName())
                 .build();
         return propertyRepository.save(propertyCreated);
+    }
+
+    @Override
+    public List<Property> findAll() {
+        return propertyRepository.findAllByPropertyParentIdIsNull();
     }
 
     @Override
