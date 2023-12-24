@@ -10,8 +10,6 @@ import java.util.List;
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
     Boolean existsByPropertyParentId(Integer propertyParentId);
 
-    List<Property> findAllByPropertyParentIdIsNull();
-
     @Query("""
             SELECT p
             FROM Property p

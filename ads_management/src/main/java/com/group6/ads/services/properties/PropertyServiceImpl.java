@@ -29,10 +29,6 @@ public class PropertyServiceImpl implements PropertyService{
         return propertyRepository.save(propertyCreated);
     }
 
-    @Override
-    public List<Property> findAll() {
-        return propertyRepository.findAllByPropertyParentIdIsNull();
-    }
 
     @Override
     public Page<Property> findAllByPropertyParentId(Integer propertyParentId, String search, PageRequestCustom pageRequestCustom) {

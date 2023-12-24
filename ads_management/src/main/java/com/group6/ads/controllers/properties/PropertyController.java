@@ -37,12 +37,6 @@ public class PropertyController {
         return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAllDistrict(search, pageRequestCustom));
     }
 
-    @Operation(summary = "Find all districts no paging")
-    @GetMapping("all")
-    ResponseEntity<List<Property>> findAll() {
-        return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAll());
-    }
-
     @Operation(summary = "Find all ward by district id")
     @GetMapping("{propertyParentId}")
     ResponseEntity<Page<Property>> findAllByPropertyParentId(
