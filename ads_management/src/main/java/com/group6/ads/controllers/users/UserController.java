@@ -4,11 +4,8 @@ package com.group6.ads.controllers.users;
 import com.group6.ads.controllers.users.models.UserRequest;
 import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.services.users.UserService;
-import com.group6.ads.util.PageRequestCustom;
 import jakarta.validation.Valid;
-import jakarta.validation.constraints.Min;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,23 +20,8 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("")
-    ResponseEntity<Page<User>> getAlUsers(
-            @RequestParam(required = false, value = "role", defaultValue = "0")
-            Integer roleId,
-            @RequestParam(required = false, value = "search", defaultValue = "")
-            String search,
-            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
-            Integer currentPage,
-            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
-            Integer pageSize
-    ) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll(roleId,search, pageRequestCustom));
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
+    public ResponseEntity<List<User>> findAll() {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll());
     }
 
     @PostMapping("")

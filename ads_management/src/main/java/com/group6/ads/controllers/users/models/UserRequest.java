@@ -18,6 +18,7 @@ public class UserRequest {
     @Email(message = "Invalid email format")
     private String email;
 
+    @NotBlank(message = "Password must be not blank")
     private String password;
 
     @NotNull(message = "Birthday must be not null")

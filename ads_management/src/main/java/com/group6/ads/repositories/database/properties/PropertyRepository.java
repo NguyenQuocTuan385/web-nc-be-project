@@ -8,9 +8,9 @@ import org.springframework.data.jpa.repository.Query;
 import java.util.List;
 
 public interface PropertyRepository extends JpaRepository<Property, Integer> {
-    Boolean existsByPropertyParentId(Integer propertyParentId);
+    List<Property> findAllByPropertyParentId(Integer propertyParentId);
 
-    List<Property> findAllByPropertyParentIdIsNull();
+    Boolean existsByPropertyParentId(Integer propertyParentId);
 
     @Query("""
             SELECT p
@@ -19,7 +19,6 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
                 AND (p.code LIKE %:search% OR p.name LIKE %:search%)
             """)
     Page<Property> findAllByPropertyParentId(Integer propertyParentId, String search, Pageable pageable);
-
 
     @Query("""
             SELECT p

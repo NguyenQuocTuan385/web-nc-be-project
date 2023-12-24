@@ -7,11 +7,8 @@ import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;
 
-import java.util.List;
-
 public interface PropertyService {
     Property save(PropertyRequest properties);
-    List<Property> findAll();
 
     Page<Property> findAllByPropertyParentId(Integer propertyParentId, String search, PageRequestCustom pageRequestCustom);
 
