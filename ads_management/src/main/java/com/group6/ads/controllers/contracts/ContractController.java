@@ -69,4 +69,9 @@ public class ContractController {
         contractService.deleteContract(id);
         return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);
     }
+
+    @GetMapping("contracts/{id}")
+    ResponseEntity<Contract> getContractById(@PathVariable Long id){
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.getContractById(id));
+    }
 }
