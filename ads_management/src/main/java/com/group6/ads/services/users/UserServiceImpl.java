@@ -24,7 +24,7 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAll(Integer roleId, String search, PageRequestCustom pageRequestCustom) {
-        return roleId == 0 ? UserRepository.findAll(search,pageRequestCustom.pageRequest()) :
+        return roleId == null ? UserRepository.findAll(search,pageRequestCustom.pageRequest()) :
                 UserRepository.findAll(roleId,search,pageRequestCustom.pageRequest());
     }
 

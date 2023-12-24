@@ -24,7 +24,7 @@ public class UserController {
 
     @GetMapping("")
     ResponseEntity<Page<User>> getAlUsers(
-            @RequestParam(required = false, value = "role", defaultValue = "0")
+            @RequestParam(required = false, value = "roleId")
             Integer roleId,
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
