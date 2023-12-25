@@ -40,6 +40,30 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, search, status, pageRequestCustom));
     }
 
+    @GetMapping("properties/contracts")
+    ResponseEntity<Page<Contract>> getContractsWithPropertyIds(
+            @RequestParam(required = false, value = "propertyId", defaultValue = "")
+            Integer[] propertyId,
+            @RequestParam(required = false, value = "parentId", defaultValue = "")
+            Integer[] parentId,
+            @RequestParam(required = false, value = "status", defaultValue = "")
+            Integer status,
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize
+    ) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+
+        if(parentId.length == 0)
+            parentId = null;
+        if(propertyId.length == 0)
+            propertyId = null;
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, parentId, search, status, pageRequestCustom));
+    }
+
     @GetMapping("advertises/{advertiseId}/contracts")
     ResponseEntity<Page<Contract>> getAllContractsByAdvertise(
             @PathVariable Integer advertiseId,

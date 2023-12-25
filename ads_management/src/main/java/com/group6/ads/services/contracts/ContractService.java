@@ -11,6 +11,7 @@ import java.util.List;
 
 public interface ContractService {
     Page<Contract> findAll(Integer propertyId, String search, Integer status, PageRequestCustom pageRequestCustom);
+    Page<Contract> findAll(Integer[] propertyId, Integer[] parentId, String search, Integer status, PageRequestCustom pageRequestCustom);
     Page<Contract> findByAdvertiseId(Integer advertiseId, String search, PageRequestCustom pageRequestCustom);
 
     Contract createContract(ContractRequest contractRequest);
