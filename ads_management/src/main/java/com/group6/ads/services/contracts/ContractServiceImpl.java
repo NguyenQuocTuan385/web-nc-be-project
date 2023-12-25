@@ -81,4 +81,10 @@ public class ContractServiceImpl implements ContractService {
         else
             throw new NotFoundException("Can't Delete, can't find contract with id " + id);
     }
+
+    @Override
+    public Contract getContractById(Long id) {
+        return contractRepository.findById(Math.toIntExact(id)).orElseThrow(() -> new NotFoundException("Not found contract with id " + id));
+    }
+
 }
