@@ -19,4 +19,6 @@ public interface ContractService {
 
     Contract updateContract(Long id, ContractUpdateRequest contractRequest);
     void deleteContract(Long id);
+
+    Contract getContractById(Long id);
 }
