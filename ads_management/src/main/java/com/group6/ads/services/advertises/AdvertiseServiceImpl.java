@@ -35,6 +35,16 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     final LocationRepository locationRepository;
 
     @Override
+    public Page<Advertise> findAll(String search, PageRequestCustom pageRequestCustom) {
+        return advertiseRepository.findAll(search, pageRequestCustom.pageRequest());
+    }
+
+    @Override
+    public Advertise findById(Integer id) {
+        return advertiseRepository.findById(id).orElse(null);
+    }
+
+    @Override
     public Page<Advertise> findAllByLocationId(Integer locationId, String search, PageRequestCustom pageRequestCustom) {
         return advertiseRepository.findAllByLocationId(locationId, search, pageRequestCustom.pageRequest());
     }

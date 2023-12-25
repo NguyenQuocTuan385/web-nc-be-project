@@ -32,6 +32,25 @@ public class AdvertiseController {
     @NonNull
     final AdvertiseService advertiseService;
 
+    @Operation(summary = "get all advertises")
+    @GetMapping("advertises")
+    public ResponseEntity<Page<Advertise>> findAll(
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+        return ResponseEntity.ok(advertiseService.findAll(search, pageRequestCustom));
+    }
+
+    @Operation(summary = "get advertise by id")
+    @GetMapping("advertises/{id}")
+    public ResponseEntity<Advertise> findById(@PathVariable Integer id) {
+        return ResponseEntity.ok(advertiseService.findById(id));
+    }
+
     @Operation(summary = "get all advertise by location id")
     @GetMapping("locations/{locationId}/advertises")
     public ResponseEntity<Page<Advertise>> findAllByLocationId(

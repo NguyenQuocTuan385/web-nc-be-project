@@ -15,8 +15,11 @@ import java.util.List;
  * Description: ...
  */
 public interface AdvertiseService {
+
+    Page<Advertise> findAll(String search, PageRequestCustom pageRequestCustom);
     Page<Advertise> findAllByLocationId(Integer locationId, String search, PageRequestCustom pageRequestCustom);
 
+    Advertise findById(Integer id);
     Advertise create(Integer locationId, AdvertiseRequest advertiseRequest);
 
     Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);

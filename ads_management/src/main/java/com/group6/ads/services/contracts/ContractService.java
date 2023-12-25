@@ -13,9 +13,10 @@ public interface ContractService {
     Page<Contract> findAll(Integer propertyId, String search, Integer status, PageRequestCustom pageRequestCustom);
     Page<Contract> findByAdvertiseId(Integer advertiseId, String search, PageRequestCustom pageRequestCustom);
 
+    Contract findByAdvertiseIdOne(Integer advertiseId);
+
     Contract createContract(ContractRequest contractRequest);
 
     Contract updateContract(Long id, ContractUpdateRequest contractRequest);
-
     void deleteContract(Long id);
 }
