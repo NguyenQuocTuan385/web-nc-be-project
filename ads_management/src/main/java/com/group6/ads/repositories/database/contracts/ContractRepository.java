@@ -18,7 +18,7 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
     @Query("""
             SELECT c
             FROM Contract c
-            WHERE ((c.advertise.location.property.id IN (:propertyId) OR c.advertise.location.property.propertyParent.id IN (:parentId)) OR :propertyId IS NULL OR  :parentId IS NULL)
+            WHERE (((c.advertise.location.property.id IN (:propertyId) OR :propertyId IS NULL) AND c.advertise.location.property.propertyParent.id IN (:parentId)) OR  :parentId IS NULL)
                 AND (c.status = :status OR :status IS NULL)
                 AND (c.companyName LIKE %:search% OR c.companyEmail LIKE %:search% OR c.companyPhone LIKE %:search% OR c.companyAddress LIKE %:search%)
             """)
