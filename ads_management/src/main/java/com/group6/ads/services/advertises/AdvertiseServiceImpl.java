@@ -1,15 +1,22 @@
 package com.group6.ads.services.advertises;
 
+import com.group6.ads.controllers.advertises.models.AdvertiseEditByRootRequest;
+import com.group6.ads.controllers.advertises.models.AdvertiseEditRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeRepository;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
+import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
+import com.group6.ads.repositories.database.advertises.edit.AdvertiseEditRepository;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.LocationRepository;
 import com.group6.ads.repositories.database.properties.Property;
+import com.group6.ads.repositories.database.users.User;
+import com.group6.ads.repositories.database.users.UserRepository;
 import com.group6.ads.util.PageRequestCustom;
+import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
@@ -33,6 +40,8 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     final AdvertiseTypeRepository advertiseTypeRepository;
     @NonNull
     final LocationRepository locationRepository;
+    @NonNull UserRepository userRepository;
+    @NonNull AdvertiseEditRepository advertiseEditRepository;
 
     @Override
     public Page<Advertise> findAll(String search, PageRequestCustom pageRequestCustom) {
@@ -74,19 +83,19 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     }
 
     @Override
-    public Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest) {
+    public Advertise updateByRoot(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest) {
         AdvertiseType advertiseType = advertiseTypeRepository
-                .findById(advertiseRequest.getAdsTypeId())
+                .findById(advertiseEditByRootRequest.getAdsTypeId())
                 .orElseThrow(() -> new NotFoundException("Advertise type not found"));
         Advertise advertise = advertiseRepository
                 .findById(advertiseId)
                 .orElseThrow(() -> new NotFoundException("Advertise not found"));
 
-        advertise.setLicensing(advertiseRequest.getLicensing());
-        advertise.setHeight(advertiseRequest.getHeight());
-        advertise.setWidth(advertiseRequest.getWidth());
+        advertise.setLicensing(advertiseEditByRootRequest.getLicensing());
+        advertise.setHeight(advertiseEditByRootRequest.getHeight());
+        advertise.setWidth(advertiseEditByRootRequest.getWidth());
         advertise.setAdsType(advertiseType);
-        advertise.setImages(advertiseRequest.getImages());
+        advertise.setImages(advertiseEditByRootRequest.getImages());
         advertise.setStatusEdit(false);
         advertise.setUpdatedAt(LocalDateTime.now());
 
@@ -99,5 +108,45 @@ public class AdvertiseServiceImpl implements AdvertiseService {
                 .findById(advertiseId)
                 .orElseThrow(() -> new NotFoundException("Advertise not found"));
         advertiseRepository.delete(advertise);
+    }
+
+    @Transactional
+    @Override
+    public AdvertiseEdit update(Integer advertiseId, AdvertiseEditRequest advertiseEditRequest) {
+        AdvertiseType advertiseType = advertiseTypeRepository
+                .findById(advertiseEditRequest.getAdsTypeId())
+                .orElseThrow(() -> new NotFoundException("Advertise type not found"));
+        Advertise advertise = advertiseRepository
+                .findById(advertiseId)
+                .orElseThrow(() -> new NotFoundException("Advertise not found"));
+        User user = userRepository
+                .findById(advertiseEditRequest.getUserId())
+                .orElseThrow(() -> new NotFoundException("User not found"));
+        Location location = locationRepository
+                .findById(advertiseEditRequest.getLocationId())
+                .orElseThrow(() -> new NotFoundException("Location not found"));
+
+        AdvertiseEdit advertiseEdit = AdvertiseEdit
+                .builder()
+                .adsType(advertiseType)
+                .content(advertiseEditRequest.getContent())
+                .user(user)
+                .createdAt(LocalDateTime.now())
+                .height(advertiseEditRequest.getHeight())
+                .width(advertiseEditRequest.getWidth())
+                .images(advertiseEditRequest.getImageUrls())
+                .licensing(advertiseEditRequest.getLicensing())
+                .location(location)
+                .build();
+
+        advertiseEditRepository.save(advertiseEdit);
+
+        advertise.setStatusEdit(false);
+        advertise.setAdvertiseEdit(advertiseEdit);
+        advertise.setUpdatedAt(LocalDateTime.now());
+
+        advertiseRepository.save(advertise);
+
+        return advertiseEdit;
     }
 }

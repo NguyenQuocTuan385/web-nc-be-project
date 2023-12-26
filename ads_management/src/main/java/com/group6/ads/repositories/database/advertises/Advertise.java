@@ -2,6 +2,7 @@ package com.group6.ads.repositories.database.advertises;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
+import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.locations.Location;
 import jakarta.persistence.*;
 import lombok.*;
@@ -33,9 +34,9 @@ public class Advertise {
     @JoinColumn(name = "ads_type_id", nullable = false)
     private AdvertiseType adsType;
 
-//    @OneToOne
-//    @JoinColumn(name = "advertise_edit_id", nullable = false)
-//    private AdvertiseEdit advertiseEdit;
+    @OneToOne
+    @JoinColumn(name = "advertise_edit_id")
+    private AdvertiseEdit advertiseEdit;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

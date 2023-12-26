@@ -1,7 +1,10 @@
 package com.group6.ads.services.advertises;
 
+import com.group6.ads.controllers.advertises.models.AdvertiseEditByRootRequest;
+import com.group6.ads.controllers.advertises.models.AdvertiseEditRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
+import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;
@@ -22,7 +25,9 @@ public interface AdvertiseService {
     Advertise findById(Integer id);
     Advertise create(Integer locationId, AdvertiseRequest advertiseRequest);
 
-    Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);
+    Advertise updateByRoot(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest);
 
     void delete(Integer advertiseId);
+
+    AdvertiseEdit update(Integer advertiseId, AdvertiseEditRequest advertiseEditRequest);
 }

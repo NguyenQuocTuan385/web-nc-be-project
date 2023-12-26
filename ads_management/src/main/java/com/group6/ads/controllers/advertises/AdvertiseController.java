@@ -1,7 +1,12 @@
 package com.group6.ads.controllers.advertises;
 
+import com.group6.ads.controllers.advertises.models.AdvertiseEditByRootRequest;
+import com.group6.ads.controllers.advertises.models.AdvertiseEditRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
+import com.group6.ads.controllers.locations.models.LocationEditRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
+import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
+import com.group6.ads.repositories.database.locations.edit.LocationEdit;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.services.advertises.AdvertiseService;
 import com.group6.ads.util.PageRequestCustom;
@@ -12,6 +17,7 @@ import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -72,8 +78,8 @@ public class AdvertiseController {
 
     @Operation(summary = "cultural department update advertise")
     @PutMapping("advertises/{advertiseId}")
-    public ResponseEntity<Advertise> updateByRoot(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseRequest advertiseRequest) {
-        return ResponseEntity.ok(advertiseService.updateByRoot(advertiseId, advertiseRequest));
+    public ResponseEntity<Advertise> updateByRoot(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseEditByRootRequest advertiseEditByRootRequest) {
+        return ResponseEntity.ok(advertiseService.updateByRoot(advertiseId, advertiseEditByRootRequest));
     }
 
     @Operation(summary = "cultural department delete advertise")
@@ -81,5 +87,11 @@ public class AdvertiseController {
     public ResponseEntity<Void> deleteByRoot(@PathVariable Integer advertiseId) {
         advertiseService.delete(advertiseId);
         return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "officer update advertise by advertise id")
+    @PostMapping("/advertises/{advertiseId}")
+    ResponseEntity<AdvertiseEdit> update(@PathVariable Integer advertiseId, @RequestBody AdvertiseEditRequest advertiseEditRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(advertiseService.update(advertiseId, advertiseEditRequest));
     }
 }
