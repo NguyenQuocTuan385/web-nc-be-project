@@ -56,6 +56,11 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public Contract findById(Long id) {
+        return contractRepository.findById(Math.toIntExact(id)).orElse(null);
+    }
+
+    @Override
     public Contract updateContract(Long id, ContractUpdateRequest contractRequest) {
         Advertise advertiseOfContract = advertiseRepository
                 .findById(contractRequest.getAdvertiseId())

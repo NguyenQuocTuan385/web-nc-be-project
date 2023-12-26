@@ -16,6 +16,9 @@ public interface ContractService {
 
     Contract createContract(ContractRequest contractRequest);
 
+    Contract findById(Long id);
+
+
     Contract updateContract(Long id, ContractUpdateRequest contractRequest);
 
     void deleteContract(Long id);

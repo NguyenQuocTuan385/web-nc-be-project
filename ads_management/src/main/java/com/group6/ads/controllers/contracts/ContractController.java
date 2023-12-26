@@ -42,9 +42,9 @@ public class ContractController {
 
     @GetMapping("properties/contracts")
     ResponseEntity<Page<Contract>> getContractsWithPropertyIds(
-            @RequestParam(required = false, value = "propertyId", defaultValue = "")
+            @RequestParam(required = false, value = "propertyId[]", defaultValue = "")
             Integer[] propertyId,
-            @RequestParam(required = false, value = "parentId", defaultValue = "")
+            @RequestParam(required = false, value = "parentId[]", defaultValue = "")
             Integer[] parentId,
             @RequestParam(required = false, value = "status", defaultValue = "")
             Integer status,
@@ -64,6 +64,7 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, parentId, search, status, pageRequestCustom));
     }
 
+
     @GetMapping("advertises/{advertiseId}/contracts")
     ResponseEntity<Page<Contract>> getAllContractsByAdvertise(
             @PathVariable Integer advertiseId,
@@ -77,11 +78,16 @@ public class ContractController {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
         return ResponseEntity.status(HttpStatus.OK).body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
     }
+    @GetMapping("contracts/{id}")
+    ResponseEntity<Contract> getContractById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
+    }
 
     @PostMapping("contracts")
     ResponseEntity<Contract> createContract(@RequestBody @Valid ContractRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(contractService.createContract(contractRequest));
     }
+
 
     @PutMapping("contracts/{id}")
     ResponseEntity<Contract> updateContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateRequest contractRequest) {
