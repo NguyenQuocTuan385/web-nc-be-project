@@ -42,9 +42,9 @@ public class ContractController {
 
     @GetMapping("properties/contracts")
     ResponseEntity<Page<Contract>> getContractsWithPropertyIds(
-            @RequestParam(required = false, value = "propertyId", defaultValue = "")
+            @RequestParam(required = false, value = "propertyId[]", defaultValue = "")
             Integer[] propertyId,
-            @RequestParam(required = false, value = "parentId", defaultValue = "")
+            @RequestParam(required = false, value = "parentId[]", defaultValue = "")
             Integer[] parentId,
             @RequestParam(required = false, value = "status", defaultValue = "")
             Integer status,
