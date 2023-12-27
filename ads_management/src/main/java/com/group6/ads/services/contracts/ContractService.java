@@ -2,6 +2,7 @@ package com.group6.ads.services.contracts;
 
 import com.group6.ads.controllers.contracts.models.ContractRequest;
 import com.group6.ads.controllers.contracts.models.ContractUpdateRequest;
+import com.group6.ads.controllers.contracts.models.ContractUpdateStatusRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.util.PageRequestCustom;
@@ -16,10 +17,13 @@ public interface ContractService {
 
     Contract createContract(ContractRequest contractRequest);
 
+
     Contract findById(Long id);
 
 
     Contract updateContract(Long id, ContractUpdateRequest contractRequest);
+    Contract updateStatusContract(Long id, ContractUpdateStatusRequest contractRequest);
+
 
     void deleteContract(Long id);
 }

@@ -1,5 +1,6 @@
 package com.group6.ads.controllers.advertises;
 
+import com.group6.ads.controllers.advertises.models.AdvertiseLicensingRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.properties.Property;
@@ -55,6 +56,12 @@ public class AdvertiseController {
     @PutMapping("advertises/{advertiseId}")
     public ResponseEntity<Advertise> updateByRoot(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseRequest advertiseRequest) {
         return ResponseEntity.ok(advertiseService.updateByRoot(advertiseId, advertiseRequest));
+    }
+
+    @Operation(summary = "cultural department update advertise license")
+    @PutMapping("advertises/{advertiseId}/license")
+    public ResponseEntity<Advertise> updateLicense(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseLicensingRequest advertiseRequest) {
+        return ResponseEntity.ok(advertiseService.updateLicense(advertiseId, advertiseRequest));
     }
 
     @Operation(summary = "cultural department delete advertise")

@@ -2,6 +2,7 @@ package com.group6.ads.controllers.contracts;
 
 import com.group6.ads.controllers.contracts.models.ContractRequest;
 import com.group6.ads.controllers.contracts.models.ContractUpdateRequest;
+import com.group6.ads.controllers.contracts.models.ContractUpdateStatusRequest;
 import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.services.contracts.ContractService;
 import com.group6.ads.util.PageRequestCustom;
@@ -91,7 +92,12 @@ public class ContractController {
 
     @PutMapping("contracts/{id}")
     ResponseEntity<Contract> updateContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateRequest contractRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(contractService.updateContract(id, contractRequest));
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.updateContract(id, contractRequest));
+    }
+
+    @PutMapping("contracts/{id}/status")
+    ResponseEntity<Contract> updateStatusContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateStatusRequest contractRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.updateStatusContract(id, contractRequest));
     }
 
     @DeleteMapping("contracts/{id}")
