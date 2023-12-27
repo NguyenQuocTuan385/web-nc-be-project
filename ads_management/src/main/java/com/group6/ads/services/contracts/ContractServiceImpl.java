@@ -2,6 +2,7 @@ package com.group6.ads.services.contracts;
 
 import com.group6.ads.controllers.contracts.models.ContractRequest;
 import com.group6.ads.controllers.contracts.models.ContractUpdateRequest;
+import com.group6.ads.controllers.contracts.models.ContractUpdateStatusRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
@@ -23,6 +24,11 @@ public class ContractServiceImpl implements ContractService {
     @Override
     public Page<Contract> findAll(Integer propertyId, String search, Integer status, PageRequestCustom pageRequestCustom) {
         return contractRepository.findAll(propertyId, search, status, pageRequestCustom.pageRequest());
+    }
+
+    @Override
+    public Page<Contract> findAll(Integer[] propertyId, Integer[] parentId, String search, Integer status, PageRequestCustom pageRequestCustom) {
+        return contractRepository.findAll(propertyId, parentId, search, status, pageRequestCustom.pageRequest());
     }
 
     @Override
@@ -56,6 +62,11 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
+    public Contract findById(Long id) {
+        return contractRepository.findById(Math.toIntExact(id)).orElse(null);
+    }
+
+    @Override
     public Contract updateContract(Long id, ContractUpdateRequest contractRequest) {
         Advertise advertiseOfContract = advertiseRepository
                 .findById(contractRequest.getAdvertiseId())
@@ -75,6 +86,19 @@ public class ContractServiceImpl implements ContractService {
         oldContract.setImages(contractRequest.getImages());
         oldContract.setStatus(contractRequest.getStatus());
         oldContract.setAdvertise(advertiseOfContract);
+
+        return contractRepository.save(oldContract);
+    }
+
+    @Override
+    public Contract updateStatusContract(Long id, ContractUpdateStatusRequest contractRequest) {
+        Contract oldContract = contractRepository.findById(Math.toIntExact(id)).orElse(null);
+
+        if (oldContract == null) {
+            throw new NotFoundException("Not found contract with id " + id);
+        }
+
+        oldContract.setStatus(contractRequest.getStatus());
 
         return contractRepository.save(oldContract);
     }
