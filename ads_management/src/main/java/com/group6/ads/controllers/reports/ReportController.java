@@ -53,4 +53,9 @@ public class ReportController {
         reportService.deleteReport(id);
         return ResponseEntity.status(HttpStatus.OK).body("Delete report with id " + id + " successful");
     }
+
+    @GetMapping("/{id}")
+    ResponseEntity<Report> findReportById(@PathVariable Integer id){
+        return ResponseEntity.status(HttpStatus.OK).body(reportService.findReportById(id));
+    }
 }
