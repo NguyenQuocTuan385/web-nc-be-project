@@ -1,5 +1,6 @@
 package com.group6.ads.services.advertises;
 
+import com.group6.ads.controllers.advertises.models.AdvertiseLicensingRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
@@ -81,6 +82,17 @@ public class AdvertiseServiceImpl implements AdvertiseService {
         advertise.setUpdatedAt(LocalDateTime.now());
 
         return advertiseRepository.save(advertise);
+    }
+
+    @Override
+    public Advertise updateLicense(Integer advertiseId, AdvertiseLicensingRequest advertiseRequest) {
+        Advertise advertise = advertiseRepository
+                .findById(advertiseId)
+                .orElseThrow(() -> new NotFoundException("Advertise not found"));
+        advertise.setLicensing(advertiseRequest.getLicensing());
+        advertise.setUpdatedAt(LocalDateTime.now());
+        return advertiseRepository.save(advertise);
+
     }
 
     @Override

@@ -1,5 +1,6 @@
 package com.group6.ads.services.advertises;
 
+import com.group6.ads.controllers.advertises.models.AdvertiseLicensingRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.properties.Property;
@@ -20,6 +21,10 @@ public interface AdvertiseService {
     Advertise create(Integer locationId, AdvertiseRequest advertiseRequest);
 
     Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);
+
+
+    Advertise updateLicense(Integer advertiseId, AdvertiseLicensingRequest advertiseRequest);
+
 
     void delete(Integer advertiseId);
 }
