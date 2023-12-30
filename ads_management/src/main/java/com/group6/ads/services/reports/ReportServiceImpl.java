@@ -79,4 +79,9 @@ public class ReportServiceImpl implements ReportService{
 
         reportRepository.delete(rp);
     }
+
+    @Override
+    public Report findReportById(Integer reportId) {
+        return reportRepository.findById(reportId).orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
+    }
 }

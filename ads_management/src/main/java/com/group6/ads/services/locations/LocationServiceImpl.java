@@ -181,4 +181,9 @@ public class LocationServiceImpl implements LocationService {
 
         return locationRepository.save(location);
     }
+
+    @Override
+    public Location getLocationById(Integer locationId) {
+        return locationsRepository.findById(locationId).orElse(null);
+    }
 }

@@ -26,4 +26,6 @@ public interface LocationService {
     Page<Location> findAllLocationReview(String search, PageRequestCustom pageRequestCustom);
 
     Location locationReview(Integer locationId, Boolean review);
+
+    Location getLocationById(Integer locationId);
 }

@@ -1,6 +1,7 @@
 package com.group6.ads.repositories.database.contracts;
+
+import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
@@ -31,4 +32,17 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
             AND (c.companyName LIKE %:search% OR c.companyEmail LIKE %:search% OR c.companyPhone LIKE %:search%)
             """)
     Page<Contract> findByAdvertiseId(Integer advertiseId, String search, Pageable pageable);
+
+    @Query("""
+            SELECT c
+            FROM Contract c, Advertise a
+            WHERE c.advertise.id = :advertiseId AND c.status = 1
+            AND (c.companyName LIKE %:search% OR c.companyEmail LIKE %:search% OR c.companyPhone LIKE %:search%)
+            """)
+    Page<Contract> findAll(String search, Pageable pageable);
+
+    @Query("""
+            SELECT c FROM Contract c WHERE c.advertise.id = :advertiseId
+            """)
+    Contract findByAdvertiseId(Integer advertiseId);
 }

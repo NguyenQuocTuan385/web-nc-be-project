@@ -98,5 +98,10 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.OK).body(locationService.locationReview(locationId, review));
     }
 
+    @Operation(summary = "officer get location by id")
+    @GetMapping("locations/{locationId}")
+    ResponseEntity<Location> getLocationById(@PathVariable Integer locationId) {
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.getLocationById(locationId));
+    }
 }
 

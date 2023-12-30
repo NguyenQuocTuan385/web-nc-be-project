@@ -16,4 +16,6 @@ public interface ReportService {
     Report updateReport(ReportUpdateRequest reportRequest, Integer reportId);
 
     void deleteReport(Integer reportId);
+
+    Report findReportById(Integer reportId);
 }

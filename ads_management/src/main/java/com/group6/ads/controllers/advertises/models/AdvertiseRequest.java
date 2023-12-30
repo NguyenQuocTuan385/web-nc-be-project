@@ -17,4 +17,6 @@ public class AdvertiseRequest {
     private Integer locationId;
     private Integer pillarQuantity;
     private String images;
+    private Integer userId;
+    private String content;
 }
