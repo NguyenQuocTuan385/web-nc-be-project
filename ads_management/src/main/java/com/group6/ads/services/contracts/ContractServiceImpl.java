@@ -13,8 +13,6 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
-
 @Service
 @RequiredArgsConstructor
 public class ContractServiceImpl implements ContractService {
@@ -63,7 +61,9 @@ public class ContractServiceImpl implements ContractService {
 
     @Override
     public Contract findById(Long id) {
-        return contractRepository.findById(Math.toIntExact(id)).orElse(null);
+        return contractRepository
+                .findById(Math.toIntExact(id))
+                .orElseThrow(() -> new NotFoundException("Not found contract with id " + id));
     }
 
     @Override
@@ -110,10 +110,4 @@ public class ContractServiceImpl implements ContractService {
         else
             throw new NotFoundException("Can't Delete, can't find contract with id " + id);
     }
-
-    @Override
-    public Contract getContractById(Long id) {
-        return contractRepository.findById(Math.toIntExact(id)).orElseThrow(() -> new NotFoundException("Not found contract with id " + id));
-    }
-
 }

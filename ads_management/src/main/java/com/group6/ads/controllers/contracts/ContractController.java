@@ -65,11 +65,11 @@ public class ContractController {
         return ResponseEntity.status(HttpStatus.OK)
                 .body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
     }
-//
-//    @GetMapping("contracts/{id}")
-//    ResponseEntity<Contract> getContractById(@PathVariable Long id) {
-//        return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
-//    }
+
+    @GetMapping("contracts/{id}")
+    ResponseEntity<Contract> getContractById(@PathVariable Long id) {
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
+    }
 
     @GetMapping("contracts/advertises/{advertiseId}")
     ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
@@ -97,10 +97,5 @@ public class ContractController {
     ResponseEntity<String> deleteContract(@PathVariable Long id) {
         contractService.deleteContract(id);
         return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);
-    }
-
-    @GetMapping("contracts/{id}")
-    ResponseEntity<Contract> getContractById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.getContractById(id));
     }
 }
