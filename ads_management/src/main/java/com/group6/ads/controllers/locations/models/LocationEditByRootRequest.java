@@ -8,6 +8,7 @@ import lombok.Data;
 @Data
 public class LocationEditByRootRequest {
     private Boolean planning;
+    private Boolean statusEdit;
     @NotNull(message = "latitude must not be null")
     private Double latitude;
     @NotNull(message = "longitude must not be null")
@@ -21,4 +22,5 @@ public class LocationEditByRootRequest {
     @NotNull(message = "propertyId must not be null")
     private Integer propertyId;
     private String imageUrls;
+    private Integer locationEditId;
 }

@@ -2,6 +2,7 @@ package com.group6.ads.controllers.advertises;
 
 import com.group6.ads.controllers.advertises.models.AdvertiseLicensingRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
+import com.group6.ads.controllers.advertises.models.AdvertiseStatusRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.services.advertises.AdvertiseService;
@@ -64,10 +65,48 @@ public class AdvertiseController {
         return ResponseEntity.ok(advertiseService.updateLicense(advertiseId, advertiseRequest));
     }
 
+
+    @Operation(summary = "cultural department get advertise by id")
+    @GetMapping("advertises/{advertiseId}")
+    public ResponseEntity<Advertise> findById(@PathVariable Integer advertiseId)
+    {
+        return ResponseEntity.ok(advertiseService.getById(advertiseId));
+    }
+
+    @GetMapping("advertises")
+    public ResponseEntity<Page<Advertise>> findAllUnauthorizedAdvertisements(
+            @RequestParam(required = false, value = "propertyId", defaultValue = "")
+            Integer propertyId,
+            @RequestParam(required = false, value = "parentId", defaultValue = "")
+            Integer parentId,
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+        return ResponseEntity.ok(advertiseService.findAllUnauthorizedAdvertisements(propertyId,parentId,search, pageRequestCustom));
+    }
+
     @Operation(summary = "cultural department delete advertise")
     @DeleteMapping("advertises/{advertiseId}")
     public ResponseEntity<Void> deleteByRoot(@PathVariable Integer advertiseId) {
         advertiseService.delete(advertiseId);
         return ResponseEntity.ok().build();
+    }
+
+
+    @Operation(summary = "cultural department delete advertise edit")
+    @DeleteMapping("advertises/edit/{advertiseId}")
+    public ResponseEntity<Void> deleteAdvertiseEdit(@PathVariable Integer advertiseId) {
+        advertiseService.deleteAdvertiseEdit(advertiseId);
+        return ResponseEntity.ok().build();
+    }
+
+    @Operation(summary = "cultural department update advertise status")
+    @PutMapping("advertises/{advertiseId}/status")
+    public ResponseEntity<Advertise> updateStatus(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseStatusRequest advertiseStatusRequest) {
+        return ResponseEntity.ok(advertiseService.updateStatus(advertiseId, advertiseStatusRequest));
     }
 }

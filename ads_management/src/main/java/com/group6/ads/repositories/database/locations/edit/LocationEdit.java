@@ -48,21 +48,17 @@ public class LocationEdit {
 
     @ManyToOne()
     @JoinColumn(name = "user_id", nullable = false)
-    @JsonIgnore
     private User user;
 
     @ManyToOne
     @JoinColumn(name = "ads_form_id", nullable = false)
-    @JsonIgnore
     private AdvertiseForm adsForm;
 
     @ManyToOne
     @JoinColumn(name = "location_type_id", nullable = false)
-    @JsonIgnore
     private LocationType locationType;
 
     @ManyToOne
     @JoinColumn(name = "property_id", nullable = false)
-    @JsonIgnore
     private Property property;
 }

@@ -3,6 +3,7 @@ package com.group6.ads.controllers.locations;
 import com.group6.ads.controllers.locations.models.LocationEditByRootRequest;
 import com.group6.ads.controllers.locations.models.LocationEditRequest;
 import com.group6.ads.controllers.locations.models.LocationCreateRequest;
+import com.group6.ads.controllers.locations.models.LocationStatusRequest;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.edit.LocationEdit;
 import com.group6.ads.services.locations.LocationService;
@@ -82,6 +83,10 @@ public class LocationController {
     @Operation(summary = "cultural department get location review")
     @GetMapping("locations/review")
     public ResponseEntity<Page<Location>> findAllLocationReview(
+            @RequestParam(required = false, value = "propertyId", defaultValue = "")
+            Integer propertyId,
+            @RequestParam(required = false, value = "parentId", defaultValue = "")
+            Integer parentId,
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
@@ -89,13 +94,33 @@ public class LocationController {
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAllLocationReview(search, pageRequestCustom));
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAllLocationReview(propertyId,parentId,search, pageRequestCustom));
     }
 
     @Operation(summary = "cultural department review location by location id")
     @PutMapping("/locations/{locationId}/review")
     ResponseEntity<Location> locationReview(@PathVariable Integer locationId, @RequestParam(required = false, value = "review", defaultValue = "true") Boolean review) {
         return ResponseEntity.status(HttpStatus.OK).body(locationService.locationReview(locationId, review));
+    }
+
+    @Operation(summary = "cultural department get location by location id")
+    @GetMapping("locations/{locationId}")
+    public ResponseEntity<Location> getById(@PathVariable Integer locationId) {
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.getById(locationId));
+    }
+
+    @Operation(summary = "cultural department update status location by location id")
+    @PutMapping("/locations/{locationId}/status")
+    ResponseEntity<Location> updateStatus(@PathVariable Integer locationId, @RequestBody LocationStatusRequest locationStatusRequest) {
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.updateStatus(locationId, locationStatusRequest));
+    }
+
+
+    @Operation(summary = "cultural department delete location edit by location edit id")
+    @DeleteMapping("locations/edit/{locationEditId}")
+    public ResponseEntity<Void> deleteLocationEdit(@PathVariable Integer locationEditId) {
+        locationService.deleteLocationEdit(locationEditId);
+        return ResponseEntity.status(HttpStatus.OK).build();
     }
 
 }

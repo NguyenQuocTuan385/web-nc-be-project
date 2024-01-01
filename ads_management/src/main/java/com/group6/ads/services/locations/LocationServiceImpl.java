@@ -3,6 +3,7 @@ package com.group6.ads.services.locations;
 import com.group6.ads.controllers.locations.models.LocationCreateRequest;
 import com.group6.ads.controllers.locations.models.LocationEditByRootRequest;
 import com.group6.ads.controllers.locations.models.LocationEditRequest;
+import com.group6.ads.controllers.locations.models.LocationStatusRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;
@@ -22,6 +23,7 @@ import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -79,8 +81,36 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public Location getById(Integer locationId) {
+        return locationsRepository.findById(locationId)
+                .orElseThrow(() -> new NotFoundException("Location not found"));
+    }
+
+    @Override
     public void delete(Integer locationId) {
         locationsRepository.deleteById(locationId);
+    }
+
+    @Override
+    public void deleteLocationEdit(Integer locationEditId) {
+        locationEditRepository.deleteById(locationEditId);
+    }
+
+    @Override
+    public Location updateStatus(Integer locationId, LocationStatusRequest locationStatusRequest) {
+        Location location = locationRepository.findById(locationId)
+                .orElseThrow(() -> new NotFoundException("Location not found"));
+        location.setStatusEdit(locationStatusRequest.getStatusEdit());
+        if(locationStatusRequest.getLocationEditId()==null)
+        {
+            location.setLocationEdit(null);
+        }
+        else {
+            LocationEdit locationEdit = locationEditRepository.findById(locationStatusRequest.getLocationEditId())
+                    .orElseThrow(() -> new NotFoundException("Location edit not found"));
+            location.setLocationEdit(locationEdit);
+        }
+        return locationRepository.save(location);
     }
 
     @Override
@@ -141,6 +171,8 @@ public class LocationServiceImpl implements LocationService {
         location.setAddress(locationEditByRootRequest.getAddress());
         location.setUpdatedAt(LocalDateTime.now());
         location.setProperty(property);
+        location.setStatusEdit(false);
+        location.setLocationEdit(null);
         location.setAdsForm(advertiseForm);
         location.setLocationType(locationType);
         location.setImages(locationEditByRootRequest.getImageUrls());
@@ -148,10 +180,13 @@ public class LocationServiceImpl implements LocationService {
         return locationRepository.save(location);
     }
 
+
+
     @Override
-    public Page<Location> findAllLocationReview(String search, PageRequestCustom pageRequestCustom) {
-        return locationsRepository.findAllLocationReview(search, pageRequestCustom.pageRequest());
+    public Page<Location> findAllLocationReview(Integer propertyId, Integer parentId, String search, PageRequestCustom pageRequestCustom) {
+        return locationRepository.findAllLocationReview(propertyId, parentId, search, pageRequestCustom.pageRequest());
     }
+
 
     @Override
     public Location locationReview(Integer locationId, Boolean review) {
