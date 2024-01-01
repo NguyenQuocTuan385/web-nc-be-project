@@ -1,6 +1,7 @@
 package com.group6.ads.repositories.database.advertises;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
 import com.group6.ads.repositories.database.locations.Location;

@@ -16,7 +16,9 @@ public interface LocationRepository extends JpaRepository<Location, Integer> {
 
     @Query("""
               SELECT l FROM Location l
-              WHERE l.statusEdit = TRUE AND l.address LIKE %:search%
+              WHERE l.statusEdit = TRUE AND l.address LIKE %:search% 
+              AND (l.property.id = :propertyId OR :propertyId IS NULL) 
+              AND (l.property.propertyParent.id = :parentId OR :parentId IS NULL)
             """)
-    Page<Location> findAllLocationReview(String search, Pageable pageable);
+    Page<Location> findAllLocationReview(Integer propertyId,Integer parentId,String search, Pageable pageable);
 }

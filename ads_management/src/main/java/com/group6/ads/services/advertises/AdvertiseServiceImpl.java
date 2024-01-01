@@ -4,6 +4,7 @@ import com.group6.ads.controllers.advertises.models.AdvertiseEditByRootRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseEditRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseLicensingRequest;
 import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
+import com.group6.ads.controllers.advertises.models.AdvertiseStatusRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeRepository;
@@ -33,6 +34,7 @@ import java.time.LocalDateTime;
 @Service
 @RequiredArgsConstructor
 public class AdvertiseServiceImpl implements AdvertiseService {
+
         @NonNull
         final AdvertiseRepository advertiseRepository;
         @NonNull
@@ -47,6 +49,11 @@ public class AdvertiseServiceImpl implements AdvertiseService {
         @Override
         public Page<Advertise> findAll(String search, PageRequestCustom pageRequestCustom) {
                 return advertiseRepository.findAll(search, pageRequestCustom.pageRequest());
+        }
+  
+        @Override
+        public Page<Advertise> findAllUnauthorizedAdvertisements(Integer propertyId,Integer parentId,String search, PageRequestCustom pageRequestCustom) {
+            return advertiseRepository.findAllUnauthorizedAdvertisements(propertyId,parentId,search, pageRequestCustom.pageRequest());
         }
 
         @Override
@@ -114,14 +121,42 @@ public class AdvertiseServiceImpl implements AdvertiseService {
                 return advertiseRepository.save(advertise);
 
         }
+  
+         @Override
+          public Advertise updateStatus(Integer advertiseId, AdvertiseStatusRequest advertiseStatusRequest) {
+              Advertise advertise = advertiseRepository
+                      .findById(advertiseId)
+                      .orElseThrow(() -> new NotFoundException("Advertise not found"));
+              if(advertiseStatusRequest.getAdvertiseEditId() == null){
+                  advertise.setAdvertiseEdit(null);
+              }
+              else{
+                  AdvertiseEdit advertiseEdit = advertiseEditRepository
+                          .findById(advertiseStatusRequest.getAdvertiseEditId())
+                          .orElseThrow(() -> new NotFoundException("Advertise edit not found"));
+                  advertise.setAdvertiseEdit(advertiseEdit);
+              }
+              advertise.setStatusEdit(advertiseStatusRequest.getStatusEdit());
 
-        @Override
-        public void delete(Integer advertiseId) {
-                Advertise advertise = advertiseRepository
-                                .findById(advertiseId)
-                                .orElseThrow(() -> new NotFoundException("Advertise not found"));
-                advertiseRepository.delete(advertise);
-        }
+              advertise.setUpdatedAt(LocalDateTime.now());
+              return advertiseRepository.save(advertise);
+          }
+
+          @Override
+          public void deleteAdvertiseEdit(Integer advertiseEditId) {
+              AdvertiseEdit advertiseEdit = advertiseEditRepository
+                      .findById(advertiseEditId)
+                      .orElseThrow(() -> new NotFoundException("Advertise edit not found"));
+              advertiseEditRepository.delete(advertiseEdit);
+          }
+
+              @Override
+              public void delete(Integer advertiseId) {
+                      Advertise advertise = advertiseRepository
+                                      .findById(advertiseId)
+                                      .orElseThrow(() -> new NotFoundException("Advertise not found"));
+                      advertiseRepository.delete(advertise);
+              }
 
         @Transactional
         @Override
