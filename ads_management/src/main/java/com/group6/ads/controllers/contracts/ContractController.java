@@ -28,75 +28,68 @@ public class ContractController {
     @GetMapping("properties/{propertyId}/contracts")
     ResponseEntity<Page<Contract>> getAllContracts(
             @PathVariable Integer propertyId,
-            @RequestParam(required = false, value = "status", defaultValue = "")
-            Integer status,
-            @RequestParam(required = false, value = "search", defaultValue = "")
-            String search,
-            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
-            Integer currentPage,
-            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
-            Integer pageSize
-    ) {
+            @RequestParam(required = false, value = "status", defaultValue = "") Integer status,
+            @RequestParam(required = false, value = "search", defaultValue = "") String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, search, status, pageRequestCustom));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(contractService.findAll(propertyId, search, status, pageRequestCustom));
     }
 
     @GetMapping("properties/contracts")
     ResponseEntity<Page<Contract>> getContractsWithPropertyIds(
-            @RequestParam(required = false, value = "propertyId[]", defaultValue = "")
-            Integer[] propertyId,
-            @RequestParam(required = false, value = "parentId[]", defaultValue = "")
-            Integer[] parentId,
-            @RequestParam(required = false, value = "status", defaultValue = "")
-            Integer status,
-            @RequestParam(required = false, value = "search", defaultValue = "")
-            String search,
-            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
-            Integer currentPage,
-            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
-            Integer pageSize
-    ) {
+            @RequestParam(required = false, value = "propertyId[]", defaultValue = "") Integer[] propertyId,
+            @RequestParam(required = false, value = "parentId[]", defaultValue = "") Integer[] parentId,
+            @RequestParam(required = false, value = "status", defaultValue = "") Integer status,
+            @RequestParam(required = false, value = "search", defaultValue = "") String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
 
-        if(parentId.length == 0)
+        if (parentId.length == 0)
             parentId = null;
-        if(propertyId.length == 0)
+        if (propertyId.length == 0)
             propertyId = null;
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findAll(propertyId, parentId, search, status, pageRequestCustom));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(contractService.findAll(propertyId, parentId, search, status, pageRequestCustom));
     }
-
 
     @GetMapping("advertises/{advertiseId}/contracts")
     ResponseEntity<Page<Contract>> getAllContractsByAdvertise(
             @PathVariable Integer advertiseId,
-            @RequestParam(required = false, value = "search", defaultValue = "")
-            String search,
-            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
-            Integer currentPage,
-            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
-            Integer pageSize
-    ) {
+            @RequestParam(required = false, value = "search", defaultValue = "") String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
+        return ResponseEntity.status(HttpStatus.OK)
+                .body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
     }
+
     @GetMapping("contracts/{id}")
     ResponseEntity<Contract> getContractById(@PathVariable Long id) {
         return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
     }
 
-    @PostMapping("contracts")
+    @GetMapping("contracts/advertises/{advertiseId}")
+    ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
+        return ResponseEntity.status(HttpStatus.OK).body(contractService.findByAdvertiseIdOne(advertiseId));
+    }
+
+    @PostMapping("")
     ResponseEntity<Contract> createContract(@RequestBody @Valid ContractRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.CREATED).body(contractService.createContract(contractRequest));
     }
 
-
     @PutMapping("contracts/{id}")
-    ResponseEntity<Contract> updateContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateRequest contractRequest) {
+    ResponseEntity<Contract> updateContract(@PathVariable Long id,
+            @RequestBody @Valid ContractUpdateRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(contractService.updateContract(id, contractRequest));
     }
 
     @PutMapping("contracts/{id}/status")
-    ResponseEntity<Contract> updateStatusContract(@PathVariable Long id, @RequestBody @Valid ContractUpdateStatusRequest contractRequest) {
+    ResponseEntity<Contract> updateStatusContract(@PathVariable Long id,
+            @RequestBody @Valid ContractUpdateStatusRequest contractRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(contractService.updateStatusContract(id, contractRequest));
     }
 
@@ -105,5 +98,4 @@ public class ContractController {
         contractService.deleteContract(id);
         return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);
     }
-
 }

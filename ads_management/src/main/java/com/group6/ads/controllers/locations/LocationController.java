@@ -103,11 +103,6 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.OK).body(locationService.locationReview(locationId, review));
     }
 
-    @Operation(summary = "cultural department get location by location id")
-    @GetMapping("locations/{locationId}")
-    public ResponseEntity<Location> getById(@PathVariable Integer locationId) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.getById(locationId));
-    }
 
     @Operation(summary = "cultural department update status location by location id")
     @PutMapping("/locations/{locationId}/status")
@@ -123,5 +118,10 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.OK).build();
     }
 
+    @Operation(summary = "officer get location by id")
+    @GetMapping("locations/{locationId}")
+    ResponseEntity<Location> getLocationById(@PathVariable Integer locationId) {
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.getLocationById(locationId));
+    }
 }
 

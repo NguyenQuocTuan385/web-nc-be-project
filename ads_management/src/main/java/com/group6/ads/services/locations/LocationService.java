@@ -33,4 +33,6 @@ public interface LocationService {
     Page<Location> findAllLocationReview(Integer propertyId,Integer parentId,String search, PageRequestCustom pageRequestCustom);
 
     Location locationReview(Integer locationId, Boolean review);
+
+    Location getLocationById(Integer locationId);
 }

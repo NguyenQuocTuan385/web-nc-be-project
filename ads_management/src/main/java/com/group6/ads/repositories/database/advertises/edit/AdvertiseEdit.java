@@ -18,11 +18,11 @@ import java.time.LocalDateTime;
 @Table(name = "advertises_edit")
 public class AdvertiseEdit {
     @Id
-    @GeneratedValue(strategy = GenerationType.AUTO)
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-    private Integer licensing;
-    private float height;
-    private float width;
+    private Boolean licensing;
+    private Double height;
+    private Double width;
     private String content;
     private String images;
 

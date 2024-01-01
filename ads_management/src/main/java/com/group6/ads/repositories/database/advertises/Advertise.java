@@ -35,9 +35,8 @@ public class Advertise {
     @JoinColumn(name = "ads_type_id", nullable = false)
     private AdvertiseType adsType;
 
-
     @OneToOne
-    @JoinColumn(name = "advertise_edit_id", nullable =true)
+    @JoinColumn(name = "advertise_edit_id")
     private AdvertiseEdit advertiseEdit;
 
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
