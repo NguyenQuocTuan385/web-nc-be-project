@@ -24,7 +24,7 @@ public interface AdvertiseService {
 
     Page<Advertise> findAllUnauthorizedAdvertisements(Integer propertyId,Integer parentId,String search, PageRequestCustom pageRequestCustom);
 
-    Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);
+//    Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);
 
     Advertise findById(Integer id);
 

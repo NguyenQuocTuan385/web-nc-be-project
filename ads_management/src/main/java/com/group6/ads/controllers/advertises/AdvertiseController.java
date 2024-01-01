@@ -35,15 +35,15 @@ public class AdvertiseController {
     @NonNull
     final AdvertiseService advertiseService;
 
-    @Operation(summary = "get all advertises")
-    @GetMapping("advertises")
-    public ResponseEntity<Page<Advertise>> findAll(
-            @RequestParam(required = false, value = "search", defaultValue = "") String search,
-            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
-            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(advertiseService.findAll(search, pageRequestCustom));
-    }
+//    @Operation(summary = "get all advertises")
+//    @GetMapping("advertises")
+//    public ResponseEntity<Page<Advertise>> findAll(
+//            @RequestParam(required = false, value = "search", defaultValue = "") String search,
+//            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
+//            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
+//        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+//        return ResponseEntity.ok(advertiseService.findAll(search, pageRequestCustom));
+//    }
 
     @Operation(summary = "get advertise by id")
     @GetMapping("advertises/{id}")
@@ -119,8 +119,8 @@ public class AdvertiseController {
     @PutMapping("advertises/{advertiseId}/status")
     public ResponseEntity<Advertise> updateStatus(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseStatusRequest advertiseStatusRequest) {
         return ResponseEntity.ok(advertiseService.updateStatus(advertiseId, advertiseStatusRequest));
-  
-     
+    }
+
     @Operation(summary = "officer update advertise by advertise id")
     @PostMapping("/advertises/{advertiseId}")
     ResponseEntity<AdvertiseEdit> update(@PathVariable Integer advertiseId,
