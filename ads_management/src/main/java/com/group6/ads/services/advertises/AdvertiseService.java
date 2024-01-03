@@ -22,15 +22,13 @@ public interface AdvertiseService {
 
     Page<Advertise> findAllByLocationId(Integer locationId, String search, PageRequestCustom pageRequestCustom);
 
-    Page<Advertise> findAllUnauthorizedAdvertisements(Integer propertyId,Integer parentId,String search, PageRequestCustom pageRequestCustom);
-
-//    Advertise updateByRoot(Integer advertiseId, AdvertiseRequest advertiseRequest);
+    Page<Advertise> findAllUnLicensingAdvertisements(Integer propertyId,Integer parentId,String search, PageRequestCustom pageRequestCustom);
 
     Advertise findById(Integer id);
 
     Advertise create(Integer locationId, AdvertiseRequest advertiseRequest);
 
-    Advertise updateByRoot(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest);
+    Advertise updateByDCMS(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest);
 
     Advertise updateLicense(Integer advertiseId, AdvertiseLicensingRequest advertiseRequest);
 

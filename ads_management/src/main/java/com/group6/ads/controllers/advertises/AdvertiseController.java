@@ -35,16 +35,6 @@ public class AdvertiseController {
     @NonNull
     final AdvertiseService advertiseService;
 
-//    @Operation(summary = "get all advertises")
-//    @GetMapping("advertises")
-//    public ResponseEntity<Page<Advertise>> findAll(
-//            @RequestParam(required = false, value = "search", defaultValue = "") String search,
-//            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
-//            @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
-//        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-//        return ResponseEntity.ok(advertiseService.findAll(search, pageRequestCustom));
-//    }
-
     @Operation(summary = "get advertise by id")
     @GetMapping("advertises/{id}")
     public ResponseEntity<Advertise> findById(@PathVariable Integer id) {
@@ -71,9 +61,9 @@ public class AdvertiseController {
 
     @Operation(summary = "cultural department update advertise")
     @PutMapping("advertises/{advertiseId}")
-    public ResponseEntity<Advertise> updateByRoot(@PathVariable Integer advertiseId,
+    public ResponseEntity<Advertise> updateByDCMS(@PathVariable Integer advertiseId,
             @RequestBody @Valid AdvertiseEditByRootRequest advertiseEditByRootRequest) {
-        return ResponseEntity.ok(advertiseService.updateByRoot(advertiseId, advertiseEditByRootRequest));
+        return ResponseEntity.ok(advertiseService.updateByDCMS(advertiseId, advertiseEditByRootRequest));
     }
 
     @Operation(summary = "cultural department update advertise license")
@@ -85,7 +75,7 @@ public class AdvertiseController {
 
 
     @GetMapping("advertises")
-    public ResponseEntity<Page<Advertise>> findAllUnauthorizedAdvertisements(
+    public ResponseEntity<Page<Advertise>> findAllUnLicensingAdvertisements(
             @RequestParam(required = false, value = "propertyId", defaultValue = "")
             Integer propertyId,
             @RequestParam(required = false, value = "parentId", defaultValue = "")
@@ -97,7 +87,7 @@ public class AdvertiseController {
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(advertiseService.findAllUnauthorizedAdvertisements(propertyId,parentId,search, pageRequestCustom));
+        return ResponseEntity.ok(advertiseService.findAllUnLicensingAdvertisements(propertyId,parentId,search, pageRequestCustom));
     }
 
     @Operation(summary = "cultural department delete advertise")
