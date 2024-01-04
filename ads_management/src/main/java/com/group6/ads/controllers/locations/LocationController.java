@@ -47,6 +47,23 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(search, pageRequestCustom));
     }
 
+    @Operation(summary = "cultural department get location with property id and parent id")
+    @GetMapping("properties/locations")
+    public ResponseEntity<Page<Location>> getAllWithPropertyAndParent(
+            @RequestParam(required = false, value = "propertyId[]", defaultValue = "")
+            Integer[] propertyId,
+            @RequestParam(required = false, value = "parentId[]", defaultValue = "")
+            Integer[] parentId,
+            @RequestParam(required = false, value = "search", defaultValue = "")
+            String search,
+            @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
+            Integer currentPage,
+            @RequestParam(required = false, value = "pageSize", defaultValue = "10")
+            Integer pageSize) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(propertyId, parentId, search, pageRequestCustom));
+    }
+
     @Operation(summary = "cultural department get location by ward id")
     @GetMapping("properties/{propertyId}/locations")
     public ResponseEntity<Page<Location>> getAllByPropertyId(

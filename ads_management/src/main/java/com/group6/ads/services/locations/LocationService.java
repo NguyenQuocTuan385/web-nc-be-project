@@ -14,6 +14,9 @@ import org.springframework.data.domain.Pageable;
 public interface LocationService {
     Page<Location> findAll(String search, PageRequestCustom pageRequestCustom);
 
+    Page<Location> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom);
+
+
     Location create(LocationCreateRequest locationCreateRequest);
 
     Location getById(Integer locationId);
