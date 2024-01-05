@@ -52,6 +52,16 @@ public class LocationServiceImpl implements LocationService {
     }
 
     @Override
+    public Page<Location> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom) {
+        if(propertyId.length == 0)
+            propertyId = null;
+        if(parentId.length == 0)
+            parentId = null;
+
+        return locationsRepository.findAll(propertyId, parentId, search, pageRequestCustom.pageRequest());
+    }
+
+    @Override
     public Page<Location> getAllByPropertyId(Integer propertyId, String search, PageRequestCustom pageRequestCustom) {
         return locationsRepository.findAllByPropertyId(propertyId, search, pageRequestCustom.pageRequest());
     }
