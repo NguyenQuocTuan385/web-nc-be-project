@@ -10,5 +10,5 @@ public interface AuthenticationService {
 
     HashMap<String, String> login(String email, String password) throws Exception;
 
-//    HashMap<String, String> login(String username, String password) throws Exception;
+    HashMap<String, String> refresh(String token) throws Exception;
 }

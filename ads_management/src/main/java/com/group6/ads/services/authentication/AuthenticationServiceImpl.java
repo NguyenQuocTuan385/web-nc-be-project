@@ -9,6 +9,7 @@ import com.group6.ads.repositories.database.roles.RoleRepository;
 import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.repositories.database.users.UserRepository;
 import com.group6.ads.util.JwtTokenUtil;
+import com.group6.ads.util.RefreshTokenUtil;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -28,6 +29,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private final RoleRepository roleRepository;
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
+    private final RefreshTokenUtil refreshTokenUtil;
 
     @Override
     public User register(RegisterRequest registerRequest) throws Exception {
@@ -72,12 +74,29 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
         newJwtToken = jwtTokenUtil.generateToken(existingUser);
 
-//        String rfToken = refreshTokenUtil.generateRefreshToken(newJwtToken, existingStaff);
-        String rfToken = "test";
+        String rfToken = refreshTokenUtil.generateRefreshToken(newJwtToken, existingUser);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", newJwtToken);
         map.put("refresh_token", rfToken);
+
+        return map;
+    }
+
+    @Override
+    public HashMap<String, String> refresh(String token) throws Exception {
+        User staff = userRepository.findByToken(token)
+                .orElseThrow(() -> new NotFoundException("No Refresh Token in Database"));
+
+        // check if rf token expired
+        if(refreshTokenUtil.isRefreshTokenExpired(staff))
+            throw new RuntimeException("Refresh Token Expired, please login again");
+
+        // generate new access token
+        String newAccessToken = jwtTokenUtil.generateToken(staff);
+
+        HashMap<String, String> map = new HashMap<>();
+        map.put("access_token", newAccessToken);
 
         return map;
     }

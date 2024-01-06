@@ -23,4 +23,6 @@ public interface UserRepository extends JpaRepository<User, Integer> {
             WHERE (u.name LIKE %:search% OR u.email LIKE %:search% OR u.phone LIKE %:search%)
             """)
     Page<User> findAll(String search, Pageable pageable);
+
+    Optional<User> findByToken(String token);
 }

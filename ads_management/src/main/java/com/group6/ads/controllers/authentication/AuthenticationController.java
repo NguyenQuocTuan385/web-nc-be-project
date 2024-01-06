@@ -1,6 +1,7 @@
 package com.group6.ads.controllers.authentication;
 
 import com.group6.ads.controllers.authentication.models.LoginRequest;
+import com.group6.ads.controllers.authentication.models.RefreshRequest;
 import com.group6.ads.controllers.authentication.models.RegisterRequest;
 import com.group6.ads.services.authentication.AuthenticationService;
 import jakarta.validation.Valid;
@@ -41,4 +42,12 @@ public class AuthenticationController {
         }
     }
 
+    @PostMapping("authentication/refresh")
+    public ResponseEntity<?> refresh(@Valid @RequestBody RefreshRequest refreshRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(authenticationService.refresh(refreshRequest.getRefreshToken()));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
 }

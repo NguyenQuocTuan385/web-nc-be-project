@@ -31,7 +31,7 @@ public class SecurityConfig {
                             .requestMatchers(
                                     String.format("%s/authentication/register", apiPrefix),
                                     String.format("%s/authentication/refresh", apiPrefix),
-                                    "/api/authentication/login",
+                                    String.format("%s/authentication/login", apiPrefix),
                                     "/v3/api-docs/**",
                                     "/swagger-ui/**",
                                     "/swagger-ui.html"

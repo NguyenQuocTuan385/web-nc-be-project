@@ -1,4 +1,5 @@
 package com.group6.ads.repositories.database.users;
+import com.fasterxml.jackson.annotation.JsonFormat;
 import com.fasterxml.jackson.annotation.JsonIgnore;
 import com.group6.ads.enums.ERoles;
 import com.group6.ads.repositories.database.properties.Property;
@@ -10,6 +11,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.Collection;
 import java.util.List;
@@ -32,6 +34,10 @@ public class User implements UserDetails {
     private LocalDate birthday;
     private String avatar;
     private String phone;
+    private String token;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime tokenExpTime;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
