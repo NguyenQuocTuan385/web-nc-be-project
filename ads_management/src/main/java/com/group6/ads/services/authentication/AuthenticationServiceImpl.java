@@ -10,6 +10,8 @@ import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.repositories.database.users.UserRepository;
 import com.group6.ads.util.JwtTokenUtil;
 import com.group6.ads.util.RefreshTokenUtil;
+import jakarta.servlet.http.Cookie;
+import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
@@ -79,6 +81,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", newJwtToken);
         map.put("refresh_token", rfToken);
+        map.put("uid", existingUser.getId().toString());
 
         return map;
     }
@@ -99,5 +102,15 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         map.put("access_token", newAccessToken);
 
         return map;
+    }
+
+    @Override
+    public void logout(HttpServletResponse response) throws Exception {
+        Cookie cookie = new Cookie("refreshToken", null);
+        cookie.setMaxAge(0);
+        cookie.setSecure(true);
+        cookie.setHttpOnly(true);
+        cookie.setPath("/");
+        response.addCookie(cookie);
     }
 }
