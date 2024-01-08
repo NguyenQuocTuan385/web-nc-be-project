@@ -9,6 +9,9 @@ spring:
     password:
 api:
   prefix: api
+jwt:
+  expiration: 120000000
+  secretKey: VzzO3+vn3QqsXwTkp982RniBlw+t6PwgIKMX+OMW+78=
 logging:
   level:
     org:
