@@ -88,15 +88,15 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
     @Override
     public HashMap<String, String> refresh(String token) throws Exception {
-        User staff = userRepository.findByToken(token)
+        User user = userRepository.findByToken(token)
                 .orElseThrow(() -> new NotFoundException("No Refresh Token in Database"));
 
         // check if rf token expired
-        if(refreshTokenUtil.isRefreshTokenExpired(staff))
+        if(refreshTokenUtil.isRefreshTokenExpired(user))
             throw new RuntimeException("Refresh Token Expired, please login again");
 
         // generate new access token
-        String newAccessToken = jwtTokenUtil.generateToken(staff);
+        String newAccessToken = jwtTokenUtil.generateToken(user);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", newAccessToken);

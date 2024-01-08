@@ -57,4 +57,10 @@ public class UserController {
         userService.delete(id);
         return ResponseEntity.status(HttpStatus.OK).build();
     }
+
+    @GetMapping("FindByEmail/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmail(email));
+    }
+
 }
