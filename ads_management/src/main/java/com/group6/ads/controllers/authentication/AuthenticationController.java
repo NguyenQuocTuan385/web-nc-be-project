@@ -1,5 +1,6 @@
 package com.group6.ads.controllers.authentication;
 
+import com.group6.ads.controllers.authentication.models.ChangePasswordRequest;
 import com.group6.ads.controllers.authentication.models.LoginRequest;
 import com.group6.ads.controllers.authentication.models.RefreshRequest;
 import com.group6.ads.controllers.authentication.models.RegisterRequest;
@@ -69,6 +70,15 @@ public class AuthenticationController {
         try {
             authenticationService.logout(response);
             return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("authentication/change-password")
+    public ResponseEntity<?> changePassword(@RequestBody @Valid ChangePasswordRequest changePasswordRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(authenticationService.changePassword(changePasswordRequest));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }
