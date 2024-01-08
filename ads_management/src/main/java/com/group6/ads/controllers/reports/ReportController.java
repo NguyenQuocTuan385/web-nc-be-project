@@ -23,6 +23,8 @@ public class ReportController {
 
     @GetMapping("")
     ResponseEntity<Page<Report>> getAllReports(
+@       RequestParam(required = false, value = "reportTypeName")
+        String reportTypeName,
         @RequestParam(required = false, value = "locationId")
         Integer locationId,
         @RequestParam (required = false, value = "email")
@@ -35,7 +37,7 @@ public class ReportController {
         Integer pageSize
     ){
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(locationId, email, search, pageRequestCustom));
+        return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, search, pageRequestCustom));
     }
 
     @PostMapping("")

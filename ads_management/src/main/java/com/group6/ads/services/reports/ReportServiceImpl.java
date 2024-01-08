@@ -29,11 +29,11 @@ public class ReportServiceImpl implements ReportService{
     private final LocationRepository locationRepository;
 
     @Override
-    public Page<Report> findAll(Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
+    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
         if (email != null && locationId != null) {
             return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
         }
-        return reportRepository.findAll(search, pageRequestCustom.pageRequest());
+        return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
     }
 
     @Override
