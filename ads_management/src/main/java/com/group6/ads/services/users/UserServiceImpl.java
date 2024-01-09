@@ -1,5 +1,6 @@
 package com.group6.ads.services.users;
 
+import com.group6.ads.controllers.users.models.UserOTPRequest;
 import com.group6.ads.controllers.users.models.UserRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.properties.Property;
@@ -13,7 +14,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
-import java.util.List;
+import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -69,6 +71,27 @@ public class UserServiceImpl implements UserService {
         foundUsers.setRole(roleRepository.findById(user.getRoleId()).orElse(null));
 
         return UserRepository.save(foundUsers);
+    }
+
+    @Override
+    public Integer checkOTP(UserOTPRequest userOtpRequest) {
+        User user = UserRepository.findByEmail(userOtpRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
+       if(!Objects.equals(user.getOtp(), userOtpRequest.getOtp()))
+       {
+           return 0;
+       }
+       else
+     {
+          if(user.getOtpExpTime().isBefore(LocalDateTime.now()))
+          {
+            return 1;
+          }
+          else
+          {
+            return 2;
+          }
+     }
+
     }
 
     @Override

@@ -1,7 +1,5 @@
 package com.group6.ads.repositories.database.users;
 import com.fasterxml.jackson.annotation.JsonFormat;
-import com.fasterxml.jackson.annotation.JsonIgnore;
-import com.group6.ads.enums.ERoles;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.roles.Role;
 import jakarta.persistence.*;
@@ -38,6 +36,11 @@ public class User implements UserDetails {
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime tokenExpTime;
+
+    private String otp;
+
+    @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime otpExpTime;
 
     @ManyToOne
     @JoinColumn(name = "role_id", nullable = false)
