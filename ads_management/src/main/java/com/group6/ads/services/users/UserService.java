@@ -11,9 +11,12 @@ public interface UserService {
     Page<User> findAll(Integer roleId, String search , PageRequestCustom pageRequestCustom);
 
     User findById(Integer id);
+
     User createUser(UserRequest user);
 
     User updateUser(UserRequest user, Integer theId);
+
+    User findByEmail(String email);
 
     void delete(Integer id);
 }
