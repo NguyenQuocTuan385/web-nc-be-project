@@ -39,6 +39,7 @@ public class SecurityConfig {
                                     String.format("%s/authentication/refresh", apiPrefix),
                                     String.format("%s/authentication/login", apiPrefix),
                                     String.format("%s/authentication/logout", apiPrefix),
+                                    String.format("%s/authentication/change-password", apiPrefix),
                                     String.format("%s/locations", apiPrefix),
                                     String.format("%s/reports", apiPrefix),
                                     String.format("%s/reports/**", apiPrefix),
@@ -48,6 +49,7 @@ public class SecurityConfig {
                                     String.format("%s/report-forms", apiPrefix),
                                     String.format("%s/email/**", apiPrefix),
                                     String.format("%s/users/**", apiPrefix),
+                                    String.format("%s/properties/*", apiPrefix),
 
                                     "/v3/api-docs/**",
                                     "/swagger-ui/**",

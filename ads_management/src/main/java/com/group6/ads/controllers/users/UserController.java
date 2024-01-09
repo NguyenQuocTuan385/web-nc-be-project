@@ -62,4 +62,9 @@ public class UserController {
     public ResponseEntity<Integer> checkOTP(@RequestBody UserOTPRequest userOtpRequest) {
         return ResponseEntity.status(HttpStatus.OK).body(userService.checkOTP(userOtpRequest));
     }
+    @GetMapping("FindByEmail/{email}")
+    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
+        return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmail(email));
+    }
+
 }

@@ -1,5 +1,6 @@
 package com.group6.ads.services.authentication;
 
+import com.group6.ads.controllers.authentication.models.ChangePasswordRequest;
 import com.group6.ads.controllers.authentication.models.RegisterRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.properties.Property;
@@ -56,6 +57,21 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     }
 
     @Override
+    public User changePassword(ChangePasswordRequest changePasswordRequest) throws Exception {
+        Optional<User> optionalUser = userRepository.findByEmail(changePasswordRequest.getEmail());
+        User existingUser = optionalUser.get();
+
+        if(!passwordEncoder.matches(changePasswordRequest.getOldPassword(), existingUser.getPassword()))
+            throw new BadCredentialsException("Wrong password");
+        String newPassword = changePasswordRequest.getNewPassword();
+        String encodePassword = passwordEncoder.encode(newPassword);
+
+        User user= userRepository.findByEmail(changePasswordRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
+        user.setPassword(encodePassword);
+        return userRepository.save(user);
+    }
+
+    @Override
     public HashMap<String, String> login(String email, String password) throws Exception {
         Optional<User> optionalUser = userRepository.findByEmail(email);
         String newJwtToken;
@@ -88,15 +104,15 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
     @Override
     public HashMap<String, String> refresh(String token) throws Exception {
-        User staff = userRepository.findByToken(token)
+        User user = userRepository.findByToken(token)
                 .orElseThrow(() -> new NotFoundException("No Refresh Token in Database"));
 
         // check if rf token expired
-        if(refreshTokenUtil.isRefreshTokenExpired(staff))
+        if(refreshTokenUtil.isRefreshTokenExpired(user))
             throw new RuntimeException("Refresh Token Expired, please login again");
 
         // generate new access token
-        String newAccessToken = jwtTokenUtil.generateToken(staff);
+        String newAccessToken = jwtTokenUtil.generateToken(user);
 
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", newAccessToken);
