@@ -42,10 +42,13 @@ public class SecurityConfig {
                                     String.format("%s/authentication/change-password", apiPrefix),
                                     String.format("%s/locations", apiPrefix),
                                     String.format("%s/reports", apiPrefix),
+                                    String.format("%s/reports/**", apiPrefix),
                                     String.format("%s/advertises/*/contracts", apiPrefix),
                                     String.format("%s/report-forms/**", apiPrefix),
                                     String.format("%s/locations/*/advertises", apiPrefix),
                                     String.format("%s/report-forms", apiPrefix),
+                                    String.format("%s/email/**", apiPrefix),
+                                    String.format("%s/users/**", apiPrefix),
                                     String.format("%s/properties/*", apiPrefix),
 
                                     "/v3/api-docs/**",

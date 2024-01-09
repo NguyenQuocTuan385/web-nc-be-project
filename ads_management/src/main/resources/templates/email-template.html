@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta charset="UTF-8"/>
+    <title>Email Template</title>
+</head>
+<body>
+    <p th:text="'Chào ' + ${name}+','"></p>
+    <p th:text="'Chúng tôi đã nhận được yêu cầu đặt lại mật khẩu ADS_LORD của bạn.
+        Nhập mã đặt lại mật khẩu sau đây:'"></p>
+    <h2 th:text="${otp}"></h2>
+    <p th:text="'Mã này sẽ hết hạn sau ' + ${time} + '.'">Mã này sẽ hết hạn sau 5 phút.</p>
+    <p th:text="'Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.'">Nếu bạn không yêu cầu đặt lại mật khẩu, vui lòng bỏ qua email này.</p>
+</body>
+</html>
