@@ -10,7 +10,7 @@ import org.springframework.data.domain.Page;
 import java.util.List;
 
 public interface ReportService {
-    Page<Report> findAll(Integer advertiseId, String email, String search, PageRequestCustom pageRequestCustom);
+    Page<Report> findAll(String reportTypeName,Integer advertiseId, String email, String search, PageRequestCustom pageRequestCustom);
 
     Page<Report> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom);
 
