@@ -6,6 +6,7 @@ import com.group6.ads.controllers.reports.models.ReportCreateRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
+import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.LocationRepository;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
@@ -29,11 +30,16 @@ public class ReportServiceImpl implements ReportService{
     private final LocationRepository locationRepository;
 
     @Override
-    public Page<Report> findAll(Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
+    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
         if (email != null && locationId != null) {
             return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
         }
-        return reportRepository.findAll(search, pageRequestCustom.pageRequest());
+        return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
+    }
+
+    @Override
+    public Page<Report> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom) {
+        return reportRepository.findAll(propertyId, parentId, search, pageRequestCustom.pageRequest());
     }
 
     @Override

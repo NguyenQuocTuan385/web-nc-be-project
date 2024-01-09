@@ -52,7 +52,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     }
 
     @Override
-    public Page<Advertise> findAllUnauthorizedAdvertisements(Integer propertyId, Integer parentId, String search, PageRequestCustom pageRequestCustom) {
+    public Page<Advertise> findAllUnLicensingAdvertisements(Integer propertyId, Integer parentId, String search, PageRequestCustom pageRequestCustom) {
         return advertiseRepository.findAllUnauthorizedAdvertisements(propertyId, parentId, search, pageRequestCustom.pageRequest());
     }
 
@@ -92,7 +92,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     }
 
     @Override
-    public Advertise updateByRoot(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest) {
+    public Advertise updateByDCMS(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest) {
         AdvertiseType advertiseType = advertiseTypeRepository
                 .findById(advertiseEditByRootRequest.getAdsTypeId())
                 .orElseThrow(() -> new NotFoundException("Advertise type not found"));
