@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2024 at 05:47 AM
+-- Generation Time: Jan 10, 2024 at 12:57 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.2.21
 
@@ -74,7 +74,7 @@ INSERT INTO `advertises` (`id`, `licensing`, `height`, `width`, `images`, `pilla
 (26, 0, 11, 2.4, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 23, 5, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
 (27, 0, 12, 2.7, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 3, 24, 6, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
 (28, 0, 10, 2.8, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', NULL, 25, 7, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35'),
-(29, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 26, 8, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35');
+(29, 0, 13, 2.9, 'https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTmq1k95wJA5bP_jYuAeEomw-NanJEBmTULTA&usqp=CAU', 1, 27, 8, NULL, NULL, '2023-12-19 08:05:35', '2023-12-19 08:05:35');
 
 -- --------------------------------------------------------
 
@@ -87,6 +87,7 @@ CREATE TABLE `advertises_edit` (
   `licensing` int(11) DEFAULT NULL,
   `height` float DEFAULT NULL,
   `width` float DEFAULT NULL,
+  `pillar_quantity` int(11) DEFAULT NULL,
   `content` text NOT NULL,
   `location_id` int(11) UNSIGNED NOT NULL,
   `ads_type_id` int(11) UNSIGNED NOT NULL,
@@ -201,7 +202,7 @@ CREATE TABLE `locations` (
 --
 
 INSERT INTO `locations` (`id`, `planning`, `longitude`, `latitude`, `address`, `images`, `status_edit`, `ads_form_id`, `location_type_id`, `property_id`, `location_edit_id`, `created_at`, `updated_at`) VALUES
-(1, 1, 106.682, 10.7647, '239 Đ. Nguyễn Văn Cừ, Phường 4, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 4, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
+(1, 1, 106.682, 10.7647, '239 Đ. Nguyễn Văn Cừ, Phường 4, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 1, 2, 19, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
 (2, 1, 106.682, 10.7652, '1 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 4, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
 (3, 1, 106.682, 10.7659, '64-59 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 2, 6, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
 (4, 1, 106.683, 10.7665, '337-335 Đ. Phạm Viết Chánh, Phường Nguyễn Cư Trinh, Quận 1, Thành phố Hồ Chí Minh, Việt Nam', '[\"https://goldsungroup.com.vn/wp-content/uploads/2019/11/bien-quang-cao-mot-cot-tren-duong-quoc-lo.jpg\",\"https://lambanghieuhcm.com/wp-content/uploads/2020/01/lam-bang-hieu-trung-tam-thuong-mai-2.jpg\"]', b'1', 3, 1, 3, NULL, '2023-12-18 13:49:44', '2023-12-18 13:49:44'),
@@ -289,7 +290,7 @@ CREATE TABLE `properties` (
   `id` int(11) UNSIGNED NOT NULL,
   `property_parent_id` int(11) UNSIGNED DEFAULT NULL,
   `name` varchar(255) DEFAULT NULL,
-  `code` varchar(255) DEFAULT NULL,
+  `code` enum('DISTRICT','WARD','','') DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -298,18 +299,20 @@ CREATE TABLE `properties` (
 --
 
 INSERT INTO `properties` (`id`, `property_parent_id`, `name`, `code`, `created_at`) VALUES
-(1, NULL, 'Quận 5', 'QUAN', '2023-12-18 12:55:31'),
-(2, NULL, 'Quận 10', 'QUAN', '2023-12-18 12:55:42'),
-(3, 1, 'Phường Nguyễn Cư Trinh', 'PHUONG', '2023-12-18 12:56:35'),
-(4, 1, 'Phường 4', 'PHUONG', '2023-12-18 12:57:10'),
-(5, 1, 'Phường 3', 'PHUONG', '2023-12-18 12:57:38'),
-(6, 2, 'Phường 1', 'PHUONG', '2023-12-18 12:59:37'),
-(7, 2, 'Phường 10', 'PHUONG', '2023-12-18 13:00:13'),
-(8, 13, 'Phường 1', 'PHUONG', '2023-12-18 13:00:45'),
-(9, 13, 'Phường 2', 'PHUONG', '2023-12-18 13:01:26'),
-(10, 2, 'Phường 9', 'PHUONG', '2023-12-18 13:02:03'),
-(11, 2, 'Phường 12', 'PHUONG', '2023-12-18 13:02:03'),
-(13, NULL, 'Quận 3', 'QUAN', '2023-12-18 12:59:45');
+(1, NULL, 'Quận 5', 'DISTRICT', '2023-12-18 12:55:31'),
+(2, NULL, 'Quận 10', 'DISTRICT', '2023-12-18 12:55:42'),
+(3, 19, 'Phường Nguyễn Cư Trinh', 'WARD', '2023-12-18 12:56:35'),
+(4, 1, 'Phường 4', 'WARD', '2023-12-18 12:57:10'),
+(5, 1, 'Phường 3', 'WARD', '2023-12-18 12:57:38'),
+(6, 2, 'Phường 1', 'WARD', '2023-12-18 12:59:37'),
+(7, 2, 'Phường 10', 'WARD', '2023-12-18 13:00:13'),
+(8, 13, 'Phường 1', 'WARD', '2023-12-18 13:00:45'),
+(9, 13, 'Phường 2', 'WARD', '2023-12-18 13:01:26'),
+(10, 2, 'Phường 9', 'WARD', '2023-12-18 13:02:03'),
+(11, 2, 'Phường 12', 'WARD', '2023-12-18 13:02:03'),
+(13, NULL, 'Quận 3', 'DISTRICT', '2023-12-18 12:59:45'),
+(14, 19, 'Phường 4', 'WARD', '2024-01-10 11:54:13'),
+(19, NULL, 'Quận 1', 'DISTRICT', '2024-01-10 11:33:55');
 
 -- --------------------------------------------------------
 
@@ -604,7 +607,7 @@ ALTER TABLE `location_types`
 -- AUTO_INCREMENT for table `properties`
 --
 ALTER TABLE `properties`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=19;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
 
 --
 -- AUTO_INCREMENT for table `reports`

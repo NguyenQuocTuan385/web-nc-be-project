@@ -8,7 +8,10 @@ import org.springframework.stereotype.Repository;
 
 @Repository
 public interface LocationRepository extends JpaRepository<Location, Integer> {
-    @Query("SELECT l FROM Location l WHERE l.property.id = :propertyId AND l.address LIKE %:search%")
+    @Query("""
+            SELECT l FROM Location l WHERE ((l.property.id = :propertyId) OR 
+            (l.property.propertyParent.id = :propertyId)) AND l.address LIKE %:search%
+        """)
     Page<Location> findAllByPropertyId(Integer propertyId, String search, Pageable pageable);
 
     @Query("SELECT l FROM Location l WHERE l.address LIKE %:search%")
