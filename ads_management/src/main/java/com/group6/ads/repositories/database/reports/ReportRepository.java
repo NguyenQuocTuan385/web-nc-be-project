@@ -31,7 +31,7 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
     @Query("""
             SELECT r
             FROM Report r
-            WHERE r.email = :email AND r.advertise.location.id = :locationId
+            WHERE r.user.email = :email AND r.advertise.location.id = :locationId
             AND (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
             """)
     Page<Report> findAllByEmailAndLocation(Integer locationId, String email, String search, Pageable pageable);

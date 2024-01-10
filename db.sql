@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Dec 23, 2023 at 11:11 AM
+-- Generation Time: Jan 10, 2024 at 05:47 AM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.2.21
 
@@ -332,7 +332,7 @@ CREATE TABLE `reports` (
   `latitude` float DEFAULT NULL,
   `report_form_id` int(11) UNSIGNED NOT NULL,
   `ads_id` int(11) UNSIGNED DEFAULT NULL,
-  `location_id` int(11) UNSIGNED DEFAULT NULL,
+  `user_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -340,11 +340,13 @@ CREATE TABLE `reports` (
 -- Dumping data for table `reports`
 --
 
-INSERT INTO `reports` (`id`, `full_name`, `email`, `phone`, `content`, `status`, `reply`, `images`, `report_type_name`, `address`, `longitude`, `latitude`, `report_form_id`, `ads_id`, `location_id`, `created_at`) VALUES
-(1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 1, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, NULL, '2023-12-21 07:04:51'),
-(2, 'Nguyễn Văn B', 'nguyenvanb@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, NULL, '2023-12-21 07:04:51'),
-(3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 3, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 2, NULL, '2023-12-21 07:04:51'),
-(4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'LOCATION', '603 Đ. Trần Hưng Đạo, Cầu Kho, Quận 1, Thành phố Hồ Chí Minh 700000, Việt Nam', 106.686, 10.7565, 1, NULL, NULL, '2023-12-21 07:04:51');
+INSERT INTO `reports` (`id`, `full_name`, `email`, `phone`, `content`, `status`, `reply`, `images`, `report_type_name`, `address`, `longitude`, `latitude`, `report_form_id`, `ads_id`, `user_id`, `created_at`) VALUES
+(1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 1, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, 21, '2023-12-21 07:04:51'),
+(2, 'Nguyễn Văn B', 'nguyenvanb@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, 21, '2023-12-21 07:04:51'),
+(3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 3, '<p>Đã xử lý xong, vui lòng kiểm tra</p>', NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 2, 21, '2023-12-21 07:04:51'),
+(4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'LOCATION', '603 Đ. Trần Hưng Đạo, Cầu Kho, Quận 1, Thành phố Hồ Chí Minh 700000, Việt Nam', 106.686, 10.7565, 1, NULL, 21, '2023-12-21 07:04:51'),
+(5, 'Nguyễn Quốc Tuấn', 'nguyenvana@gmail.com', '0937690534', '<p>aaaaaaaaaaaa</p><p><strong>bbbbbbbbbbbb</strong></p>', 1, NULL, '[\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261398/dldckqkxpa7ij81bvgt9.jpg\"]', 'ADVERTISE', NULL, NULL, NULL, 1, 8, 21, '2024-01-03 05:56:36'),
+(6, 'Nguyễn Quốc Tuấn', 'nguyenvana@gmail.com', '0937690534', '<p>aaaaaaaaaaaaaaaa</p><p>		<strong>dddddddddđ</strong></p><p>			<strong><s>			eeeeeeeeeeee</s></strong></p>', 1, NULL, '[\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261771/wme79phlpo0tdxd0sawl.png\",\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261772/vgeqoson0nn168jk7zm9.png\"]', 'ADVERTISE', NULL, NULL, NULL, 3, 11, 21, '2024-01-03 06:02:50');
 
 -- --------------------------------------------------------
 
@@ -401,12 +403,16 @@ CREATE TABLE `users` (
   `id` int(11) UNSIGNED NOT NULL,
   `name` varchar(100) DEFAULT NULL,
   `email` varchar(100) NOT NULL,
-  `password` varchar(50) NOT NULL,
+  `password` varchar(256) NOT NULL,
   `birthday` date DEFAULT NULL,
   `avatar` text DEFAULT NULL,
   `phone` varchar(20) DEFAULT NULL,
+  `token` varchar(256) DEFAULT NULL,
+  `token_exp_time` datetime DEFAULT NULL,
+  `otp` varchar(6) DEFAULT NULL,
+  `otp_exp_time` datetime DEFAULT NULL,
   `role_id` int(11) UNSIGNED NOT NULL,
-  `property_id` int(11) UNSIGNED NOT NULL,
+  `property_id` int(11) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -414,27 +420,30 @@ CREATE TABLE `users` (
 -- Dumping data for table `users`
 --
 
-INSERT INTO `users` (`id`, `name`, `email`, `password`, `birthday`, `avatar`, `phone`, `role_id`, `property_id`, `created_at`) VALUES
-(1, 'Nguyễn Văn Dũng', 'nguyenvandung@example.com', 'fda750c7638bc78996f2f02e185125ac', '1990-01-01', 'https://i.pravatar.cc/1000', '123456789', 2, 3, '2023-12-23 09:54:10'),
-(2, 'Lê Thị Hoài Anh', 'lethihoaianh@example.com', '2adfb08f3f42ff58e047e69e887be782', '1991-02-02', 'https://i.pravatar.cc/1000', '987654321', 2, 4, '2023-12-23 09:54:10'),
-(3, 'Phạm Văn Thanh', 'phamvanthanh@example.com', '64fd9733c78983e938b1018dcb65f038', '1992-03-03', 'https://i.pravatar.cc/1000', '555555555', 2, 5, '2023-12-23 09:54:10'),
-(4, 'Nguyễn Thị Hồng', 'nguyenthihong@example.com', '96a3ce71a3523b18d6294556ae63be8a', '1993-04-04', 'https://i.pravatar.cc/1000', '111111111', 2, 6, '2023-12-23 09:54:10'),
-(5, 'Lê Văn Hùng', 'levanhung@example.com', '0cc9dbe1b38f956cbc1ab3aaf993415b', '1994-05-05', 'https://i.pravatar.cc/1000', '999999999', 2, 7, '2023-12-23 09:54:10'),
-(6, 'Trần Thị Hạnh', 'tranthihanh@example.com', '55c4e63e983a47b2e6b2130006e677d9', '1995-06-06', 'https://i.pravatar.cc/1000', '444444444', 2, 8, '2023-12-23 09:54:10'),
-(7, 'Nguyễn Thanh Tâm', 'nguyenthanhtam@example.com', '5536ad18d17669b03f1ef01ae0157eee', '1996-07-07', 'https://i.pravatar.cc/1000', '333333333', 2, 9, '2023-12-23 09:54:10'),
-(8, 'Lê Minh Tuấn', 'leminhtuan@example.com', 'abb00bcb8f96f371df43353b2a2a2320', '1997-08-08', 'https://i.pravatar.cc/1000', '777777777', 2, 10, '2023-12-23 09:54:10'),
-(9, 'Phan Thị Bích Ngọc', 'phanthibichngoc@example.com', '387bb8f826eead194dac2e3f34168760', '1998-09-09', 'https://i.pravatar.cc/1000', '222222222', 2, 11, '2023-12-23 09:54:10'),
-(10, 'Vũ Quang Huy', 'vuquanghuy@example.com', '05cae72a37cf74340d399e266276bac1', '1999-10-10', 'https://i.pravatar.cc/1000', '666666666', 3, 1, '2023-12-23 09:54:10'),
-(11, 'Nguyễn Thị Thanh Hương', 'nguyenthanhhuong@example.com', '1b8f5b8ee98a8d95d59ff2c025dbbc38', '2000-11-11', 'https://i.pravatar.cc/1000', '555555555', 3, 2, '2023-12-23 09:54:10'),
-(12, 'Trần Đình Thiên Long', 'trandinhthienlong@example.com', '38eaea022f00cbca98d87dd3df245e70', '2001-12-12', 'https://i.pravatar.cc/1000', '888888888', 3, 13, '2023-12-23 09:54:10'),
-(13, 'Nguyễn Thị Lan Anh', 'nguyenthilananh@example.com', '762de3d52ec142d731063e3dfa669f5e', '2002-01-01', 'https://i.pravatar.cc/1000', '333333333', 3, 1, '2023-12-23 09:54:10'),
-(14, 'Phan Văn Hải', 'phanvanhai@example.com', '672e2f76926555c1125fc70c3a1f9423', '2003-02-02', 'https://i.pravatar.cc/1000', '999999999', 3, 2, '2023-12-23 09:54:10'),
-(15, 'Nguyễn Thị Diệu Linh', 'nguyenthidieulinh@example.com', '301df57dc5e58bd98c4947b564cae46b', '2004-03-03', 'https://i.pravatar.cc/1000', '111111111', 3, 13, '2023-12-23 09:54:10'),
-(16, 'Lê Quang Minh', 'lequangminh@example.com', 'ef8eaa65bc27704608e4c81a6086e29c', '2005-04-04', 'https://i.pravatar.cc/1000', '777777777', 3, 1, '2023-12-23 09:54:10'),
-(17, 'Trần Văn Hoàng', 'tranvanhoang@example.com', 'ad1f2d588544580995487bb76f665763', '2006-05-05', 'https://i.pravatar.cc/1000', '222222222', 3, 2, '2023-12-23 09:54:10'),
-(18, 'Nguyễn Thị Thảo Vy', 'nguyenthithaovy@example.com', 'a257151af6813c9eddce0821c33f9573', '2007-06-06', 'https://i.pravatar.cc/1000', '444444444', 3, 13, '2023-12-23 09:54:10'),
-(19, 'Nguyễn Văn Khánh', 'nguyenvankhanh@example.com', 'a65fdc4f6521b1b91562fb585efd0d0a', '2008-07-07', 'https://i.pravatar.cc/1000', '666666666', 3, 1, '2023-12-23 09:54:10'),
-(20, 'Nguyễn Thị Ngọc Ánh', 'nguyenthingocanh@example.com', '6d9a2eb35e3fb0b80777988ca941e4e9', '2009-08-08', 'https://i.pravatar.cc/1000', '888888888', 3, 2, '2023-12-23 09:54:10');
+INSERT INTO `users` (`id`, `name`, `email`, `password`, `birthday`, `avatar`, `phone`, `token`, `token_exp_time`, `otp`, `otp_exp_time`, `role_id`, `property_id`, `created_at`) VALUES
+(1, 'Nguyễn Văn Dũng', 'nguyenvandung@example.com', 'fda750c7638bc78996f2f02e185125ac', '1990-01-01', 'https://i.pravatar.cc/1000', '123456789', NULL, NULL, NULL, NULL, 2, 3, '2023-12-23 09:54:10'),
+(2, 'Lê Thị Hoài Anh', 'lethihoaianh@example.com', '2adfb08f3f42ff58e047e69e887be782', '1991-02-02', 'https://i.pravatar.cc/1000', '987654321', NULL, NULL, NULL, NULL, 2, 4, '2023-12-23 09:54:10'),
+(3, 'Phạm Văn Thanh', 'phamvanthanh@example.com', '64fd9733c78983e938b1018dcb65f038', '1992-03-03', 'https://i.pravatar.cc/1000', '555555555', NULL, NULL, NULL, NULL, 2, 5, '2023-12-23 09:54:10'),
+(4, 'Nguyễn Thị Hồng', 'nguyenthihong@example.com', '96a3ce71a3523b18d6294556ae63be8a', '1993-04-04', 'https://i.pravatar.cc/1000', '111111111', NULL, NULL, NULL, NULL, 2, 6, '2023-12-23 09:54:10'),
+(5, 'Lê Văn Hùng', 'levanhung@example.com', '0cc9dbe1b38f956cbc1ab3aaf993415b', '1994-05-05', 'https://i.pravatar.cc/1000', '999999999', NULL, NULL, NULL, NULL, 2, 7, '2023-12-23 09:54:10'),
+(6, 'Trần Thị Hạnh', 'tranthihanh@example.com', '55c4e63e983a47b2e6b2130006e677d9', '1995-06-06', 'https://i.pravatar.cc/1000', '444444444', NULL, NULL, NULL, NULL, 2, 8, '2023-12-23 09:54:10'),
+(7, 'Nguyễn Thanh Tâm', 'nguyenthanhtam@example.com', '5536ad18d17669b03f1ef01ae0157eee', '1996-07-07', 'https://i.pravatar.cc/1000', '333333333', NULL, NULL, NULL, NULL, 2, 9, '2023-12-23 09:54:10'),
+(8, 'Lê Minh Tuấn', 'leminhtuan@example.com', 'abb00bcb8f96f371df43353b2a2a2320', '1997-08-08', 'https://i.pravatar.cc/1000', '777777777', NULL, NULL, NULL, NULL, 2, 10, '2023-12-23 09:54:10'),
+(9, 'Phan Thị Bích Ngọc', 'phanthibichngoc@example.com', '387bb8f826eead194dac2e3f34168760', '1998-09-09', 'https://i.pravatar.cc/1000', '222222222', NULL, NULL, NULL, NULL, 2, 11, '2023-12-23 09:54:10'),
+(10, 'Vũ Quang Huy', 'vuquanghuy@example.com', '05cae72a37cf74340d399e266276bac1', '1999-10-10', 'https://i.pravatar.cc/1000', '666666666', NULL, NULL, NULL, NULL, 3, 1, '2023-12-23 09:54:10'),
+(11, 'Nguyễn Thị Thanh Hương', 'nguyenthanhhuong@example.com', '1b8f5b8ee98a8d95d59ff2c025dbbc38', '2000-11-11', 'https://i.pravatar.cc/1000', '555555555', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
+(12, 'Trần Đình Thiên Long', 'trandinhthienlong@example.com', '38eaea022f00cbca98d87dd3df245e70', '2001-12-12', 'https://i.pravatar.cc/1000', '888888888', NULL, NULL, NULL, NULL, 3, 13, '2023-12-23 09:54:10'),
+(13, 'Nguyễn Thị Lan Anh', 'nguyenthilananh@example.com', '762de3d52ec142d731063e3dfa669f5e', '2002-01-01', 'https://i.pravatar.cc/1000', '333333333', NULL, NULL, NULL, NULL, 3, 1, '2023-12-23 09:54:10'),
+(14, 'Phan Văn Hải', 'phanvanhai@example.com', '672e2f76926555c1125fc70c3a1f9423', '2003-02-02', 'https://i.pravatar.cc/1000', '999999999', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
+(15, 'Nguyễn Thị Diệu Linh', 'nguyenthidieulinh@example.com', '301df57dc5e58bd98c4947b564cae46b', '2004-03-03', 'https://i.pravatar.cc/1000', '111111111', NULL, NULL, NULL, NULL, 3, 13, '2023-12-23 09:54:10'),
+(16, 'Lê Quang Minh', 'lequangminh@example.com', 'ef8eaa65bc27704608e4c81a6086e29c', '2005-04-04', 'https://i.pravatar.cc/1000', '777777777', NULL, NULL, NULL, NULL, 3, 1, '2023-12-23 09:54:10'),
+(17, 'Trần Văn Hoàng', 'tranvanhoang@example.com', 'ad1f2d588544580995487bb76f665763', '2006-05-05', 'https://i.pravatar.cc/1000', '222222222', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
+(18, 'Nguyễn Thị Thảo Vy', 'nguyenthithaovy@example.com', 'a257151af6813c9eddce0821c33f9573', '2007-06-06', 'https://i.pravatar.cc/1000', '444444444', NULL, NULL, NULL, NULL, 3, 13, '2023-12-23 09:54:10'),
+(19, 'Nguyễn Văn Khánh', 'nguyenvankhanh@example.com', 'a65fdc4f6521b1b91562fb585efd0d0a', '2008-07-07', 'https://i.pravatar.cc/1000', '666666666', NULL, NULL, NULL, NULL, 3, 1, '2023-12-23 09:54:10'),
+(20, 'Nguyễn Thị Ngọc Ánh', 'nguyenthingocanh@example.com', '6d9a2eb35e3fb0b80777988ca941e4e9', '2009-08-08', 'https://i.pravatar.cc/1000', '888888888', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
+(21, 'Guest', 'nguyenvana@gmail.com', '2adfb08f3f42ff58e047e69e887be782', NULL, NULL, '0937690534', NULL, NULL, NULL, NULL, 1, NULL, '2024-01-08 06:44:28'),
+(22, 'Nguyễn Thị Ngọc Ánh', 'nguyenthingocanh2@example.com', '6d9a2eb35e3fb0b80777988ca941e4e9', '2009-08-08', 'https://i.pravatar.cc/1000', '888888888', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
+(23, 'Nguyễn Quốc Tuấn', 'nguyenquoctuan385@gmail.com', '$2a$10$IRBRzn6MYoX2WI/a/j3d7u/lz7ZUijzUy.H6qmQV7itV81oToGFJ6', '2002-04-29', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1704859357/wt7p7dnuoru279n3lqle.jpg', '+84937690534', '3378258f91020cc93b8d8db49ca920ee56a75aebecd90b5dcca02592bc4cf1ed', '2024-01-17 11:34:00', NULL, NULL, 3, 13, '2024-01-10 04:02:39');
 
 --
 -- Indexes for dumped tables
@@ -517,7 +526,7 @@ ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`),
   ADD KEY `advertise_id` (`ads_id`),
   ADD KEY `report_form_id` (`report_form_id`),
-  ADD KEY `location_id` (`location_id`);
+  ADD KEY `reports_ibfk_3` (`user_id`);
 
 --
 -- Indexes for table `report_forms`
@@ -601,7 +610,7 @@ ALTER TABLE `properties`
 -- AUTO_INCREMENT for table `reports`
 --
 ALTER TABLE `reports`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT for table `report_forms`
@@ -619,7 +628,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=21;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
 
 --
 -- Constraints for dumped tables
@@ -676,7 +685,8 @@ ALTER TABLE `properties`
 --
 ALTER TABLE `reports`
   ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`ads_id`) REFERENCES `advertises` (`id`),
-  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_form_id`) REFERENCES `report_forms` (`id`);
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_form_id`) REFERENCES `report_forms` (`id`),
+  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
 
 --
 -- Constraints for table `users`

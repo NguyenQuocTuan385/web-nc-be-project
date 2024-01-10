@@ -3,6 +3,7 @@ package com.group6.ads.repositories.database.reports;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
+import com.group6.ads.repositories.database.users.User;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -40,9 +41,12 @@ public class Report {
     private ReportForm reportForm;
 
     @ManyToOne
-    @JoinColumn(name = "ads_id", nullable = false)
+    @JoinColumn(name = "ads_id", nullable = true)
     private Advertise advertise;
 
+    @ManyToOne
+    @JoinColumn(name = "user_id", nullable = false)
+    private User user;
 
     private String images;
 }

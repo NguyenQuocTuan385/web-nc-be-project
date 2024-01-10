@@ -1,6 +1,7 @@
 package com.group6.ads.controllers.users;
 
 
+import com.group6.ads.controllers.users.models.UserGuestRequest;
 import com.group6.ads.controllers.users.models.UserOTPRequest;
 import com.group6.ads.controllers.users.models.UserRequest;
 import com.group6.ads.repositories.database.users.User;
@@ -22,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("")
-    ResponseEntity<Page<User>> getAlUsers(
+    ResponseEntity<Page<User>> getAllUsers(
             @RequestParam(required = false, value = "roleId")
             Integer roleId,
             @RequestParam(required = false, value = "search", defaultValue = "")
@@ -44,6 +45,11 @@ public class UserController {
     @PostMapping("")
     public ResponseEntity<User> createUser(@RequestBody @Valid UserRequest user) {
         return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+    }
+
+    @PostMapping("/guest")
+    public ResponseEntity<User> createGuestUser(@RequestBody @Valid UserGuestRequest user) {
+        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createGuestUser(user));
     }
 
     @PutMapping("/{id}")

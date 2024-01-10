@@ -1,5 +1,6 @@
 package com.group6.ads.services.users;
 
+import com.group6.ads.controllers.users.models.UserGuestRequest;
 import com.group6.ads.controllers.users.models.UserOTPRequest;
 import com.group6.ads.controllers.users.models.UserRequest;
 import com.group6.ads.exceptions.NotFoundException;
@@ -12,6 +13,7 @@ import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.util.PageRequestCustom;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -23,6 +25,7 @@ public class UserServiceImpl implements UserService {
     private final UserRepository UserRepository;
     private final PropertyRepository propertyRepository;
     private final RoleRepository roleRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Override
     public Page<User> findAll(Integer roleId, String search, PageRequestCustom pageRequestCustom) {
@@ -53,6 +56,23 @@ public class UserServiceImpl implements UserService {
     }
 
     @Override
+    public User createGuestUser(UserGuestRequest userGuestRequest) {
+        Role role = roleRepository.findById(1).orElse(null);
+        User usersCreated = User.builder()
+                .name("Guest")
+                .password(userGuestRequest.getPassword())
+                .email(userGuestRequest.getEmail())
+                .phone(userGuestRequest.getPhone())
+                .role(role)
+                .build();
+        String password = userGuestRequest.getPassword();
+        String encodePassword = passwordEncoder.encode(password);
+        usersCreated.setPassword(encodePassword);
+
+        return UserRepository.save(usersCreated);
+    }
+
+    @Override
     public User updateUser(UserRequest user, Integer theId) {
         User foundUsers = UserRepository.findById(theId).orElseThrow(() -> new NotFoundException("User not found"));
 
@@ -76,22 +96,16 @@ public class UserServiceImpl implements UserService {
     @Override
     public Integer checkOTP(UserOTPRequest userOtpRequest) {
         User user = UserRepository.findByEmail(userOtpRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
-       if(!Objects.equals(user.getOtp(), userOtpRequest.getOtp()))
-       {
-           return 0;
-       }
-       else
-     {
-          if(user.getOtpExpTime().isBefore(LocalDateTime.now()))
-          {
-            return 1;
-          }
-          else
-          {
-            return 2;
-          }
-     }
-
+        if (!Objects.equals(user.getOtp(), userOtpRequest.getOtp())) {
+            return 0;
+        } else {
+            if (user.getOtpExpTime().isBefore(LocalDateTime.now())) {
+                return 1;
+            } else {
+                return 2;
+            }
+        }
+    }
     public User findByEmail(String email) {
         return UserRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Not found user with email " + email));
     }

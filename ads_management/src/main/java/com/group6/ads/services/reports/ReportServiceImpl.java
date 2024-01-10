@@ -53,6 +53,7 @@ public class ReportServiceImpl implements ReportService{
                 .phone(reportRequest.getPhone())
                 .content(reportRequest.getContent())
                 .reply(null)
+                .status(1)
                 .reportTypeName(reportRequest.getReportTypeName())
                 .address(reportRequest.getAddress())
                 .latitude(reportRequest.getLatitude())
