@@ -1,9 +1,6 @@
 package com.group6.ads.controllers.authentication;
 
-import com.group6.ads.controllers.authentication.models.ChangePasswordRequest;
-import com.group6.ads.controllers.authentication.models.LoginRequest;
-import com.group6.ads.controllers.authentication.models.RefreshRequest;
-import com.group6.ads.controllers.authentication.models.RegisterRequest;
+import com.group6.ads.controllers.authentication.models.*;
 import com.group6.ads.services.authentication.AuthenticationService;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletRequest;
@@ -79,6 +76,15 @@ public class AuthenticationController {
     public ResponseEntity<?> changePassword(@RequestBody @Valid ChangePasswordRequest changePasswordRequest) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(authenticationService.changePassword(changePasswordRequest));
+        } catch (Exception e) {
+            return ResponseEntity.badRequest().body(e.getMessage());
+        }
+    }
+
+    @PutMapping("authentication/reset-password")
+    public ResponseEntity<?> resetPassword(@RequestBody @Valid ResetPasswordRequest resetPasswordRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(authenticationService.resetPassword(resetPasswordRequest));
         } catch (Exception e) {
             return ResponseEntity.badRequest().body(e.getMessage());
         }

@@ -2,6 +2,7 @@ package com.group6.ads.services.authentication;
 
 import com.group6.ads.controllers.authentication.models.ChangePasswordRequest;
 import com.group6.ads.controllers.authentication.models.RegisterRequest;
+import com.group6.ads.controllers.authentication.models.ResetPasswordRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.properties.PropertyRepository;
@@ -67,6 +68,19 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         String encodePassword = passwordEncoder.encode(newPassword);
 
         User user= userRepository.findByEmail(changePasswordRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
+        user.setPassword(encodePassword);
+        return userRepository.save(user);
+    }
+
+    @Override
+    public User resetPassword(ResetPasswordRequest resetPasswordRequest) throws Exception {
+        Optional<User> optionalUser = userRepository.findByEmail(resetPasswordRequest.getEmail());
+        User existingUser = optionalUser.get();
+
+        String newPassword = resetPasswordRequest.getPassword();
+        String encodePassword = passwordEncoder.encode(newPassword);
+
+        User user= userRepository.findByEmail(resetPasswordRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
         user.setPassword(encodePassword);
         return userRepository.save(user);
     }
