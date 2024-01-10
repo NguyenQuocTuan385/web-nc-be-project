@@ -40,6 +40,7 @@ public class SecurityConfig {
                                     String.format("%s/authentication/login", apiPrefix),
                                     String.format("%s/authentication/logout", apiPrefix),
                                     String.format("%s/authentication/change-password", apiPrefix),
+                                    String.format("%s/authentication/reset-password", apiPrefix),
                                     String.format("%s/locations", apiPrefix),
                                     String.format("%s/locations/**", apiPrefix),
                                     String.format("%s/reports", apiPrefix),
