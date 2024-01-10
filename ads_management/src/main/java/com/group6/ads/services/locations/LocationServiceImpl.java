@@ -7,6 +7,8 @@ import com.group6.ads.controllers.locations.models.LocationStatusRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;
+import com.group6.ads.repositories.database.advertises.Advertise;
+import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.repositories.database.location.types.LocationTypeRepository;
 import com.group6.ads.repositories.database.locations.Location;
@@ -27,18 +29,19 @@ import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.List;
 
 @Service
 @RequiredArgsConstructor
 public class LocationServiceImpl implements LocationService {
-    @NonNull
-    final LocationRepository locationsRepository;
     @NotNull
     final LocationTypeRepository locationTypeRepository;
     @NotNull
     final PropertyRepository propertyRepository;
     @NotNull
     final AdvertiseFormRepository advertiseFormRepository;
+    @NotNull
+    final AdvertiseRepository advertiseRepository;
     @NonNull
     final LocationEditRepository locationEditRepository;
     @NonNull
@@ -48,7 +51,7 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Page<Location> findAll(String search, PageRequestCustom pageRequestCustom) {
-        return locationsRepository.findAll(search, pageRequestCustom.pageRequest());
+        return locationRepository.findAll(search, pageRequestCustom.pageRequest());
     }
 
     @Override
@@ -58,12 +61,12 @@ public class LocationServiceImpl implements LocationService {
         if(parentId.length == 0)
             parentId = null;
 
-        return locationsRepository.findAll(propertyId, parentId, search, pageRequestCustom.pageRequest());
+        return locationRepository.findAll(propertyId, parentId, search, pageRequestCustom.pageRequest());
     }
 
     @Override
     public Page<Location> getAllByPropertyId(Integer propertyId, String search, PageRequestCustom pageRequestCustom) {
-        return locationsRepository.findAllByPropertyId(propertyId, search, pageRequestCustom.pageRequest());
+        return locationRepository.findAllByPropertyId(propertyId, search, pageRequestCustom.pageRequest());
     }
 
     public Location create(LocationCreateRequest locationCreateRequest) {
@@ -88,18 +91,18 @@ public class LocationServiceImpl implements LocationService {
                 .images(locationCreateRequest.getImages())
                 .build();
 
-        return locationsRepository.save(location);
+        return locationRepository.save(location);
     }
 
     @Override
     public Location getById(Integer locationId) {
-        return locationsRepository.findById(locationId)
+        return locationRepository.findById(locationId)
                 .orElseThrow(() -> new NotFoundException("Location not found"));
     }
 
     @Override
     public void delete(Integer locationId) {
-        locationsRepository.deleteById(locationId);
+        locationRepository.deleteById(locationId);
     }
 
     @Override
@@ -230,6 +233,17 @@ public class LocationServiceImpl implements LocationService {
 
     @Override
     public Location getLocationById(Integer locationId) {
-        return locationsRepository.findById(locationId).orElse(null);
+        return locationRepository.findById(locationId).orElse(null);
+    }
+
+    @Override
+    public boolean checkExistAdvertises(Integer locationId) {
+        PageRequestCustom pageRequestCustom = PageRequestCustom.of(1, 10);
+        Page<Advertise> advertisePage = advertiseRepository.findAllByLocationId(locationId, "", pageRequestCustom.pageRequest());
+        if (advertisePage.getContent().isEmpty())
+        {
+            return false;
+        }
+        return true;
     }
 }

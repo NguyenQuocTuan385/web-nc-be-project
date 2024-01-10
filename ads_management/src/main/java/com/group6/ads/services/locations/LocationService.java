@@ -16,11 +16,9 @@ public interface LocationService {
 
     Page<Location> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom);
 
-
     Location create(LocationCreateRequest locationCreateRequest);
 
     Location getById(Integer locationId);
-
 
     Page<Location> getAllByPropertyId(Integer propertyId,String search, PageRequestCustom pageRequestCustom);
 
@@ -38,4 +36,6 @@ public interface LocationService {
     Location locationReview(Integer locationId, Boolean review);
 
     Location getLocationById(Integer locationId);
+
+    boolean checkExistAdvertises(Integer locationId);
 }
