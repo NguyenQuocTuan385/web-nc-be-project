@@ -24,7 +24,7 @@ public class ReportController {
 
     @GetMapping("reports")
     ResponseEntity<Page<Report>> getAllReports(
-@       RequestParam(required = false, value = "reportTypeName")
+        @RequestParam(required = false, value = "reportTypeName")
         String reportTypeName,
         @RequestParam(required = false, value = "locationId")
         Integer locationId,

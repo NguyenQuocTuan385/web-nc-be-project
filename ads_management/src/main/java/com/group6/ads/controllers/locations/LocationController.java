@@ -47,6 +47,13 @@ public class LocationController {
         return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(search, pageRequestCustom));
     }
 
+    @Operation(summary = "check exists advertises in location")
+    @GetMapping("locations/{locationId}/exists-advertises")
+    public ResponseEntity<Boolean> checkExistsAdvertises(
+            @PathVariable Integer locationId) {
+        return ResponseEntity.status(HttpStatus.OK).body(locationService.checkExistAdvertises(locationId));
+    }
+
     @Operation(summary = "cultural department get location with property id and parent id")
     @GetMapping("properties/locations")
     public ResponseEntity<Page<Location>> getAllWithPropertyAndParent(
