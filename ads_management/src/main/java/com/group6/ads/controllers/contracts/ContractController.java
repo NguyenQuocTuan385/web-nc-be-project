@@ -73,7 +73,13 @@ public class ContractController {
 
     @GetMapping("contracts/advertises/{advertiseId}")
     ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findByAdvertiseIdOne(advertiseId));
+        Contract contract = contractService.findByAdvertiseIdOne(advertiseId);
+
+        if(contract != null) {
+            return ResponseEntity.status(HttpStatus.OK).body(contract);
+        }
+
+        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @PostMapping("")

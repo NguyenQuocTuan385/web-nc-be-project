@@ -42,7 +42,7 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
     Page<Contract> findAll(String search, Pageable pageable);
 
     @Query("""
-            SELECT c FROM Contract c WHERE c.advertise.id = :advertiseId
+            SELECT c FROM Contract c WHERE c.advertise.id = :advertiseId AND c.status = 1
             """)
     Contract findByAdvertiseId(Integer advertiseId);
 }

@@ -29,8 +29,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Page<User> findAll(Integer roleId, String search, PageRequestCustom pageRequestCustom) {
-        return roleId == null ? UserRepository.findAll(search,pageRequestCustom.pageRequest()) :
-                UserRepository.findAll(roleId,search,pageRequestCustom.pageRequest());
+        return roleId == null ? UserRepository.findAll(search, pageRequestCustom.pageRequest())
+                : UserRepository.findAll(roleId, search, pageRequestCustom.pageRequest());
     }
 
     @Override
@@ -77,10 +77,9 @@ public class UserServiceImpl implements UserService {
         User foundUsers = UserRepository.findById(theId).orElseThrow(() -> new NotFoundException("User not found"));
 
         foundUsers.setName(user.getName());
-        if(user.getPassword() != null
+        if (user.getPassword() != null
                 && !user.getPassword().isEmpty()
-                && !user.getPassword().equals("null"))
-        {
+                && !user.getPassword().equals("null")) {
             foundUsers.setPassword(user.getPassword());
         }
         foundUsers.setEmail(user.getEmail());
@@ -95,7 +94,8 @@ public class UserServiceImpl implements UserService {
 
     @Override
     public Integer checkOTP(UserOTPRequest userOtpRequest) {
-        User user = UserRepository.findByEmail(userOtpRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
+        User user = UserRepository.findByEmail(userOtpRequest.getEmail())
+                .orElseThrow(() -> new NotFoundException("User not found"));
         if (!Objects.equals(user.getOtp(), userOtpRequest.getOtp())) {
             return 0;
         } else {
@@ -106,8 +106,10 @@ public class UserServiceImpl implements UserService {
             }
         }
     }
+
     public User findByEmail(String email) {
-        return UserRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("Not found user with email " + email));
+        return UserRepository.findByEmail(email)
+                .orElseThrow(() -> new NotFoundException("Not found user with email " + email));
     }
 
     @Override
