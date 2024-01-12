@@ -15,7 +15,7 @@ public interface ContractService {
 
     Page<Contract> findByAdvertiseId(Integer advertiseId, String search, PageRequestCustom pageRequestCustom);
 
-    Contract findByAdvertiseIdOne(Integer advertiseId);
+    Contract findContractLicensingByAdvertiseId(Integer advertiseId);
 
     Contract createContract(ContractRequest contractRequest);
 

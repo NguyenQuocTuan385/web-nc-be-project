@@ -44,5 +44,5 @@ public interface ContractRepository extends JpaRepository<Contract, Integer> {
     @Query("""
             SELECT c FROM Contract c WHERE c.advertise.id = :advertiseId AND c.status = 1
             """)
-    Contract findByAdvertiseId(Integer advertiseId);
+    Contract findContractLicensingByAdvertiseId(Integer advertiseId);
 }

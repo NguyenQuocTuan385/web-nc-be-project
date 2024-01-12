@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Host: 127.0.0.1
--- Generation Time: Jan 10, 2024 at 12:57 PM
+-- Generation Time: Jan 12, 2024 at 02:32 PM
 -- Server version: 10.4.28-MariaDB
 -- PHP Version: 7.2.21
 
@@ -161,7 +161,7 @@ CREATE TABLE `contracts` (
   `company_address` varchar(200) DEFAULT NULL,
   `start_at` datetime(6) DEFAULT NULL,
   `end_at` datetime(6) DEFAULT NULL,
-  `status` int(1) DEFAULT NULL COMMENT '1:PENDING, 2: SUCCESS, 3: EXPIRED',
+  `status` int(1) DEFAULT NULL COMMENT '  licensed = 1,\r\n  notLicensed = 2,\r\n  expired = 3,\r\n  rejected = 4',
   `ads_id` int(10) UNSIGNED NOT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp(),
   `images` text DEFAULT NULL
@@ -324,6 +324,7 @@ CREATE TABLE `reports` (
   `id` int(11) UNSIGNED NOT NULL,
   `full_name` varchar(50) DEFAULT NULL,
   `email` varchar(50) DEFAULT NULL,
+  `guest_email` varchar(50) NOT NULL,
   `phone` varchar(10) DEFAULT NULL,
   `content` varchar(255) DEFAULT NULL,
   `status` int(1) DEFAULT 1 COMMENT '  NEW = 1,\r\n  PROCESSING = 2,\r\n  DONE = 3',
@@ -335,7 +336,6 @@ CREATE TABLE `reports` (
   `latitude` float DEFAULT NULL,
   `report_form_id` int(11) UNSIGNED NOT NULL,
   `ads_id` int(11) UNSIGNED DEFAULT NULL,
-  `user_id` int(10) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
@@ -343,13 +343,13 @@ CREATE TABLE `reports` (
 -- Dumping data for table `reports`
 --
 
-INSERT INTO `reports` (`id`, `full_name`, `email`, `phone`, `content`, `status`, `reply`, `images`, `report_type_name`, `address`, `longitude`, `latitude`, `report_form_id`, `ads_id`, `user_id`, `created_at`) VALUES
-(1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 1, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, 21, '2023-12-21 07:04:51'),
-(2, 'Nguyễn Văn B', 'nguyenvanb@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, 21, '2023-12-21 07:04:51'),
-(3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 3, '<p>Đã xử lý xong, vui lòng kiểm tra</p>', NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 2, 21, '2023-12-21 07:04:51'),
-(4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'LOCATION', '603 Đ. Trần Hưng Đạo, Cầu Kho, Quận 1, Thành phố Hồ Chí Minh 700000, Việt Nam', 106.686, 10.7565, 1, NULL, 21, '2023-12-21 07:04:51'),
-(5, 'Nguyễn Quốc Tuấn', 'nguyenvana@gmail.com', '0937690534', '<p>aaaaaaaaaaaa</p><p><strong>bbbbbbbbbbbb</strong></p>', 1, NULL, '[\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261398/dldckqkxpa7ij81bvgt9.jpg\"]', 'ADVERTISE', NULL, NULL, NULL, 1, 8, 21, '2024-01-03 05:56:36'),
-(6, 'Nguyễn Quốc Tuấn', 'nguyenvana@gmail.com', '0937690534', '<p>aaaaaaaaaaaaaaaa</p><p>		<strong>dddddddddđ</strong></p><p>			<strong><s>			eeeeeeeeeeee</s></strong></p>', 1, NULL, '[\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261771/wme79phlpo0tdxd0sawl.png\",\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261772/vgeqoson0nn168jk7zm9.png\"]', 'ADVERTISE', NULL, NULL, NULL, 3, 11, 21, '2024-01-03 06:02:50');
+INSERT INTO `reports` (`id`, `full_name`, `email`, `guest_email`, `phone`, `content`, `status`, `reply`, `images`, `report_type_name`, `address`, `longitude`, `latitude`, `report_form_id`, `ads_id`, `created_at`) VALUES
+(1, 'Nguyễn Văn A', 'nguyenvana@gmail.com', 'nguyenquoctuan385@gmail.com', '123456789', 'Báo cáo sai phạm', 1, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, '2023-12-21 07:04:51'),
+(2, 'Nguyễn Văn B', 'nguyenvanb@gmail.com', 'nguyenquoctuan385@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 16, '2023-12-21 07:04:51'),
+(3, 'Nguyễn Văn A', 'nguyenvana@gmail.com', 'nguyenquoctuan385@gmail.com', '123456789', 'Báo cáo sai phạm', 3, '<p>Đã xử lý xong, vui lòng kiểm tra</p>', NULL, 'ADVERTISE', NULL, NULL, NULL, 1, 2, '2023-12-21 07:04:51'),
+(4, 'Nguyễn Văn A', 'nguyenvana@gmail.com', 'nguyenquoctuan385@gmail.com', '123456789', 'Báo cáo sai phạm', 2, NULL, NULL, 'LOCATION', '603 Đ. Trần Hưng Đạo, Cầu Kho, Quận 1, Thành phố Hồ Chí Minh 700000, Việt Nam', 106.686, 10.7565, 1, NULL, '2023-12-21 07:04:51'),
+(5, 'Nguyễn Quốc Tuấn', 'nguyenvana@gmail.com', 'nguyenquoctuan385@gmail.com', '0937690534', '<p>aaaaaaaaaaaa</p><p><strong>bbbbbbbbbbbb</strong></p>', 1, NULL, '[\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261398/dldckqkxpa7ij81bvgt9.jpg\"]', 'ADVERTISE', NULL, NULL, NULL, 1, 8, '2024-01-03 05:56:36'),
+(6, 'Nguyễn Quốc Tuấn', 'nguyenvana@gmail.com', 'nguyenquoctuan385@gmail.com', '0937690534', '<p>aaaaaaaaaaaaaaaa</p><p>		<strong>dddddddddđ</strong></p><p>			<strong><s>			eeeeeeeeeeee</s></strong></p>', 1, NULL, '[\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261771/wme79phlpo0tdxd0sawl.png\",\"https://res.cloudinary.com/dacvpgdfi/image/upload/v1704261772/vgeqoson0nn168jk7zm9.png\"]', 'ADVERTISE', NULL, NULL, NULL, 3, 11, '2024-01-03 06:02:50');
 
 -- --------------------------------------------------------
 
@@ -391,7 +391,6 @@ CREATE TABLE `roles` (
 --
 
 INSERT INTO `roles` (`id`, `code`, `description`) VALUES
-(1, 'GUEST', 'Người dân'),
 (2, 'WARD', 'Cán bộ phường/xã'),
 (3, 'DISTRICT', 'Cán bộ quận/huyện'),
 (4, 'DEPARTMENT', 'Cán bộ Sở văn hóa - TT');
@@ -414,7 +413,7 @@ CREATE TABLE `users` (
   `token_exp_time` datetime DEFAULT NULL,
   `otp` varchar(6) DEFAULT NULL,
   `otp_exp_time` datetime DEFAULT NULL,
-  `role_id` int(11) UNSIGNED NOT NULL,
+  `role_id` int(11) UNSIGNED DEFAULT NULL,
   `property_id` int(11) UNSIGNED DEFAULT NULL,
   `created_at` timestamp NOT NULL DEFAULT current_timestamp()
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
@@ -444,9 +443,10 @@ INSERT INTO `users` (`id`, `name`, `email`, `password`, `birthday`, `avatar`, `p
 (18, 'Nguyễn Thị Thảo Vy', 'nguyenthithaovy@example.com', 'a257151af6813c9eddce0821c33f9573', '2007-06-06', 'https://i.pravatar.cc/1000', '444444444', NULL, NULL, NULL, NULL, 3, 13, '2023-12-23 09:54:10'),
 (19, 'Nguyễn Văn Khánh', 'nguyenvankhanh@example.com', 'a65fdc4f6521b1b91562fb585efd0d0a', '2008-07-07', 'https://i.pravatar.cc/1000', '666666666', NULL, NULL, NULL, NULL, 3, 1, '2023-12-23 09:54:10'),
 (20, 'Nguyễn Thị Ngọc Ánh', 'nguyenthingocanh@example.com', '6d9a2eb35e3fb0b80777988ca941e4e9', '2009-08-08', 'https://i.pravatar.cc/1000', '888888888', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
-(21, 'Guest', 'nguyenvana@gmail.com', '2adfb08f3f42ff58e047e69e887be782', NULL, NULL, '0937690534', NULL, NULL, NULL, NULL, 1, NULL, '2024-01-08 06:44:28'),
 (22, 'Nguyễn Thị Ngọc Ánh', 'nguyenthingocanh2@example.com', '6d9a2eb35e3fb0b80777988ca941e4e9', '2009-08-08', 'https://i.pravatar.cc/1000', '888888888', NULL, NULL, NULL, NULL, 3, 2, '2023-12-23 09:54:10'),
-(23, 'Nguyễn Quốc Tuấn', 'nguyenquoctuan385@gmail.com', '$2a$10$IRBRzn6MYoX2WI/a/j3d7u/lz7ZUijzUy.H6qmQV7itV81oToGFJ6', '2002-04-29', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1704859357/wt7p7dnuoru279n3lqle.jpg', '+84937690534', '3378258f91020cc93b8d8db49ca920ee56a75aebecd90b5dcca02592bc4cf1ed', '2024-01-17 11:34:00', NULL, NULL, 3, 13, '2024-01-10 04:02:39');
+(23, 'Nguyễn Quốc Tuấn', 'nguyenquoctuan385@gmail.com', '$2a$10$IRBRzn6MYoX2WI/a/j3d7u/lz7ZUijzUy.H6qmQV7itV81oToGFJ6', '2002-04-29', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1704859357/wt7p7dnuoru279n3lqle.jpg', '+84937690534', '0670781f0430e81aab587a02f04b1fdd4d4c501d4c03d13f975e26d9af6a0f85', '2024-01-19 11:45:43', NULL, NULL, 3, 13, '2024-01-10 04:02:39'),
+(24, 'Nguyễn Quốc Tuấn', 'nguyenquoctuan852@gmail.com', '$2a$10$IRBRzn6MYoX2WI/a/j3d7u/lz7ZUijzUy.H6qmQV7itV81oToGFJ6', '2002-04-29', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1704859357/wt7p7dnuoru279n3lqle.jpg', '+84937690534', '1fd831eedb5d6c30d8bfd12681b9c4ac3c8c651f1047897944dbee8abeeb7da7', '2024-01-18 21:38:55', NULL, NULL, 2, 3, '2024-01-10 04:02:39'),
+(25, 'Nguyễn Quốc Tuấn', 'nguyenquoctuan147@gmail.com', '$2a$10$IRBRzn6MYoX2WI/a/j3d7u/lz7ZUijzUy.H6qmQV7itV81oToGFJ6', '2002-04-29', 'https://res.cloudinary.com/dacvpgdfi/image/upload/v1704859357/wt7p7dnuoru279n3lqle.jpg', '+84937690534', '9dce67b46876ac64ba7fc8e3227eccfcb91eecf949912cdd3d85cd97d030d6ec', '2024-01-19 09:40:39', NULL, NULL, 4, NULL, '2024-01-10 04:02:39');
 
 --
 -- Indexes for dumped tables
@@ -528,8 +528,7 @@ ALTER TABLE `properties`
 ALTER TABLE `reports`
   ADD PRIMARY KEY (`id`),
   ADD KEY `advertise_id` (`ads_id`),
-  ADD KEY `report_form_id` (`report_form_id`),
-  ADD KEY `reports_ibfk_3` (`user_id`);
+  ADD KEY `report_form_id` (`report_form_id`);
 
 --
 -- Indexes for table `report_forms`
@@ -631,7 +630,7 @@ ALTER TABLE `roles`
 -- AUTO_INCREMENT for table `users`
 --
 ALTER TABLE `users`
-  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=24;
+  MODIFY `id` int(11) UNSIGNED NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=26;
 
 --
 -- Constraints for dumped tables
@@ -688,8 +687,7 @@ ALTER TABLE `properties`
 --
 ALTER TABLE `reports`
   ADD CONSTRAINT `reports_ibfk_1` FOREIGN KEY (`ads_id`) REFERENCES `advertises` (`id`),
-  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_form_id`) REFERENCES `report_forms` (`id`),
-  ADD CONSTRAINT `reports_ibfk_3` FOREIGN KEY (`user_id`) REFERENCES `users` (`id`);
+  ADD CONSTRAINT `reports_ibfk_2` FOREIGN KEY (`report_form_id`) REFERENCES `report_forms` (`id`);
 
 --
 -- Constraints for table `users`

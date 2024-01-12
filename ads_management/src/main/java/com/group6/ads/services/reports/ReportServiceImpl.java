@@ -31,8 +31,10 @@ public class ReportServiceImpl implements ReportService{
 
     @Override
     public Page<Report> findAll(String reportTypeName,Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
-        if (email != null && locationId != null) {
-            return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
+        if (email != null) {
+            if (locationId != null)
+                return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
+            return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
         }
         return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
     }
@@ -54,6 +56,7 @@ public class ReportServiceImpl implements ReportService{
                 .content(reportRequest.getContent())
                 .reply(null)
                 .status(1)
+                .guestEmail(reportRequest.getGuestEmail())
                 .reportTypeName(reportRequest.getReportTypeName())
                 .address(reportRequest.getAddress())
                 .latitude(reportRequest.getLatitude())

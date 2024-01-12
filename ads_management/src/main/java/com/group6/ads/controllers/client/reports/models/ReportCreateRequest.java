@@ -1,4 +1,4 @@
-package com.group6.ads.controllers.reports.models;
+package com.group6.ads.controllers.client.reports.models;
 
 import lombok.Data;
 

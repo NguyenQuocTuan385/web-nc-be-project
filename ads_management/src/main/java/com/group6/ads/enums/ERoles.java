@@ -3,8 +3,7 @@ package com.group6.ads.enums;
 public enum ERoles {
     WARD("WARD"),
     DISTRICT("DISTRICT"),
-    DEPARTMENT("DEPARTMENT"),
-    GUEST("GUEST");
+    DEPARTMENT("DEPARTMENT");
 
 
     final String label;

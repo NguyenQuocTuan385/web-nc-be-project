@@ -73,7 +73,7 @@ public class ContractController {
 
     @GetMapping("contracts/advertises/{advertiseId}")
     ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
-        Contract contract = contractService.findByAdvertiseIdOne(advertiseId);
+        Contract contract = contractService.findContractLicensingByAdvertiseId(advertiseId);
 
         if(contract != null) {
             return ResponseEntity.status(HttpStatus.OK).body(contract);

@@ -35,13 +35,12 @@ public class ContractServiceImpl implements ContractService {
     }
 
     @Override
-    public Contract findByAdvertiseIdOne(Integer advertiseId) {
-        Contract contract = contractRepository.findByAdvertiseId(advertiseId);
+    public Contract findContractLicensingByAdvertiseId(Integer advertiseId) {
+        Contract contract = contractRepository.findContractLicensingByAdvertiseId(advertiseId);
         if(contract != null) {
-            return contractRepository.findByAdvertiseId(advertiseId);
+            return contract;
         }
-
-        return null;
+        throw new NotFoundException("Contract not found");
     }
 
     @Override

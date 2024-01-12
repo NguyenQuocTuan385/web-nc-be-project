@@ -44,11 +44,16 @@ public class SecurityConfig {
                                     String.format("%s/authentication/reset-password", apiPrefix),
                                     String.format("%s/locations", apiPrefix),
                                     String.format("%s/locations/**", apiPrefix),
+                                    String.format("%s/locations-client/**", apiPrefix),
+                                    String.format("%s/locations-client", apiPrefix),
                                     String.format("%s/reports", apiPrefix),
                                     String.format("%s/reports/**", apiPrefix),
                                     String.format("%s/advertises", apiPrefix),
                                     String.format("%s/advertises/**", apiPrefix),
                                     String.format("%s/advertises/*/contracts", apiPrefix),
+                                    String.format("%s/advertises-client/**", apiPrefix),
+                                    String.format("%s/advertises-client", apiPrefix),
+                                    String.format("%s/reports-client", apiPrefix),
                                     String.format("%s/contracts", apiPrefix),
                                     String.format("%s/contracts/**", apiPrefix),
                                     String.format("%s/report-forms/**", apiPrefix),
@@ -66,7 +71,6 @@ public class SecurityConfig {
                             .permitAll()
                             .anyRequest()
                             .hasAnyRole(
-                                    ERoles.GUEST.toString(),
                                     ERoles.WARD.toString(),
                                     ERoles.DEPARTMENT.toString(),
                                     ERoles.DISTRICT.toString());
