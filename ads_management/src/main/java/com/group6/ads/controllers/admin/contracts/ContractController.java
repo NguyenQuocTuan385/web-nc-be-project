@@ -10,6 +10,8 @@ import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -22,6 +24,8 @@ import org.springframework.web.bind.annotation.*;
 public class ContractController {
     @NonNull
     final ContractService contractService;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
 
     @GetMapping("properties/{propertyId}/contracts")
     ResponseEntity<Page<Contract>> getAllContracts(
@@ -31,6 +35,8 @@ public class ContractController {
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+
+        logger.info("(getAllContracts) Get All Contracts with PropertyId " + propertyId + " , status " + status);
         return ResponseEntity.status(HttpStatus.OK)
                 .body(contractService.findAll(propertyId, search, status, pageRequestCustom));
     }
@@ -72,6 +78,7 @@ public class ContractController {
     @GetMapping("contracts/advertises/{advertiseId}")
     ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
         Contract contract = contractService.findContractLicensingByAdvertiseId(advertiseId);
+
 
         if(contract != null) {
             return ResponseEntity.status(HttpStatus.OK).body(contract);
