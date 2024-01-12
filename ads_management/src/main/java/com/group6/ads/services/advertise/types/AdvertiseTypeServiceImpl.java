@@ -1,6 +1,6 @@
 package com.group6.ads.services.advertise.types;
 
-import com.group6.ads.controllers.advertise.types.models.AdvertiseTypeRequest;
+import com.group6.ads.controllers.admin.advertise.types.models.AdvertiseTypeRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseType;
 import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeRepository;

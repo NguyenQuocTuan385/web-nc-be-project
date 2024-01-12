@@ -1,11 +1,9 @@
 package com.group6.ads.services.report.forms;
 
-import com.group6.ads.controllers.report.forms.models.ReportFormRequest;
+import com.group6.ads.controllers.admin.report.forms.models.ReportFormRequest;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;
-
-import java.util.List;
 
 /**
  * com.group6.ads.services.report.forms

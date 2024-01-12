@@ -1,6 +1,6 @@
 package com.group6.ads.services.roles;
 
-import com.group6.ads.controllers.roles.models.RoleRequest;
+import com.group6.ads.controllers.admin.roles.models.RoleRequest;
 import com.group6.ads.repositories.database.roles.Role;
 
 import java.util.List;

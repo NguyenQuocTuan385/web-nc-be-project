@@ -1,14 +1,13 @@
 package com.group6.ads.services.locations;
 
-import com.group6.ads.controllers.locations.models.LocationCreateRequest;
-import com.group6.ads.controllers.locations.models.LocationEditByRootRequest;
-import com.group6.ads.controllers.locations.models.LocationEditRequest;
-import com.group6.ads.controllers.locations.models.LocationStatusRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationCreateRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationEditByRootRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationEditRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationStatusRequest;
 import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.edit.LocationEdit;
 import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 
 
 public interface LocationService {

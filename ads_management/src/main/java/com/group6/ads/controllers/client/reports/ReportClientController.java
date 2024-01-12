@@ -1,6 +1,6 @@
 package com.group6.ads.controllers.client.reports;
 
-import com.group6.ads.controllers.reports.models.ReportCreateRequest;
+import com.group6.ads.controllers.admin.reports.models.ReportCreateRequest;
 import com.group6.ads.repositories.database.reports.Report;
 import com.group6.ads.services.reports.ReportService;
 import com.group6.ads.util.PageRequestCustom;

@@ -1,6 +1,6 @@
 package com.group6.ads.services.report.forms;
 
-import com.group6.ads.controllers.report.forms.models.ReportFormRequest;
+import com.group6.ads.controllers.admin.report.forms.models.ReportFormRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
@@ -9,8 +9,6 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
-
-import java.util.List;
 
 /**
  * com.group6.ads.services.report.forms

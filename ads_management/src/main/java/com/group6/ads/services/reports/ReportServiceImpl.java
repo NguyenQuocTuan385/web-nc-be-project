@@ -1,13 +1,10 @@
 package com.group6.ads.services.reports;
 
-import com.google.gson.Gson;
-import com.group6.ads.controllers.report.forms.models.ReportUpdateRequest;
-import com.group6.ads.controllers.reports.models.ReportCreateRequest;
+import com.group6.ads.controllers.admin.report.forms.models.ReportUpdateRequest;
+import com.group6.ads.controllers.admin.reports.models.ReportCreateRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
-import com.group6.ads.repositories.database.contracts.Contract;
-import com.group6.ads.repositories.database.locations.Location;
 import com.group6.ads.repositories.database.locations.LocationRepository;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
