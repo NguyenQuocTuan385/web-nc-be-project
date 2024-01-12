@@ -32,6 +32,7 @@ public class SecurityConfig {
                 .cors(corConf -> corConf.configurationSource(corsConfigurationSource()))
                 .csrf(AbstractHttpConfigurer::disable)
                 .addFilterBefore(jwtTokenFilter, UsernamePasswordAuthenticationFilter.class)
+
                 .authorizeHttpRequests(requests -> {
                     requests
                             .requestMatchers(
@@ -48,6 +49,8 @@ public class SecurityConfig {
                                     String.format("%s/advertises", apiPrefix),
                                     String.format("%s/advertises/**", apiPrefix),
                                     String.format("%s/advertises/*/contracts", apiPrefix),
+                                    String.format("%s/contracts", apiPrefix),
+                                    String.format("%s/contracts/**", apiPrefix),
                                     String.format("%s/report-forms/**", apiPrefix),
                                     String.format("%s/locations/*/advertises", apiPrefix),
                                     String.format("%s/report-forms", apiPrefix),
