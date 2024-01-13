@@ -106,6 +106,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
         advertise.setAdsType(advertiseType);
         advertise.setImages(advertiseEditByRootRequest.getImages());
         advertise.setStatusEdit(false);
+        advertise.setAdvertiseEdit(null);
         advertise.setUpdatedAt(LocalDateTime.now());
 
         return advertiseRepository.save(advertise);

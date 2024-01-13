@@ -25,6 +25,8 @@ public class AdvertiseEdit {
     private Double width;
     private String content;
     private String images;
+    private Integer pillarQuantity;
+
 
     @JsonFormat(pattern="yyyy-MM-dd HH:mm:ss")
     private LocalDateTime createdAt;

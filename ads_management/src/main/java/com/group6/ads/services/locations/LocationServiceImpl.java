@@ -113,15 +113,7 @@ public class LocationServiceImpl implements LocationService {
         Location location = locationRepository.findById(locationId)
                 .orElseThrow(() -> new NotFoundException("Location not found"));
         location.setStatusEdit(locationStatusRequest.getStatusEdit());
-        if(locationStatusRequest.getLocationEditId()==null)
-        {
-            location.setLocationEdit(null);
-        }
-        else {
-            LocationEdit locationEdit = locationEditRepository.findById(locationStatusRequest.getLocationEditId())
-                    .orElseThrow(() -> new NotFoundException("Location edit not found"));
-            location.setLocationEdit(locationEdit);
-        }
+        location.setLocationEdit(null);
         return locationRepository.save(location);
     }
 
