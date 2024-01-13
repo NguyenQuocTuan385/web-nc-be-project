@@ -15,6 +15,8 @@ import com.group6.ads.util.RefreshTokenUtil;
 import jakarta.servlet.http.Cookie;
 import jakarta.servlet.http.HttpServletResponse;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.security.authentication.AuthenticationManager;
 import org.springframework.security.authentication.BadCredentialsException;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
@@ -34,6 +36,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
     private final JwtTokenUtil jwtTokenUtil;
     private final AuthenticationManager authenticationManager;
     private final RefreshTokenUtil refreshTokenUtil;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public User register(RegisterRequest registerRequest) throws Exception {
@@ -53,7 +56,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         String encodePassword = passwordEncoder.encode(password);
 
         usersCreated.setPassword(encodePassword);
-
+        logger.info("User created: {}", usersCreated);
         return userRepository.save(usersCreated);
     }
 
@@ -69,6 +72,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
         User user= userRepository.findByEmail(changePasswordRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
         user.setPassword(encodePassword);
+        logger.info("User changed password: {}", user);
         return userRepository.save(user);
     }
 
@@ -82,6 +86,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
 
         User user= userRepository.findByEmail(resetPasswordRequest.getEmail()).orElseThrow(() -> new NotFoundException("User not found"));
         user.setPassword(encodePassword);
+        logger.info("User reset password: {}", user);
         return userRepository.save(user);
     }
 
@@ -113,6 +118,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         map.put("refresh_token", rfToken);
         map.put("uid", existingUser.getId().toString());
 
+        logger.info("User logged in: {}", existingUser);
         return map;
     }
 
@@ -131,6 +137,7 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         HashMap<String, String> map = new HashMap<>();
         map.put("access_token", newAccessToken);
 
+        logger.info("User refreshed token: {}", user);
         return map;
     }
 
@@ -142,5 +149,6 @@ public class AuthenticationServiceImpl implements AuthenticationService{
         cookie.setHttpOnly(true);
         cookie.setPath("/");
         response.addCookie(cookie);
+        logger.info("User logged out");
     }
 }

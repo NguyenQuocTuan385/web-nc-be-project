@@ -7,6 +7,8 @@ import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.properties.PropertyRepository;
 import com.group6.ads.util.PageRequestCustom;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -16,52 +18,83 @@ import java.util.Objects;
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
     private final PropertyRepository propertyRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Property save(PropertyRequest properties) {
-        if(Objects.isNull(properties.getPropertyParentId())) {
+        try {
+            logger.info("Create new property");
+            if(Objects.isNull(properties.getPropertyParentId())) {
+                Property propertyCreated = Property.builder()
+                        .propertyParent(null)
+                        .code(properties.getCode())
+                        .name(properties.getName())
+                        .build();
+                return propertyRepository.save(propertyCreated);
+            }
+            Property propertyParent = propertyRepository.findById(properties.getPropertyParentId())
+                    .orElseThrow(() -> new NotFoundException("Property not found"));
             Property propertyCreated = Property.builder()
-                    .propertyParent(null)
+                    .propertyParent(propertyParent)
                     .code(properties.getCode())
                     .name(properties.getName())
                     .build();
             return propertyRepository.save(propertyCreated);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found property");
         }
-        Property propertyParent = propertyRepository.findById(properties.getPropertyParentId())
-                .orElseThrow(() -> new NotFoundException("Property not found"));
-        Property propertyCreated = Property.builder()
-                .propertyParent(propertyParent)
-                .code(properties.getCode())
-                .name(properties.getName())
-                .build();
-        return propertyRepository.save(propertyCreated);
     }
 
 
     @Override
     public Page<Property> findAllByPropertyParentId(Integer propertyParentId, String search, PageRequestCustom pageRequestCustom) {
-        return propertyRepository.findAllByPropertyParentId(propertyParentId, search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all property");
+            return propertyRepository.findAllByPropertyParentId(propertyParentId, search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found property");
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        if(propertyRepository.existsByPropertyParentId(id)) {
-            throw new NotFoundException("Property has child");
+        try {
+            logger.info("Delete property");
+            if(propertyRepository.existsByPropertyParentId(id)) {
+                throw new NotFoundException("Property has child");
+            }
+            propertyRepository.deleteById(id);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found property");
         }
-        propertyRepository.deleteById(id);
     }
 
     @Override
     public Property update(Integer id, PropertyUpdateRequest propertyRequest) {
-        Property property = propertyRepository.findById(id).orElseThrow(() -> new NotFoundException("Property not found"));
+        try {
+            logger.info("Update property");
+            Property property = propertyRepository.findById(id).orElseThrow(() -> new NotFoundException("Property not found"));
 
-        property.setCode(propertyRequest.getCode());
-        property.setName(propertyRequest.getName());
-        return propertyRepository.save(property);
+            property.setCode(propertyRequest.getCode());
+            property.setName(propertyRequest.getName());
+            return propertyRepository.save(property);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found property");
+        }
     }
 
     @Override
     public Page<Property> findAllDistrict(String search, PageRequestCustom pageRequestCustom) {
-        return propertyRepository.findAllDistrict(search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all district");
+            return propertyRepository.findAllDistrict(search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found property");
+        }
     }
 }

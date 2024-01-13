@@ -13,6 +13,8 @@ import com.group6.ads.repositories.database.reports.ReportRepository;
 import com.group6.ads.util.PageRequestCustom;
 import jakarta.transaction.Transactional;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -24,71 +26,107 @@ public class ReportServiceImpl implements ReportService{
     private final ReportRepository reportRepository;
     private final AdvertiseRepository advertiseRepository;
     private final ReportFormRepository reportFormRepository;
-    private final LocationRepository locationRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Page<Report> findAll(String reportTypeName,Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
-        if (email != null) {
-            if (locationId != null)
-                return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
-            return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all report");
+            if (email != null) {
+                if (locationId != null)
+                    return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
+                return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
+            }
+            return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found report");
         }
-        return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
     }
 
     @Override
     public Page<Report> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom) {
-        return reportRepository.findAll(propertyId, parentId, search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all report");
+            return reportRepository.findAll(propertyId, parentId, search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found report");
+        }
     }
 
     @Override
     public Report createReport(ReportCreateRequest reportRequest) {
-        Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
-        ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
+        try {
+            logger.info("Create new report");
+            Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
+            ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
 
-        Report newReport = Report.builder()
-                .fullName(reportRequest.getFullName())
-                .email(reportRequest.getEmail())
-                .phone(reportRequest.getPhone())
-                .content(reportRequest.getContent())
-                .reply(null)
-                .status(1)
-                .guestEmail(reportRequest.getGuestEmail())
-                .reportTypeName(reportRequest.getReportTypeName())
-                .address(reportRequest.getAddress())
-                .latitude(reportRequest.getLatitude())
-                .longitude(reportRequest.getLongitude())
-                .reportForm(rpForm)
-                .advertise(ad)
-                .createdAt(LocalDateTime.now())
-                .images(reportRequest.getImages())
-                .build();
+            Report newReport = Report.builder()
+                    .fullName(reportRequest.getFullName())
+                    .email(reportRequest.getEmail())
+                    .phone(reportRequest.getPhone())
+                    .content(reportRequest.getContent())
+                    .reply(null)
+                    .status(1)
+                    .guestEmail(reportRequest.getGuestEmail())
+                    .reportTypeName(reportRequest.getReportTypeName())
+                    .address(reportRequest.getAddress())
+                    .latitude(reportRequest.getLatitude())
+                    .longitude(reportRequest.getLongitude())
+                    .reportForm(rpForm)
+                    .advertise(ad)
+                    .createdAt(LocalDateTime.now())
+                    .images(reportRequest.getImages())
+                    .build();
 
-        return reportRepository.save(newReport);
+            return reportRepository.save(newReport);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found report");
+        }
     }
 
     @Override
     public Report updateReport(ReportUpdateRequest reportRequest, Integer reportId) {
-        Report currentReport = reportRepository.findById(reportId).orElseThrow();
+        try {
+            logger.info("Update report");
+            Report currentReport = reportRepository.findById(reportId).orElseThrow();
 
-        currentReport.setStatus(reportRequest.getStatus());
-        currentReport.setReply(reportRequest.getReply());
+            currentReport.setStatus(reportRequest.getStatus());
+            currentReport.setReply(reportRequest.getReply());
 
-        return reportRepository.save(currentReport);
+            return reportRepository.save(currentReport);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found report");
+        }
     }
 
     @Override
     @Transactional
     public void deleteReport(Integer reportId) {
-        Report rp = reportRepository
-                .findById(reportId)
-                .orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
+        try {
+            logger.info("Delete report");
+            Report rp = reportRepository
+                    .findById(reportId)
+                    .orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
 
-        reportRepository.delete(rp);
+            reportRepository.delete(rp);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found report");
+        }
     }
 
     @Override
     public Report findReportById(Integer reportId) {
-        return reportRepository.findById(reportId).orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
+        try {
+            logger.info("Find report by id");
+            return reportRepository.findById(reportId).orElseThrow(() -> new NotFoundException("Not found report with id " + reportId));
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found report");
+        }
     }
 }

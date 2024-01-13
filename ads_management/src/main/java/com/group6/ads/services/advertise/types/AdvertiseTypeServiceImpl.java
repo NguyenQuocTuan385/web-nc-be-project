@@ -7,6 +7,8 @@ import com.group6.ads.repositories.database.advertise.types.AdvertiseTypeReposit
 import com.group6.ads.util.PageRequestCustom;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -23,37 +25,63 @@ import java.time.LocalDateTime;
 public class AdvertiseTypeServiceImpl implements AdvertiseTypeService {
     @NonNull
     final AdvertiseTypeRepository advertiseTypeRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Page<AdvertiseType> findAll(String search, PageRequestCustom pageRequestCustom) {
-        return advertiseTypeRepository.findAll(search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all advertise type");
+            return advertiseTypeRepository.findAll(search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise type");
+        }
     }
 
     @Override
     public AdvertiseType createAdvertiseType(AdvertiseTypeRequest advertiseTypeRequest) {
-        return advertiseTypeRepository.save(AdvertiseType.builder()
-                .name(advertiseTypeRequest.getName())
-                .description(advertiseTypeRequest.getDescription())
-                .createdAt(LocalDateTime.now())
-                .build());
+        try {
+            logger.info("Create new advertise type");
+            AdvertiseType advertiseType = AdvertiseType.builder()
+                    .name(advertiseTypeRequest.getName())
+                    .description(advertiseTypeRequest.getDescription())
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            return advertiseTypeRepository.save(advertiseType);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise type");
+        }
     }
 
     @Override
     public AdvertiseType updateAdvertiseType(Integer id, AdvertiseTypeRequest advertiseTypeRequest) {
-        AdvertiseType advertiseType = advertiseTypeRepository
-                .findById(id)
-                .orElseThrow(() -> new NotFoundException("Property not found"));
+        try {
+            logger.info("Update advertise type");
+            AdvertiseType advertiseType = advertiseTypeRepository
+                    .findById(id)
+                    .orElseThrow(() -> new NotFoundException("Property not found"));
 
-        advertiseType.setName(advertiseTypeRequest.getName());
-        advertiseType.setDescription(advertiseTypeRequest.getDescription());
-        return advertiseTypeRepository.save(advertiseType);
+            advertiseType.setName(advertiseTypeRequest.getName());
+            advertiseType.setDescription(advertiseTypeRequest.getDescription());
+            return advertiseTypeRepository.save(advertiseType);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise type");
+        }
     }
 
     @Override
     public void deleteAdvertiseType(Integer id) {
-        AdvertiseType advertiseType = advertiseTypeRepository
-                .findById(id)
-                .orElseThrow(() -> new NotFoundException("Property not found"));
-        advertiseTypeRepository.delete(advertiseType);
+        try {
+            logger.info("Delete advertise type");
+            AdvertiseType advertiseType = advertiseTypeRepository
+                    .findById(id)
+                    .orElseThrow(() -> new NotFoundException("Property not found"));
+            advertiseTypeRepository.delete(advertiseType);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise type");
+        }
     }
 }

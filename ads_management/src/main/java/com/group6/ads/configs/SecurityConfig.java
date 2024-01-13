@@ -78,7 +78,8 @@ public class SecurityConfig {
                                     String.format("%s/users/**", apiPrefix),
                                     String.format("%s/properties/**", apiPrefix),
                                     String.format("%s/report-forms/**", apiPrefix),
-                                    String.format("%s/report-forms", apiPrefix)
+                                    String.format("%s/report-forms", apiPrefix),
+                                    String.format("%s/advertise-types/**", apiPrefix)
                             )
                             .hasAnyRole(
                                     ERoles.WARD.toString(),
