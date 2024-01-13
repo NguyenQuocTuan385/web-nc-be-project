@@ -1,6 +1,6 @@
 package com.group6.ads.services.advertise.forms;
 
-import com.group6.ads.controllers.advertise.forms.models.AdvertiseFormRequest;
+import com.group6.ads.controllers.admin.advertise.forms.models.AdvertiseFormRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;

@@ -1,8 +1,8 @@
 package com.group6.ads.services.users;
 
-import com.group6.ads.controllers.users.models.UserGuestRequest;
-import com.group6.ads.controllers.users.models.UserOTPRequest;
-import com.group6.ads.controllers.users.models.UserRequest;
+import com.group6.ads.controllers.admin.users.models.UserGuestRequest;
+import com.group6.ads.controllers.admin.users.models.UserOTPRequest;
+import com.group6.ads.controllers.admin.users.models.UserRequest;
 import com.group6.ads.repositories.database.users.User;
 import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;

@@ -1,6 +1,6 @@
 package com.group6.ads.services.location.types;
 
-import com.group6.ads.controllers.location.types.models.LocationTypeRequest;
+import com.group6.ads.controllers.admin.location.types.models.LocationTypeRequest;
 import com.group6.ads.repositories.database.location.types.LocationType;
 import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;

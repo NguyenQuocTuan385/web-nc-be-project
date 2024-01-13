@@ -1,10 +1,10 @@
 package com.group6.ads.services.advertises;
 
-import com.group6.ads.controllers.advertises.models.AdvertiseEditByRootRequest;
-import com.group6.ads.controllers.advertises.models.AdvertiseEditRequest;
-import com.group6.ads.controllers.advertises.models.AdvertiseLicensingRequest;
-import com.group6.ads.controllers.advertises.models.AdvertiseRequest;
-import com.group6.ads.controllers.advertises.models.AdvertiseStatusRequest;
+import com.group6.ads.controllers.admin.advertises.models.AdvertiseEditByRootRequest;
+import com.group6.ads.controllers.admin.advertises.models.AdvertiseEditRequest;
+import com.group6.ads.controllers.admin.advertises.models.AdvertiseLicensingRequest;
+import com.group6.ads.controllers.admin.advertises.models.AdvertiseRequest;
+import com.group6.ads.controllers.admin.advertises.models.AdvertiseStatusRequest;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.edit.AdvertiseEdit;
 import com.group6.ads.util.PageRequestCustom;

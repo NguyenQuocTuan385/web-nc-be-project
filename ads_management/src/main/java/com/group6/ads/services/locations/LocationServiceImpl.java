@@ -1,9 +1,9 @@
 package com.group6.ads.services.locations;
 
-import com.group6.ads.controllers.locations.models.LocationCreateRequest;
-import com.group6.ads.controllers.locations.models.LocationEditByRootRequest;
-import com.group6.ads.controllers.locations.models.LocationEditRequest;
-import com.group6.ads.controllers.locations.models.LocationStatusRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationCreateRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationEditByRootRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationEditRequest;
+import com.group6.ads.controllers.admin.locations.models.LocationStatusRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseForm;
 import com.group6.ads.repositories.database.advertise.forms.AdvertiseFormRepository;
@@ -25,11 +25,9 @@ import jakarta.validation.constraints.NotNull;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
-import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @Service
 @RequiredArgsConstructor
