@@ -18,9 +18,13 @@ public class ContractClientController {
     @NonNull
     final ContractService contractService;
 
-    @GetMapping("advertises-client/{advertiseId}/contracts")
-    ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
-        Contract contract = contractService.findContractLicensingByAdvertiseId(advertiseId);
-        return ResponseEntity.status(HttpStatus.OK).body(contract);
+    @GetMapping("/contracts-client/advertises/{advertiseId}")
+    ResponseEntity<?> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
+        try {
+            Contract contract = contractService.findContractLicensingByAdvertiseId(advertiseId);
+            return ResponseEntity.status(HttpStatus.OK).body(contract);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 }

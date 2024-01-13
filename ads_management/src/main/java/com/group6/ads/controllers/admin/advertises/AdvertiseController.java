@@ -37,45 +37,65 @@ public class AdvertiseController {
 
     @Operation(summary = "get advertise by id")
     @GetMapping("advertises/{id}")
-    public ResponseEntity<Advertise> findById(@PathVariable Integer id) {
-        return ResponseEntity.ok(advertiseService.findById(id));
+    public ResponseEntity<?> findById(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.ok(advertiseService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "get all advertise by location id")
     @GetMapping("locations/{locationId}/advertises")
-    public ResponseEntity<Page<Advertise>> findAllByLocationId(
+    public ResponseEntity<?> findAllByLocationId(
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize,
             @PathVariable Integer locationId) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(advertiseService.findAllByLocationId(locationId, search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.ok(advertiseService.findAllByLocationId(locationId, search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department create new advertise")
     @PostMapping("locations/{locationId}/advertises")
-    public ResponseEntity<Advertise> create(@PathVariable Integer locationId,
+    public ResponseEntity<?> create(@PathVariable Integer locationId,
             @RequestBody @Valid AdvertiseRequest advertiseRequest) {
-        return ResponseEntity.ok(advertiseService.create(locationId, advertiseRequest));
+        try {
+            return ResponseEntity.ok(advertiseService.create(locationId, advertiseRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department update advertise")
     @PutMapping("advertises/{advertiseId}")
-    public ResponseEntity<Advertise> updateByDCMS(@PathVariable Integer advertiseId,
+    public ResponseEntity<?> updateByDCMS(@PathVariable Integer advertiseId,
             @RequestBody @Valid AdvertiseEditByRootRequest advertiseEditByRootRequest) {
-        return ResponseEntity.ok(advertiseService.updateByDCMS(advertiseId, advertiseEditByRootRequest));
+        try {
+            return ResponseEntity.ok(advertiseService.updateByDCMS(advertiseId, advertiseEditByRootRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department update advertise license")
     @PutMapping("advertises/{advertiseId}/license")
-    public ResponseEntity<Advertise> updateLicense(@PathVariable Integer advertiseId,
+    public ResponseEntity<?> updateLicense(@PathVariable Integer advertiseId,
             @RequestBody @Valid AdvertiseLicensingRequest advertiseRequest) {
-        return ResponseEntity.ok(advertiseService.updateLicense(advertiseId, advertiseRequest));
+        try {
+            return ResponseEntity.ok(advertiseService.updateLicense(advertiseId, advertiseRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 
     @GetMapping("advertises")
-    public ResponseEntity<Page<Advertise>> findAllUnLicensingAdvertisements(
+    public ResponseEntity<?> findAllUnLicensingAdvertisements(
             @RequestParam(required = false, value = "propertyId", defaultValue = "")
             Integer propertyId,
             @RequestParam(required = false, value = "parentId", defaultValue = "")
@@ -86,35 +106,55 @@ public class AdvertiseController {
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(advertiseService.findAllUnLicensingAdvertisements(propertyId,parentId,search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.ok(advertiseService.findAllUnLicensingAdvertisements(propertyId,parentId,search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department delete advertise")
     @DeleteMapping("advertises/{advertiseId}")
-    public ResponseEntity<Void> deleteByRoot(@PathVariable Integer advertiseId) {
-        advertiseService.delete(advertiseId);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> deleteByRoot(@PathVariable Integer advertiseId) {
+        try {
+            advertiseService.delete(advertiseId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 
     @Operation(summary = "cultural department delete advertise edit")
     @DeleteMapping("advertises/edit/{advertiseId}")
-    public ResponseEntity<Void> deleteAdvertiseEdit(@PathVariable Integer advertiseId) {
-        advertiseService.deleteAdvertiseEdit(advertiseId);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> deleteAdvertiseEdit(@PathVariable Integer advertiseId) {
+        try {
+            advertiseService.deleteAdvertiseEdit(advertiseId);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department update advertise status")
     @PutMapping("advertises/{advertiseId}/status")
-    public ResponseEntity<Advertise> updateStatus(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseStatusRequest advertiseStatusRequest) {
-        return ResponseEntity.ok(advertiseService.updateStatus(advertiseId, advertiseStatusRequest));
+    public ResponseEntity<?> updateStatus(@PathVariable Integer advertiseId, @RequestBody @Valid AdvertiseStatusRequest advertiseStatusRequest) {
+        try {
+            return ResponseEntity.ok(advertiseService.updateStatus(advertiseId, advertiseStatusRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "officer update advertise by advertise id")
     @PostMapping("/advertises/{advertiseId}")
-    ResponseEntity<AdvertiseEdit> update(@PathVariable Integer advertiseId,
+    ResponseEntity<?> update(@PathVariable Integer advertiseId,
             @RequestBody AdvertiseEditRequest advertiseEditRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(advertiseService.update(advertiseId, advertiseEditRequest));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(advertiseService.update(advertiseId, advertiseEditRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

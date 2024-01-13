@@ -24,22 +24,30 @@ public class LocationClientController {
 
     @Operation(summary = "cultural department get all location")
     @GetMapping("locations-client")
-    public ResponseEntity<Page<Location>> getAll(
+    public ResponseEntity<?> getAll(
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "check exists advertises in location")
     @GetMapping("locations-client/{locationId}/exists-advertises")
-    public ResponseEntity<Boolean> checkExistsAdvertises(
+    public ResponseEntity<?> checkExistsAdvertises(
             @PathVariable Integer locationId) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.checkExistAdvertises(locationId));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.checkExistAdvertises(locationId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }
 

@@ -21,7 +21,7 @@ public class ReportClientController {
     private final ReportService reportService;
 
     @GetMapping("reports-client")
-    ResponseEntity<Page<Report>> getAllReports(
+    ResponseEntity<?> getAllReports(
         @RequestParam(required = false, value = "reportTypeName")
         String reportTypeName,
         @RequestParam(required = false, value = "locationId")
@@ -35,12 +35,20 @@ public class ReportClientController {
         @RequestParam(required = false, value = "pageSize", defaultValue = "10")
         Integer pageSize
     ){
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("reports-client")
-    ResponseEntity<Report> createReport(@RequestBody ReportCreateRequest reportCreateRequest){
-        return ResponseEntity.status(HttpStatus.OK).body(reportService.createReport(reportCreateRequest));
+    ResponseEntity<?> createReport(@RequestBody ReportCreateRequest reportCreateRequest){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(reportService.createReport(reportCreateRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

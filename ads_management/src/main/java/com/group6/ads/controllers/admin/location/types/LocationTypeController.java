@@ -10,6 +10,7 @@ import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -28,26 +29,42 @@ public class LocationTypeController {
     @NonNull
     final LocationTypeService locationTypeService;
     @PostMapping
-    public ResponseEntity<LocationType> create(@RequestBody @Valid LocationTypeRequest locationTypeRequest) {
-        return ResponseEntity.ok(locationTypeService.create(locationTypeRequest));
+    public ResponseEntity<?> create(@RequestBody @Valid LocationTypeRequest locationTypeRequest) {
+        try {
+            return ResponseEntity.ok(locationTypeService.create(locationTypeRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
     @GetMapping
-    public ResponseEntity<Page<LocationType>> findAll(
+    public ResponseEntity<?> findAll(
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(locationTypeService.findAll(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.ok(locationTypeService.findAll(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
     @PutMapping("{id}")
-    public ResponseEntity<LocationType> update(@RequestParam Integer id, @RequestBody @Valid LocationTypeRequest locationTypeRequest) {
-        return ResponseEntity.ok(locationTypeService.update(id, locationTypeRequest));
+    public ResponseEntity<?> update(@RequestParam Integer id, @RequestBody @Valid LocationTypeRequest locationTypeRequest) {
+        try {
+            return ResponseEntity.ok(locationTypeService.update(id, locationTypeRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
     @DeleteMapping("{id}")
-    public ResponseEntity<Void> delete(@RequestParam Integer id) {
-        locationTypeService.delete(id);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<?> delete(@RequestParam Integer id) {
+        try {
+            locationTypeService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

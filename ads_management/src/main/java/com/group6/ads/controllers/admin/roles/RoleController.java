@@ -19,23 +19,39 @@ public class RoleController {
     private final RoleService roleService;
 
     @GetMapping("")
-    ResponseEntity<List<Role>> getAllRoles() {
-        return ResponseEntity.status(HttpStatus.OK).body(roleService.findAll());
+    ResponseEntity<?> getAllRoles() {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(roleService.findAll());
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("")
-    ResponseEntity<Role> createRole(@RequestBody @Valid RoleRequest role) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(roleService.createRole(role));
+    ResponseEntity<?> createRole(@RequestBody @Valid RoleRequest role) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(roleService.createRole(role));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    ResponseEntity<Role> updateRole(@RequestBody @Valid RoleRequest role, @PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(roleService.updateRole(role, id));
+    ResponseEntity<?> updateRole(@RequestBody @Valid RoleRequest role, @PathVariable Integer id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(roleService.updateRole(role, id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    ResponseEntity<Void> deleteRole(@PathVariable Integer id) {
-        roleService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    ResponseEntity<?> deleteRole(@PathVariable Integer id) {
+        try {
+            roleService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

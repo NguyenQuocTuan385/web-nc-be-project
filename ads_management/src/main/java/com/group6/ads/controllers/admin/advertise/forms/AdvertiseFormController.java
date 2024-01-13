@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,29 +28,45 @@ public class AdvertiseFormController {
     final AdvertiseFormService advertiseFormService;
 
     @GetMapping
-    ResponseEntity<Page<AdvertiseForm>> findAll(
+    ResponseEntity<?> findAll(
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok().body(advertiseFormService.findAll(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.ok().body(advertiseFormService.findAll(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping
-    ResponseEntity<AdvertiseForm> create(@RequestBody @Valid AdvertiseFormRequest advertiseFormRequest) {
-        return ResponseEntity.ok().body(advertiseFormService.create(advertiseFormRequest));
+    ResponseEntity<?> create(@RequestBody @Valid AdvertiseFormRequest advertiseFormRequest) {
+        try {
+            return ResponseEntity.ok().body(advertiseFormService.create(advertiseFormRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("{id}")
-    ResponseEntity<AdvertiseForm> update(@PathVariable Integer id, @RequestBody @Valid AdvertiseFormRequest advertiseFormRequest) {
-        return ResponseEntity.ok().body(advertiseFormService.update(id, advertiseFormRequest));
+    ResponseEntity<?> update(@PathVariable Integer id, @RequestBody @Valid AdvertiseFormRequest advertiseFormRequest) {
+        try {
+            return ResponseEntity.ok().body(advertiseFormService.update(id, advertiseFormRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("{id}")
-    ResponseEntity<Void> delete(@PathVariable Integer id) {
-        advertiseFormService.delete(id);
-        return ResponseEntity.ok().build();
+    ResponseEntity<?> delete(@PathVariable Integer id) {
+        try {
+            advertiseFormService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

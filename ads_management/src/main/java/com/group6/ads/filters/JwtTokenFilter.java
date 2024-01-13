@@ -47,7 +47,7 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                     && SecurityContextHolder.getContext().getAuthentication() == null) {
                 User userDetails = (User) userDetailsService.loadUserByUsername(email);
 
-                if(jwtTokenUtil.validateToken(token, userDetails)) {
+                if (jwtTokenUtil.validateToken(token, userDetails)) {
                     UsernamePasswordAuthenticationToken authenticationToken =
                             new UsernamePasswordAuthenticationToken(
                                     userDetails,
@@ -59,9 +59,8 @@ public class JwtTokenFilter extends OncePerRequestFilter {
                 }
             }
             filterChain.doFilter(request, response); //enable bypass
-        }
-        catch (Exception e){
-            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.toString());
+        } catch (Exception e) {
+            response.sendError(HttpServletResponse.SC_UNAUTHORIZED, e.getMessage());
         }
     }
 }

@@ -24,20 +24,24 @@ public class PropertyController {
     final PropertyService propertyService;
     @Operation(summary = "Find all districts")
     @GetMapping
-    ResponseEntity<Page<Property>> findAllDistrict(
+    ResponseEntity<?> findAllDistrict(
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAllDistrict(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(propertyService.findAllDistrict(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "Find all ward by district id")
     @GetMapping("{propertyParentId}")
-    ResponseEntity<Page<Property>> findAllByPropertyParentId(
+    ResponseEntity<?> findAllByPropertyParentId(
             @PathVariable
             Integer propertyParentId,
             @RequestParam(required = false, value = "search", defaultValue = "")
@@ -46,28 +50,44 @@ public class PropertyController {
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity
-                .status(HttpStatus.OK)
-                .body(propertyService.findAllByPropertyParentId(propertyParentId, search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(propertyService.findAllByPropertyParentId(propertyParentId, search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department create new district")
     @PostMapping
-    ResponseEntity<Property> save(@RequestBody @Valid PropertyRequest properties) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(propertyService.save(properties));
+    ResponseEntity<?> save(@RequestBody @Valid PropertyRequest properties) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(propertyService.save(properties));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department update district")
     @PutMapping("{id}")
-    ResponseEntity<Property> update(@PathVariable Integer id, @RequestBody @Valid PropertyUpdateRequest propertyRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(propertyService.update(id, propertyRequest));
+    ResponseEntity<?> update(@PathVariable Integer id, @RequestBody @Valid PropertyUpdateRequest propertyRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(propertyService.update(id, propertyRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department delete district or ward")
     @DeleteMapping("{id}")
-    ResponseEntity<Void> delete(@PathVariable Integer id) {
-        propertyService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    ResponseEntity<?> delete(@PathVariable Integer id) {
+        try {
+            propertyService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

@@ -28,29 +28,45 @@ public class ReportFormController {
     final ReportFormService reportFormService;
 
     @GetMapping
-    ResponseEntity<Page<ReportForm>> findAll(
+    ResponseEntity<?> findAll(
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(reportFormService.findAll(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(reportFormService.findAll(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping
-    ResponseEntity<ReportForm> create(@RequestBody @Valid ReportFormRequest reportFormRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(reportFormService.create(reportFormRequest));
+    ResponseEntity<?> create(@RequestBody @Valid ReportFormRequest reportFormRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(reportFormService.create(reportFormRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("{id}")
-    ResponseEntity<ReportForm> update(@PathVariable Integer id, @RequestBody @Valid ReportFormRequest reportFormRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(reportFormService.update(id, reportFormRequest));
+    ResponseEntity<?> update(@PathVariable Integer id, @RequestBody @Valid ReportFormRequest reportFormRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(reportFormService.update(id, reportFormRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("{id}")
-    ResponseEntity<Void> delete(@PathVariable Integer id) {
-        reportFormService.delete(id);
-        return ResponseEntity.ok().build();
+    ResponseEntity<?> delete(@PathVariable Integer id) {
+        try {
+            reportFormService.delete(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

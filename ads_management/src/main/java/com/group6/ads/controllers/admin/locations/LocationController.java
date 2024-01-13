@@ -30,33 +30,45 @@ public class LocationController {
 
     @Operation(summary = "cultural department create new location")
     @PostMapping("locations")
-    public ResponseEntity<Location> create(@RequestBody @Valid LocationCreateRequest locationCreateRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(locationService.create(locationCreateRequest));
+    public ResponseEntity<?> create(@RequestBody @Valid LocationCreateRequest locationCreateRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(locationService.create(locationCreateRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department get all location")
     @GetMapping("locations")
-    public ResponseEntity<Page<Location>> getAll(
+    public ResponseEntity<?> getAll(
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "check exists advertises in location")
     @GetMapping("locations/{locationId}/exists-advertises")
-    public ResponseEntity<Boolean> checkExistsAdvertises(
+    public ResponseEntity<?> checkExistsAdvertises(
             @PathVariable Integer locationId) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.checkExistAdvertises(locationId));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.checkExistAdvertises(locationId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department get location with property id and parent id")
     @GetMapping("properties/locations")
-    public ResponseEntity<Page<Location>> getAllWithPropertyAndParent(
+    public ResponseEntity<?> getAllWithPropertyAndParent(
             @RequestParam(required = false, value = "propertyId[]", defaultValue = "")
             Integer[] propertyId,
             @RequestParam(required = false, value = "parentId[]", defaultValue = "")
@@ -68,12 +80,16 @@ public class LocationController {
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
         PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(propertyId, parentId, search, pageRequestCustom));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.findAll(propertyId, parentId, search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department get location by ward id")
     @GetMapping("properties/{propertyId}/locations")
-    public ResponseEntity<Page<Location>> getAllByPropertyId(
+    public ResponseEntity<?> getAllByPropertyId(
             @PathVariable Integer propertyId,
             @RequestParam(required = false, value = "search", defaultValue = "")
             String search,
@@ -81,32 +97,48 @@ public class LocationController {
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.getAllByPropertyId(propertyId, search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.getAllByPropertyId(propertyId, search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department delete location by location id")
     @DeleteMapping("locations/{locationId}")
-    public ResponseEntity<Void> delete(@PathVariable Integer locationId) {
-        locationService.delete(locationId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<?> delete(@PathVariable Integer locationId) {
+        try {
+            locationService.delete(locationId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "officer update location by location id")
     @PostMapping("/locations/{locationId}")
-    ResponseEntity<LocationEdit> update(@PathVariable Integer locationId, @RequestBody LocationEditRequest locationEditRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.update(locationId, locationEditRequest));
+    ResponseEntity<?> update(@PathVariable Integer locationId, @RequestBody LocationEditRequest locationEditRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.update(locationId, locationEditRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department update location by location id")
     @PutMapping("/locations/{locationId}")
-    ResponseEntity<Location> updateByRoot(@PathVariable Integer locationId, @RequestBody LocationEditByRootRequest locationEditByRootRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.updateByRoot(locationId, locationEditByRootRequest));
+    ResponseEntity<?> updateByRoot(@PathVariable Integer locationId, @RequestBody LocationEditByRootRequest locationEditByRootRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.updateByRoot(locationId, locationEditByRootRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department get location review")
     @GetMapping("locations/review")
-    public ResponseEntity<Page<Location>> findAllLocationReview(
+    public ResponseEntity<?> findAllLocationReview(
             @RequestParam(required = false, value = "propertyId", defaultValue = "")
             Integer propertyId,
             @RequestParam(required = false, value = "parentId", defaultValue = "")
@@ -117,35 +149,55 @@ public class LocationController {
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.findAllLocationReview(propertyId,parentId,search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.findAllLocationReview(propertyId,parentId,search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "cultural department review location by location id")
     @PutMapping("/locations/{locationId}/review")
-    ResponseEntity<Location> locationReview(@PathVariable Integer locationId, @RequestParam(required = false, value = "review", defaultValue = "true") Boolean review) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.locationReview(locationId, review));
+    ResponseEntity<?> locationReview(@PathVariable Integer locationId, @RequestParam(required = false, value = "review", defaultValue = "true") Boolean review) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.locationReview(locationId, review));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 
     @Operation(summary = "cultural department update status location by location id")
     @PutMapping("/locations/{locationId}/status")
-    ResponseEntity<Location> updateStatus(@PathVariable Integer locationId, @RequestBody LocationStatusRequest locationStatusRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.updateStatus(locationId, locationStatusRequest));
+    ResponseEntity<?> updateStatus(@PathVariable Integer locationId, @RequestBody LocationStatusRequest locationStatusRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.updateStatus(locationId, locationStatusRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 
     @Operation(summary = "cultural department delete location edit by location edit id")
     @DeleteMapping("locations/edit/{locationEditId}")
-    public ResponseEntity<Void> deleteLocationEdit(@PathVariable Integer locationEditId) {
-        locationService.deleteLocationEdit(locationEditId);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<?> deleteLocationEdit(@PathVariable Integer locationEditId) {
+        try {
+            locationService.deleteLocationEdit(locationEditId);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @Operation(summary = "officer get location by id")
     @GetMapping("locations/{locationId}")
-    ResponseEntity<Location> getLocationById(@PathVariable Integer locationId) {
-        return ResponseEntity.status(HttpStatus.OK).body(locationService.getLocationById(locationId));
+    ResponseEntity<?> getLocationById(@PathVariable Integer locationId) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(locationService.getLocationById(locationId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }
 

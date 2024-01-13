@@ -42,29 +42,15 @@ public class SecurityConfig {
                                     String.format("%s/authentication/logout", apiPrefix),
                                     String.format("%s/authentication/change-password", apiPrefix),
                                     String.format("%s/authentication/reset-password", apiPrefix),
-                                    String.format("%s/locations", apiPrefix),
-                                    String.format("%s/locations/**", apiPrefix),
                                     String.format("%s/locations-client/**", apiPrefix),
                                     String.format("%s/locations-client", apiPrefix),
-                                    String.format("%s/reports", apiPrefix),
-                                    String.format("%s/reports/**", apiPrefix),
-                                    String.format("%s/advertises", apiPrefix),
-                                    String.format("%s/advertises/**", apiPrefix),
-                                    String.format("%s/advertises/*/contracts", apiPrefix),
+                                    String.format("%s/contracts-client/advertises/**", apiPrefix),
                                     String.format("%s/advertises-client/**", apiPrefix),
                                     String.format("%s/advertises-client", apiPrefix),
                                     String.format("%s/reports-client", apiPrefix),
                                     String.format("%s/reports-client/**", apiPrefix),
-                                    String.format("%s/advertise-forms", apiPrefix),
-                                    String.format("%s/contracts", apiPrefix),
-                                    String.format("%s/contracts/**", apiPrefix),
-                                    String.format("%s/contracts/advertises/**", apiPrefix),
-                                    String.format("%s/report-forms/**", apiPrefix),
-                                    String.format("%s/locations/*/advertises", apiPrefix),
-                                    String.format("%s/report-forms", apiPrefix),
-                                    String.format("%s/email/**", apiPrefix),
-                                    String.format("%s/users/**", apiPrefix),
-                                    String.format("%s/properties/**", apiPrefix),
+                                    String.format("%s/report-forms-client/**", apiPrefix),
+                                    String.format("%s/report-forms-client", apiPrefix),
 
                                     "/v3/api-docs/**",
                                     "/swagger-ui/**",
@@ -72,11 +58,31 @@ public class SecurityConfig {
 
                             )
                             .permitAll()
-                            .anyRequest()
+
+                            .requestMatchers(
+                                    String.format("%s/locations", apiPrefix),
+                                    String.format("%s/locations/**", apiPrefix),
+                                    String.format("%s/reports", apiPrefix),
+                                    String.format("%s/reports/**", apiPrefix),
+                                    String.format("%s/advertises", apiPrefix),
+                                    String.format("%s/advertises/**", apiPrefix),
+                                    String.format("%s/advertises/*/contracts", apiPrefix),
+                                    String.format("%s/advertise-forms", apiPrefix),
+                                    String.format("%s/contracts", apiPrefix),
+                                    String.format("%s/contracts/**", apiPrefix),
+                                    String.format("%s/contracts/advertises/**", apiPrefix),
+                                    String.format("%s/email/**", apiPrefix),
+                                    String.format("%s/users/**", apiPrefix),
+                                    String.format("%s/properties/**", apiPrefix),
+                                    String.format("%s/locations/*/advertises", apiPrefix),
+                                    String.format("%s/report-forms/**", apiPrefix),
+                                    String.format("%s/report-forms", apiPrefix)
+                            )
                             .hasAnyRole(
                                     ERoles.WARD.toString(),
                                     ERoles.DEPARTMENT.toString(),
-                                    ERoles.DISTRICT.toString());
+                                    ERoles.DISTRICT.toString())
+                            .anyRequest().authenticated();
                 });
         return http.build();
     }

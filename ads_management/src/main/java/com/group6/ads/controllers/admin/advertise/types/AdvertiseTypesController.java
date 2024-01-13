@@ -9,6 +9,7 @@ import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
+import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -27,29 +28,45 @@ public class AdvertiseTypesController {
     final AdvertiseTypeService advertiseTypeService;
 
     @GetMapping
-    ResponseEntity<Page<AdvertiseType>> findAl(
+    ResponseEntity<?> findAl(
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
             Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.ok(advertiseTypeService.findAll(search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.ok(advertiseTypeService.findAll(search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @PostMapping
-    ResponseEntity<AdvertiseType> createAdvertiseType(@RequestBody @Valid AdvertiseTypeRequest advertiseTypeRequest) {
-        return ResponseEntity.ok(advertiseTypeService.createAdvertiseType(advertiseTypeRequest));
+    ResponseEntity<?> createAdvertiseType(@RequestBody @Valid AdvertiseTypeRequest advertiseTypeRequest) {
+        try {
+            return ResponseEntity.ok(advertiseTypeService.createAdvertiseType(advertiseTypeRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("{id}")
-    ResponseEntity<AdvertiseType> updateAdvertiseType(@PathVariable Integer id, @RequestBody @Valid AdvertiseTypeRequest advertiseTypeRequest) {
-        return ResponseEntity.ok(advertiseTypeService.updateAdvertiseType(id, advertiseTypeRequest));
+    ResponseEntity<?> updateAdvertiseType(@PathVariable Integer id, @RequestBody @Valid AdvertiseTypeRequest advertiseTypeRequest) {
+        try {
+            return ResponseEntity.ok(advertiseTypeService.updateAdvertiseType(id, advertiseTypeRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("{id}")
-    ResponseEntity<Void> deleteAdvertiseType(@PathVariable Integer id) {
-        advertiseTypeService.deleteAdvertiseType(id);
-        return ResponseEntity.ok().build();
+    ResponseEntity<?> deleteAdvertiseType(@PathVariable Integer id) {
+        try {
+            advertiseTypeService.deleteAdvertiseType(id);
+            return ResponseEntity.ok().build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

@@ -36,14 +36,18 @@ public class EmailSenderController {
     @Autowired
     private OtpUtil otpUtil;
     @PostMapping("text")
-    public ResponseEntity<String> sendTextEmail(@RequestBody EmailSenderRequest emailSenderRequest) {
-        String to = emailSenderRequest.getToEmail();
-        String subject = emailSenderRequest.getSubject();
-        String body = emailSenderRequest.getBody();
+    public ResponseEntity<?> sendTextEmail(@RequestBody EmailSenderRequest emailSenderRequest) {
+        try {
+            String to = emailSenderRequest.getToEmail();
+            String subject = emailSenderRequest.getSubject();
+            String body = emailSenderRequest.getBody();
 
-        emailSenderService.sendTextEmail(to, subject, body);
+            emailSenderService.sendTextEmail(to, subject, body);
 
-        return ResponseEntity.ok().body("Sent email successfully!");
+            return ResponseEntity.ok().body("Sent email successfully!");
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("/html")

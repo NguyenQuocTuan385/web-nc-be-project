@@ -24,89 +24,114 @@ import org.springframework.web.bind.annotation.*;
 public class ContractController {
     @NonNull
     final ContractService contractService;
-    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
 
     @GetMapping("properties/{propertyId}/contracts")
-    ResponseEntity<Page<Contract>> getAllContracts(
+    ResponseEntity<?> getAllContracts(
             @PathVariable Integer propertyId,
             @RequestParam(required = false, value = "status", defaultValue = "") Integer status,
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-
-        logger.info("(getAllContracts) Get All Contracts with PropertyId " + propertyId + " , status " + status);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(contractService.findAll(propertyId, search, status, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(contractService.findAll(propertyId, search, status, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("properties/contracts")
-    ResponseEntity<Page<Contract>> getContractsWithPropertyIds(
+    ResponseEntity<?> getContractsWithPropertyIds(
             @RequestParam(required = false, value = "propertyId[]", defaultValue = "") Integer[] propertyId,
             @RequestParam(required = false, value = "parentId[]", defaultValue = "") Integer[] parentId,
             @RequestParam(required = false, value = "status", defaultValue = "") Integer status,
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-
-        if (parentId.length == 0)
-            parentId = null;
-        if (propertyId.length == 0)
-            propertyId = null;
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(contractService.findAll(propertyId, parentId, search, status, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            if (parentId.length == 0)
+                parentId = null;
+            if (propertyId.length == 0)
+                propertyId = null;
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(contractService.findAll(propertyId, parentId, search, status, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("advertises/{advertiseId}/contracts")
-    ResponseEntity<Page<Contract>> getAllContractsByAdvertise(
+    ResponseEntity<?> getAllContractsByAdvertise(
             @PathVariable Integer advertiseId,
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
             @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1) Integer currentPage,
             @RequestParam(required = false, value = "pageSize", defaultValue = "10") Integer pageSize) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK)
-                .body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK)
+                    .body(contractService.findByAdvertiseId(advertiseId, search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("contracts/{id}")
-    ResponseEntity<Contract> getContractById(@PathVariable Long id) {
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
+    ResponseEntity<?> getContractById(@PathVariable Long id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
     }
 
     @GetMapping("contracts/advertises/{advertiseId}")
-    ResponseEntity<Contract> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
-        Contract contract = contractService.findContractLicensingByAdvertiseId(advertiseId);
-
-
-        if(contract != null) {
-            return ResponseEntity.status(HttpStatus.OK).body(contract);
+    ResponseEntity<?> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(contractService.findContractLicensingByAdvertiseId(advertiseId));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
         }
-
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(null);
     }
 
     @PostMapping("contracts")
-    ResponseEntity<Contract> createContract(@RequestBody @Valid ContractRequest contractRequest) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(contractService.createContract(contractRequest));
+    ResponseEntity<?> createContract(@RequestBody @Valid ContractRequest contractRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(contractService.createContract(contractRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("contracts/{id}")
-    ResponseEntity<Contract> updateContract(@PathVariable Long id,
+    ResponseEntity<?> updateContract(@PathVariable Long id,
             @RequestBody @Valid ContractUpdateRequest contractRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.updateContract(id, contractRequest));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(contractService.updateContract(id, contractRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("contracts/{id}/status")
-    ResponseEntity<Contract> updateStatusContract(@PathVariable Long id,
+    ResponseEntity<?> updateStatusContract(@PathVariable Long id,
             @RequestBody @Valid ContractUpdateStatusRequest contractRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(contractService.updateStatusContract(id, contractRequest));
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(contractService.updateStatusContract(id, contractRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("contracts/{id}")
-    ResponseEntity<String> deleteContract(@PathVariable Long id) {
-        contractService.deleteContract(id);
-        return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);
+    ResponseEntity<?> deleteContract(@PathVariable Long id) {
+        try {
+            contractService.deleteContract(id);
+            return ResponseEntity.status(HttpStatus.OK).body("Success delete contract with id " + id);
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 }

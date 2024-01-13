@@ -23,7 +23,7 @@ public class UserController {
     private final UserService userService;
 
     @GetMapping("")
-    ResponseEntity<Page<User>> getAllUsers(
+    ResponseEntity<?> getAllUsers(
             @RequestParam(required = false, value = "roleId")
             Integer roleId,
             @RequestParam(required = false, value = "search", defaultValue = "")
@@ -33,44 +33,76 @@ public class UserController {
             @RequestParam(required = false, value = "pageSize", defaultValue = "10")
             Integer pageSize
     ) {
-        PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findAll(roleId,search, pageRequestCustom));
+        try {
+            PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
+            return ResponseEntity.status(HttpStatus.OK).body(userService.findAll(roleId,search, pageRequestCustom));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<User> getUserById(@PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
+    public ResponseEntity<?> getUserById(@PathVariable Integer id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.findById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("")
-    public ResponseEntity<User> createUser(@RequestBody @Valid UserRequest user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+    public ResponseEntity<?> createUser(@RequestBody @Valid UserRequest user) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(userService.createUser(user));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PostMapping("/guest")
-    public ResponseEntity<User> createGuestUser(@RequestBody @Valid UserGuestRequest user) {
-        return ResponseEntity.status(HttpStatus.CREATED).body(userService.createGuestUser(user));
+    public ResponseEntity<?> createGuestUser(@RequestBody @Valid UserGuestRequest user) {
+        try {
+            return ResponseEntity.status(HttpStatus.CREATED).body(userService.createGuestUser(user));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<User> updateUser(@RequestBody @Valid UserRequest user, @PathVariable Integer id) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(user, id));
+    public ResponseEntity<?> updateUser(@RequestBody @Valid UserRequest user, @PathVariable Integer id) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.updateUser(user, id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deleteUser(@PathVariable Integer id) {
-        userService.delete(id);
-        return ResponseEntity.status(HttpStatus.OK).build();
+    public ResponseEntity<?> deleteUser(@PathVariable Integer id) {
+        try {
+            userService.delete(id);
+            return ResponseEntity.status(HttpStatus.OK).build();
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 
     @PostMapping("/checkOTP")
-    public ResponseEntity<Integer> checkOTP(@RequestBody UserOTPRequest userOtpRequest) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.checkOTP(userOtpRequest));
+    public ResponseEntity<?> checkOTP(@RequestBody UserOTPRequest userOtpRequest) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.checkOTP(userOtpRequest));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
     @GetMapping("FindByEmail/{email}")
-    public ResponseEntity<User> getUserByEmail(@PathVariable String email) {
-        return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmail(email));
+    public ResponseEntity<?> getUserByEmail(@PathVariable String email) {
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(userService.findByEmail(email));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
     }
 
 }
