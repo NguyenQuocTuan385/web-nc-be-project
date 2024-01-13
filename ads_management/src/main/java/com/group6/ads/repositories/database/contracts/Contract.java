@@ -28,6 +28,8 @@ public class Contract {
     private LocalDateTime startAt;
     @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime endAt;
+    @JsonFormat(pattern = "yyyy-MM-dd HH:mm:ss")
+    private LocalDateTime createdAt;
 
     private Integer status;
     private String images;
