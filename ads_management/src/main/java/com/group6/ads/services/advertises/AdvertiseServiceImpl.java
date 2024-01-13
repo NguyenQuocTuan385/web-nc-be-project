@@ -20,6 +20,8 @@ import com.group6.ads.util.PageRequestCustom;
 import jakarta.transaction.Transactional;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -45,156 +47,223 @@ public class AdvertiseServiceImpl implements AdvertiseService {
     UserRepository userRepository;
     @NonNull
     AdvertiseEditRepository advertiseEditRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public Page<Advertise> findAll(String search, PageRequestCustom pageRequestCustom) {
-        return advertiseRepository.findAll(search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all advertise");
+            return advertiseRepository.findAll(search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public Page<Advertise> findAllUnLicensingAdvertisements(Integer propertyId, Integer parentId, String search, PageRequestCustom pageRequestCustom) {
-        return advertiseRepository.findAllUnauthorizedAdvertisements(propertyId, parentId, search, pageRequestCustom.pageRequest());
+           try {
+                logger.info("Find all advertise");
+                return advertiseRepository.findAllUnauthorizedAdvertisements(propertyId, parentId, search, pageRequestCustom.pageRequest());
+            } catch (Exception e) {
+                logger.error(e.getMessage());
+                throw new NotFoundException("Not found advertise");
+            }
     }
 
     @Override
     public Advertise findById(Integer id) {
-        return advertiseRepository.findById(id).orElse(null);
+        try {
+            logger.info("Find advertise by id");
+            return advertiseRepository.findById(id).orElseThrow();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public Page<Advertise> findAllByLocationId(Integer locationId, String search,
                                                PageRequestCustom pageRequestCustom) {
-        return advertiseRepository.findAllByLocationId(locationId, search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all advertise by location id");
+            return advertiseRepository.findAllByLocationId(locationId, search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public Advertise create(Integer locationId, AdvertiseRequest advertiseRequest) {
-        Location location = locationRepository
-                .findById(locationId)
-                .orElseThrow();
-        AdvertiseType advertiseType = advertiseTypeRepository
-                .findById(advertiseRequest.getAdsTypeId())
-                .orElseThrow();
+        try {
+            logger.info("Create new advertise");
+            Location location = locationRepository
+                    .findById(locationId)
+                    .orElseThrow();
+            AdvertiseType advertiseType = advertiseTypeRepository
+                    .findById(advertiseRequest.getAdsTypeId())
+                    .orElseThrow();
 
-        Advertise newAdvertise = Advertise.builder()
-                .location(location)
-                .licensing(advertiseRequest.getLicensing())
-                .height(advertiseRequest.getHeight())
-                .width(advertiseRequest.getWidth())
-                .adsType(advertiseType)
-                .images(advertiseRequest.getImages())
-                .statusEdit(false)
-                .createdAt(LocalDateTime.now())
-                .updatedAt(LocalDateTime.now())
-                .build();
+            Advertise newAdvertise = Advertise.builder()
+                    .location(location)
+                    .licensing(advertiseRequest.getLicensing())
+                    .height(advertiseRequest.getHeight())
+                    .width(advertiseRequest.getWidth())
+                    .adsType(advertiseType)
+                    .pillarQuantity(advertiseRequest.getPillarQuantity())
+                    .images(advertiseRequest.getImages())
+                    .statusEdit(false)
+                    .createdAt(LocalDateTime.now())
+                    .updatedAt(LocalDateTime.now())
+                    .build();
 
-        return advertiseRepository.save(newAdvertise);
+            return advertiseRepository.save(newAdvertise);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public Advertise updateByDCMS(Integer advertiseId, AdvertiseEditByRootRequest advertiseEditByRootRequest) {
-        AdvertiseType advertiseType = advertiseTypeRepository
-                .findById(advertiseEditByRootRequest.getAdsTypeId())
-                .orElseThrow(() -> new NotFoundException("Advertise type not found"));
-        Advertise advertise = advertiseRepository
-                .findById(advertiseId)
-                .orElseThrow(() -> new NotFoundException("Advertise not found"));
+        try {
+            logger.info("Update advertise by DCMS");
+            AdvertiseType advertiseType = advertiseTypeRepository
+                    .findById(advertiseEditByRootRequest.getAdsTypeId())
+                    .orElseThrow(() -> new NotFoundException("Advertise type not found"));
+            Advertise advertise = advertiseRepository
+                    .findById(advertiseId)
+                    .orElseThrow(() -> new NotFoundException("Advertise not found"));
 
-        advertise.setLicensing(advertiseEditByRootRequest.getLicensing());
-        advertise.setHeight(advertiseEditByRootRequest.getHeight());
-        advertise.setWidth(advertiseEditByRootRequest.getWidth());
-        advertise.setAdsType(advertiseType);
-        advertise.setImages(advertiseEditByRootRequest.getImages());
-        advertise.setStatusEdit(false);
-        advertise.setAdvertiseEdit(null);
-        advertise.setUpdatedAt(LocalDateTime.now());
+            advertise.setLicensing(advertiseEditByRootRequest.getLicensing());
+            advertise.setHeight(advertiseEditByRootRequest.getHeight());
+            advertise.setWidth(advertiseEditByRootRequest.getWidth());
+            advertise.setAdsType(advertiseType);
+            advertise.setImages(advertiseEditByRootRequest.getImages());
+            advertise.setStatusEdit(false);
+            advertise.setAdvertiseEdit(null);
+            advertise.setUpdatedAt(LocalDateTime.now());
 
-        return advertiseRepository.save(advertise);
+            return advertiseRepository.save(advertise);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public Advertise updateLicense(Integer advertiseId, AdvertiseLicensingRequest advertiseRequest) {
-        Advertise advertise = advertiseRepository
-                .findById(advertiseId)
-                .orElseThrow(() -> new NotFoundException("Advertise not found"));
-        advertise.setLicensing(advertiseRequest.getLicensing());
-        advertise.setUpdatedAt(LocalDateTime.now());
-        return advertiseRepository.save(advertise);
-
+        try {
+            logger.info("Update license advertise");
+            Advertise advertise = advertiseRepository
+                    .findById(advertiseId)
+                    .orElseThrow(() -> new NotFoundException("Advertise not found"));
+            advertise.setLicensing(advertiseRequest.getLicensing());
+            advertise.setUpdatedAt(LocalDateTime.now());
+            return advertiseRepository.save(advertise);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public Advertise updateStatus(Integer advertiseId, AdvertiseStatusRequest advertiseStatusRequest) {
-        Advertise advertise = advertiseRepository
-                .findById(advertiseId)
-                .orElseThrow(() -> new NotFoundException("Advertise not found"));
-        if (advertiseStatusRequest.getAdvertiseEditId() == null) {
-            advertise.setAdvertiseEdit(null);
-        } else {
-            AdvertiseEdit advertiseEdit = advertiseEditRepository
-                    .findById(advertiseStatusRequest.getAdvertiseEditId())
-                    .orElseThrow(() -> new NotFoundException("Advertise edit not found"));
-            advertise.setAdvertiseEdit(advertiseEdit);
-        }
-        advertise.setStatusEdit(advertiseStatusRequest.getStatusEdit());
+        try {
+            logger.info("Update status advertise");
+            Advertise advertise = advertiseRepository
+                    .findById(advertiseId)
+                    .orElseThrow(() -> new NotFoundException("Advertise not found"));
+            if (advertiseStatusRequest.getAdvertiseEditId() == null) {
+                advertise.setAdvertiseEdit(null);
+            } else {
+                AdvertiseEdit advertiseEdit = advertiseEditRepository
+                        .findById(advertiseStatusRequest.getAdvertiseEditId())
+                        .orElseThrow(() -> new NotFoundException("Advertise edit not found"));
+                advertise.setAdvertiseEdit(advertiseEdit);
+            }
+            advertise.setStatusEdit(advertiseStatusRequest.getStatusEdit());
 
-        advertise.setUpdatedAt(LocalDateTime.now());
-        return advertiseRepository.save(advertise);
+            advertise.setUpdatedAt(LocalDateTime.now());
+            return advertiseRepository.save(advertise);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Override
     public void deleteAdvertiseEdit(Integer advertiseEditId) {
-        AdvertiseEdit advertiseEdit = advertiseEditRepository
-                .findById(advertiseEditId)
-                .orElseThrow(() -> new NotFoundException("Advertise edit not found"));
-        advertiseEditRepository.delete(advertiseEdit);
+        try {
+            logger.info("Delete advertise edit");
+            AdvertiseEdit advertiseEdit = advertiseEditRepository
+                    .findById(advertiseEditId)
+                    .orElseThrow(() -> new NotFoundException("Advertise edit not found"));
+            advertiseEditRepository.delete(advertiseEdit);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise edit");
+        }
     }
 
     @Override
     public void delete(Integer advertiseId) {
-        Advertise advertise = advertiseRepository
-                .findById(advertiseId)
-                .orElseThrow(() -> new NotFoundException("Advertise not found"));
-        advertiseRepository.delete(advertise);
+        try {
+            logger.info("Delete advertise");
+            Advertise advertise = advertiseRepository
+                    .findById(advertiseId)
+                    .orElseThrow(() -> new NotFoundException("Advertise not found"));
+            advertiseRepository.delete(advertise);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 
     @Transactional
     @Override
     public AdvertiseEdit update(Integer advertiseId, AdvertiseEditRequest advertiseEditRequest) {
-        AdvertiseType advertiseType = advertiseTypeRepository
-                .findById(advertiseEditRequest.getAdsTypeId())
-                .orElseThrow(() -> new NotFoundException("Advertise type not found"));
-        Advertise advertise = advertiseRepository
-                .findById(advertiseId)
-                .orElseThrow(() -> new NotFoundException("Advertise not found"));
-        User user = userRepository
-                .findById(advertiseEditRequest.getUserId())
-                .orElseThrow(() -> new NotFoundException("User not found"));
-        Location location = locationRepository
-                .findById(advertiseEditRequest.getLocationId())
-                .orElseThrow(() -> new NotFoundException("Location not found"));
+        try {
+            logger.info("Update advertise");
+            AdvertiseType advertiseType = advertiseTypeRepository
+                    .findById(advertiseEditRequest.getAdsTypeId())
+                    .orElseThrow(() -> new NotFoundException("Advertise type not found"));
+            Advertise advertise = advertiseRepository
+                    .findById(advertiseId)
+                    .orElseThrow(() -> new NotFoundException("Advertise not found"));
+            User user = userRepository
+                    .findById(advertiseEditRequest.getUserId())
+                    .orElseThrow(() -> new NotFoundException("User not found"));
+            Location location = locationRepository
+                    .findById(advertiseEditRequest.getLocationId())
+                    .orElseThrow(() -> new NotFoundException("Location not found"));
 
-        AdvertiseEdit advertiseEdit = AdvertiseEdit
-                .builder()
-                .adsType(advertiseType)
-                .content(advertiseEditRequest.getContent())
-                .user(user)
-                .createdAt(LocalDateTime.now())
-                .height(advertiseEditRequest.getHeight())
-                .width(advertiseEditRequest.getWidth())
-                .images(advertiseEditRequest.getImageUrls())
-                .licensing(advertiseEditRequest.getLicensing())
-                .location(location)
-                .build();
+            AdvertiseEdit advertiseEdit = AdvertiseEdit
+                    .builder()
+                    .adsType(advertiseType)
+                    .content(advertiseEditRequest.getContent())
+                    .user(user)
+                    .createdAt(LocalDateTime.now())
+                    .height(advertiseEditRequest.getHeight())
+                    .width(advertiseEditRequest.getWidth())
+                    .images(advertiseEditRequest.getImageUrls())
+                    .licensing(advertiseEditRequest.getLicensing())
+                    .location(location)
+                    .build();
 
-        advertiseEditRepository.save(advertiseEdit);
+            advertiseEditRepository.save(advertiseEdit);
 
-        advertise.setStatusEdit(false);
-        advertise.setAdvertiseEdit(advertiseEdit);
-        advertise.setUpdatedAt(LocalDateTime.now());
+            advertise.setStatusEdit(false);
+            advertise.setAdvertiseEdit(advertiseEdit);
+            advertise.setUpdatedAt(LocalDateTime.now());
 
-        advertiseRepository.save(advertise);
+            advertiseRepository.save(advertise);
 
-        return advertiseEdit;
+            return advertiseEdit;
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found advertise");
+        }
     }
 }
