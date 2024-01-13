@@ -40,6 +40,8 @@ public class SecurityConfig {
                                     String.format("%s/authentication/refresh", apiPrefix),
                                     String.format("%s/authentication/login", apiPrefix),
                                     String.format("%s/authentication/logout", apiPrefix),
+                                    String.format("%s/email/otp", apiPrefix),
+                                    String.format("%s/users/checkOTP", apiPrefix),
                                     String.format("%s/authentication/change-password", apiPrefix),
                                     String.format("%s/authentication/reset-password", apiPrefix),
                                     String.format("%s/locations-client/**", apiPrefix),
@@ -62,6 +64,7 @@ public class SecurityConfig {
                             .requestMatchers(
                                     String.format("%s/locations", apiPrefix),
                                     String.format("%s/locations/**", apiPrefix),
+                                    String.format("%s/locations/*/advertises", apiPrefix),
                                     String.format("%s/reports", apiPrefix),
                                     String.format("%s/reports/**", apiPrefix),
                                     String.format("%s/advertises", apiPrefix),
@@ -74,7 +77,6 @@ public class SecurityConfig {
                                     String.format("%s/email/**", apiPrefix),
                                     String.format("%s/users/**", apiPrefix),
                                     String.format("%s/properties/**", apiPrefix),
-                                    String.format("%s/locations/*/advertises", apiPrefix),
                                     String.format("%s/report-forms/**", apiPrefix),
                                     String.format("%s/report-forms", apiPrefix)
                             )

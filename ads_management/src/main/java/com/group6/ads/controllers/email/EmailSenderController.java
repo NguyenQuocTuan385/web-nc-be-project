@@ -75,6 +75,11 @@ public class EmailSenderController {
 
     @PostMapping("/otp")
     public ResponseEntity<String> sendOTPToEmail(@RequestBody OTPRequest otpRequest) {
+        Optional<User> user = userRepository.findByEmail(otpRequest.getEmail());
+        if(user.isEmpty()){
+            return  ResponseEntity.status(HttpStatus.NOT_FOUND)
+                    .body("Email not found");
+        }
         otpUtil.generateOTP();
         String otp = otpUtil.getOtp();
         LocalDateTime time = otpUtil.getTime();
@@ -82,15 +87,14 @@ public class EmailSenderController {
 
         String to = otpRequest.getEmail();
         String subject = otp+" là mã khôi phục tài khoản của bạn";
-
-        User user = userRepository.findByEmail(to).orElseThrow(() -> new NotFoundException("User not found"));
-        user.setOtp(otp);
-        user.setOtpExpTime(timeExpired);
-        userRepository.save(user);
+        User temp= user.get();
+        temp.setOtp(otp);
+        temp.setOtpExpTime(timeExpired);
+        userRepository.save(temp);
         Context context = new Context();
         context.setVariable("otp", otp);
-        context.setVariable("name", user.getName());
-       //thoi gian het han se la 3 phut
+        context.setVariable("name", temp.getName());
+        //thoi gian het han se la 3 phut
         /// convert to format dd/MM/yyyy HH:mm:ss
         String timeFormat= timeExpired.format(DateTimeFormatter.ofPattern("dd/MM/yyyy HH:mm"));
         context.setVariable("time", timeFormat);
