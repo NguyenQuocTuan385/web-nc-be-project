@@ -10,6 +10,8 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.util.Objects;
+
 @Service
 @RequiredArgsConstructor
 public class PropertyServiceImpl implements PropertyService{
@@ -17,6 +19,14 @@ public class PropertyServiceImpl implements PropertyService{
 
     @Override
     public Property save(PropertyRequest properties) {
+        if(Objects.isNull(properties.getPropertyParentId())) {
+            Property propertyCreated = Property.builder()
+                    .propertyParent(null)
+                    .code(properties.getCode())
+                    .name(properties.getName())
+                    .build();
+            return propertyRepository.save(propertyCreated);
+        }
         Property propertyParent = propertyRepository.findById(properties.getPropertyParentId())
                 .orElseThrow(() -> new NotFoundException("Property not found"));
         Property propertyCreated = Property.builder()
