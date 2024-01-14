@@ -111,11 +111,15 @@ public class UserServiceImpl implements UserService {
                     && !user.getPassword().equals("null")) {
                 foundUsers.setPassword(user.getPassword());
             }
+            Property property = null;
+            if (!Objects.isNull(user.getPropertyId()))
+                property = propertyRepository.findById(user.getPropertyId()).orElse(null);
+
             foundUsers.setEmail(user.getEmail());
             foundUsers.setPhone(user.getPhone());
             foundUsers.setBirthday(user.getBirthday());
             foundUsers.setAvatar(user.getAvatar());
-            foundUsers.setProperty(propertyRepository.findById(user.getPropertyId()).orElse(null));
+            foundUsers.setProperty(property);
             foundUsers.setRole(roleRepository.findById(user.getRoleId()).orElse(null));
 
             return UserRepository.save(foundUsers);
