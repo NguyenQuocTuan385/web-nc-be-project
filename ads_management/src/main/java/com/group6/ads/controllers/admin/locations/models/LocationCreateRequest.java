@@ -24,5 +24,5 @@ public class LocationCreateRequest {
     private Integer locationTypeId;
     @NotNull(message = "propertyId must not be null")
     private Integer propertyId;
-    private String images;
+    private String image;
 }
