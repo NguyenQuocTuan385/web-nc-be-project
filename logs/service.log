@@ -1,0 +1,229 @@
+2024-01-13 21:52:05,415 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:05,418 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:05,444 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] Not found Contracts With advertiseId 1
+2024-01-13 21:52:05,453 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@5c60f83c
+2024-01-13 21:52:05,498 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:05,500 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:05,508 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Not found Contracts With advertiseId 1
+2024-01-13 21:52:05,513 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@47b262dd
+2024-01-13 21:52:09,795 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:09,797 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] Not found Contracts With advertiseId 1
+2024-01-13 21:52:09,807 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:09,809 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] Not found Contracts With advertiseId 1
+2024-01-13 21:52:23,134 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:23,136 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] Not found Contracts With advertiseId 1
+2024-01-13 21:52:23,140 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:23,173 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@54ad32cd
+2024-01-13 21:52:23,207 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:23,210 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] Not found Contracts With advertiseId 1
+2024-01-13 21:52:23,211 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:23,230 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@3eea8195
+2024-01-13 21:52:23,243 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:23,245 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Not found Contracts With advertiseId 1
+2024-01-13 21:52:23,250 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:23,254 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@7bc3be99
+2024-01-13 21:52:27,799 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:27,809 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@36537ec7
+2024-01-13 21:52:27,817 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:27,820 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@c502ef8
+2024-01-13 21:52:31,990 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:31,992 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] Not found Contracts With advertiseId 1
+2024-01-13 21:52:32,001 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:32,007 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@644f0dfb
+2024-01-13 21:52:32,023 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:32,023 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:32,024 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Not found Contracts With advertiseId 1
+2024-01-13 21:52:32,033 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@a5756fc
+2024-01-13 21:52:32,073 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:32,075 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:52:32,076 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] Not found Contracts With advertiseId 1
+2024-01-13 21:52:32,080 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@5f000e69
+2024-01-13 21:52:35,904 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:35,906 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] Not found Contracts With advertiseId 1
+2024-01-13 21:52:35,917 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:52:35,918 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 1
+2024-01-13 21:54:40,040 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:54:40,043 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:54:40,045 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] Not found Contracts With advertiseId 1
+2024-01-13 21:54:40,049 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@4ed0b66b
+2024-01-13 21:54:40,059 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:54:40,061 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Not found Contracts With advertiseId 1
+2024-01-13 21:54:40,079 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:54:40,083 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 1
+2024-01-13 21:54:40,084 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 1
+2024-01-13 21:54:40,084 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@47b6f373
+2024-01-13 21:54:40,093 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-12] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 2
+2024-01-13 21:54:40,111 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-12] Found Contracts With advertiseId 2, contract com.group6.ads.repositories.database.contracts.Contract@2de3cddb
+2024-01-13 22:14:24,540 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-4] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 3
+2024-01-13 22:14:24,567 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-4] Not found Contracts With advertiseId 3
+2024-01-13 22:14:24,589 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-2] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 3
+2024-01-13 22:14:24,591 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-2] Not found Contracts With advertiseId 3
+2024-01-13 22:31:18,394 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: 3, search: , status: null
+2024-01-13 22:31:18,418 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] (findAll) Find All Contracts with propertyId: 3, search: , status: null
+2024-01-13 22:31:25,732 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-4] (findAll) Find All Contracts with propertyId: 3, search: , status: null
+2024-01-13 22:31:25,750 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: 3, search: , status: null
+2024-01-13 22:31:25,809 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: 3, search: , status: null
+2024-01-13 22:31:34,303 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findAll) Find All Contracts with propertyId: 3, search: , status: 1
+2024-01-13 22:31:35,138 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-4] (findAll) Find All Contracts with propertyId: 3, search: , status: 2
+2024-01-13 22:31:35,671 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: 3, search: , status: 3
+2024-01-13 22:31:37,724 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: 3, search: , status: null
+2024-01-13 22:40:51,340 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:51,342 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Not found Contracts With advertiseId 8
+2024-01-13 22:40:51,393 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-4] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:51,397 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-4] Not found Contracts With advertiseId 8
+2024-01-13 22:40:55,974 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:55,977 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] Not found Contracts With advertiseId 8
+2024-01-13 22:40:55,997 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:55,998 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 8
+2024-01-13 22:40:58,015 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:58,018 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Not found Contracts With advertiseId 8
+2024-01-13 22:40:58,064 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:58,065 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] Not found Contracts With advertiseId 8
+2024-01-13 22:40:58,443 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:40:58,445 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] Not found Contracts With advertiseId 8
+2024-01-13 22:41:00,841 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:00,843 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] Not found Contracts With advertiseId 8
+2024-01-13 22:41:00,853 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:00,854 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 8
+2024-01-13 22:41:03,911 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:03,913 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] Not found Contracts With advertiseId 8
+2024-01-13 22:41:03,955 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:03,956 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] Not found Contracts With advertiseId 8
+2024-01-13 22:41:06,786 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:06,788 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Not found Contracts With advertiseId 8
+2024-01-13 22:41:06,799 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:06,799 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] Not found Contracts With advertiseId 8
+2024-01-13 22:41:08,098 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:08,103 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Not found Contracts With advertiseId 8
+2024-01-13 22:41:08,159 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:41:08,161 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] Not found Contracts With advertiseId 8
+2024-01-13 22:42:42,073 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:42:42,087 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:42:42,114 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:42:42,138 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:43:14,710 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:43:14,722 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:43:14,750 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:43:14,764 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:43:36,567 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:43:36,569 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-7] Not found Contracts With advertiseId 10
+2024-01-13 22:43:36,616 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:43:36,618 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Not found Contracts With advertiseId 10
+2024-01-13 22:43:42,732 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 18
+2024-01-13 22:43:42,734 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 18
+2024-01-13 22:43:42,745 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 18
+2024-01-13 22:43:42,747 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] Not found Contracts With advertiseId 18
+2024-01-13 22:45:42,004 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:42,010 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 10
+2024-01-13 22:45:42,026 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:42,028 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-8] Not found Contracts With advertiseId 10
+2024-01-13 22:45:44,002 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:44,003 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Not found Contracts With advertiseId 10
+2024-01-13 22:45:44,052 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:44,055 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Not found Contracts With advertiseId 10
+2024-01-13 22:45:44,138 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:44,138 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-1] Not found Contracts With advertiseId 10
+2024-01-13 22:45:47,123 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:47,125 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Not found Contracts With advertiseId 10
+2024-01-13 22:45:47,135 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 10
+2024-01-13 22:45:47,136 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] Not found Contracts With advertiseId 10
+2024-01-13 22:47:04,582 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:47:04,583 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] Not found Contracts With advertiseId 8
+2024-01-13 22:47:04,604 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:47:04,605 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Not found Contracts With advertiseId 8
+2024-01-13 22:48:17,555 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:48:17,558 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] Not found Contracts With advertiseId 8
+2024-01-13 22:48:17,622 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 22:48:17,623 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] Not found Contracts With advertiseId 8
+2024-01-13 22:48:23,825 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:48:23,838 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:48:23,849 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:48:23,871 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 22:50:34,495 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 1
+2024-01-13 22:50:34,549 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 1
+2024-01-13 22:50:35,023 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 2
+2024-01-13 22:50:35,063 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 2
+2024-01-13 22:50:35,469 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:50:35,513 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:15,516 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:15,550 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:15,587 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:15,624 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:23,563 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:23,578 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:23,600 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 22:59:23,628 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-17] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:00:11,555 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:00:11,569 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:00:11,589 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:00:11,617 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:01:41,320 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:01:41,334 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:01:41,356 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:01:41,407 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:02:48,854 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:02:48,872 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:02:48,895 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:02:48,938 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:05:23,839 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:05:23,888 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:05:23,937 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:05:23,977 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:07:58,568 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:07:58,590 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:07:58,763 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:07:58,827 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-17] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:09:15,033 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:09:15,074 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-17] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:09:15,608 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 1
+2024-01-13 23:09:15,650 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 1
+2024-01-13 23:09:15,975 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 2
+2024-01-13 23:09:16,027 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 2
+2024-01-13 23:09:16,606 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:09:16,650 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:12:33,133 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:12:33,146 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:12:33,211 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:12:33,259 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:13:11,845 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:13:11,860 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:13:11,897 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:13:11,985 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:14:44,572 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:14:44,587 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:14:44,603 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-17] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:14:44,641 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:17:38,488 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:17:38,500 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:17:38,556 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-17] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:17:38,584 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 3
+2024-01-13 23:18:06,638 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 2
+2024-01-13 23:18:06,679 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 2
+2024-01-13 23:18:07,460 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 1
+2024-01-13 23:18:07,504 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: 1
+2024-01-13 23:18:07,831 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:18:07,869 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:20:46,610 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:20:46,631 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-17] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:20:46,647 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:20:46,675 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:23:48,645 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-15] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:23:48,671 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:23:48,681 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:23:48,711 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:28,974 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-5] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:28,995 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-13] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:29,100 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:29,150 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:52,208 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:52,224 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-14] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:52,238 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-6] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:24:52,254 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:25:05,553 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:25:05,564 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:25:05,580 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-10] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:25:05,598 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-3] (findAll) Find All Contracts with propertyId: null, parentId: [2], search: , status: null
+2024-01-13 23:46:49,453 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 23:46:49,459 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-11] Not found Contracts With advertiseId 8
+2024-01-13 23:46:49,483 INFO c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] (findContractLicensingByAdvertiseId) Find Contracts With status 1, advertiseId 8
+2024-01-13 23:46:49,483 WARN c.g.a.s.c.ContractServiceImpl [http-nio-8081-exec-9] Not found Contracts With advertiseId 8
