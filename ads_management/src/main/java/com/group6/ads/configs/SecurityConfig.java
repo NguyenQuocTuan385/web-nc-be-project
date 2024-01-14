@@ -53,7 +53,7 @@ public class SecurityConfig {
                                     String.format("%s/reports-client/**", apiPrefix),
                                     String.format("%s/report-forms-client/**", apiPrefix),
                                     String.format("%s/report-forms-client", apiPrefix),
-
+                                    String.format("%s/properties", apiPrefix),
                                     "/v3/api-docs/**",
                                     "/swagger-ui/**",
                                     "/swagger-ui.html"
