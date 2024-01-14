@@ -6,6 +6,10 @@ import com.group6.ads.controllers.admin.contracts.models.ContractUpdateStatusReq
 import com.group6.ads.repositories.database.contracts.Contract;
 import com.group6.ads.services.contracts.ContractService;
 import com.group6.ads.util.PageRequestCustom;
+import io.swagger.v3.oas.annotations.Operation;
+import io.swagger.v3.oas.annotations.Parameter;
+import io.swagger.v3.oas.annotations.media.Content;
+import io.swagger.v3.oas.annotations.media.ExampleObject;
 import jakarta.validation.Valid;
 import jakarta.validation.constraints.Min;
 import lombok.NonNull;
@@ -27,6 +31,13 @@ public class ContractController {
 
 
     @GetMapping("properties/{propertyId}/contracts")
+    @Operation(summary = "Get All contracts", parameters = {
+            @Parameter(name = "propertyId", description = "ID của phường, quận muốn tìm", example = "3"),
+            @Parameter(name = "status", description = "Trạng thái hợp đồng", example = ""),
+            @Parameter(name = "search", description = "Từ khóa muốn tìm", example = "3"),
+            @Parameter(name = "current", description = "trang hiện tại", example = "1"),
+            @Parameter(name = "pageSize", description = "Số lượng muốn hiển thị", example = "5")
+    })
     ResponseEntity<?> getAllContracts(
             @PathVariable Integer propertyId,
             @RequestParam(required = false, value = "status", defaultValue = "") Integer status,
@@ -42,6 +53,14 @@ public class ContractController {
         }
     }
 
+    @Operation(summary = "Lấy tất cả hợp đồng với id phường và id quận", parameters = {
+            @Parameter(name = "propertyId[]", description = "ID của phường muốn tìm", example = "[1]"),
+            @Parameter(name = "parentId[]", description = "ID của quận", example = "[2]"),
+            @Parameter(name = "status", description = "Trạng thái hợp đồng", example = ""),
+            @Parameter(name = "search", description = "Từ khóa muốn tìm", example = "3"),
+            @Parameter(name = "current", description = "trang hiện tại", example = "1"),
+            @Parameter(name = "pageSize", description = "Số lượng muốn hiển thị", example = "5")
+    })
     @GetMapping("properties/contracts")
     ResponseEntity<?> getContractsWithPropertyIds(
             @RequestParam(required = false, value = "propertyId[]", defaultValue = "") Integer[] propertyId,
@@ -64,6 +83,12 @@ public class ContractController {
     }
 
     @GetMapping("advertises/{advertiseId}/contracts")
+    @Operation(summary = "Lấy tất cả hợp đồng với id quảng cáo", parameters = {
+            @Parameter(name = "advertiseId", description = "ID của quảng cáo muốn tìm", example = "1"),
+            @Parameter(name = "search", description = "Từ khóa muốn tìm", example = "3"),
+            @Parameter(name = "current", description = "trang hiện tại", example = "1"),
+            @Parameter(name = "pageSize", description = "Số lượng muốn hiển thị", example = "5")
+    })
     ResponseEntity<?> getAllContractsByAdvertise(
             @PathVariable Integer advertiseId,
             @RequestParam(required = false, value = "search", defaultValue = "") String search,
@@ -79,6 +104,9 @@ public class ContractController {
     }
 
     @GetMapping("contracts/{id}")
+    @Operation(summary = "Lấy hợp đồng với id truyền vào", parameters = {
+            @Parameter(name = "id", description = "ID của hợp đồng muốn tìm", example = "1")
+    })
     ResponseEntity<?> getContractById(@PathVariable Long id) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(contractService.findById(id));
@@ -88,6 +116,9 @@ public class ContractController {
     }
 
     @GetMapping("contracts/advertises/{advertiseId}")
+    @Operation(summary = "Lấy hợp đồng với id của quảng cáo", parameters = {
+            @Parameter(name = "advertiseId", description = "ID của quảng cáo muốn tìm", example = "1")
+    })
     ResponseEntity<?> getContractByAdvertiseId(@PathVariable Integer advertiseId) {
         try {
             return ResponseEntity.status(HttpStatus.OK).body(contractService.findContractLicensingByAdvertiseId(advertiseId));
@@ -97,6 +128,7 @@ public class ContractController {
     }
 
     @PostMapping("contracts")
+    @Operation(summary = "Tạo hợp đồng mới")
     ResponseEntity<?> createContract(@RequestBody @Valid ContractRequest contractRequest) {
         try {
             return ResponseEntity.status(HttpStatus.CREATED).body(contractService.createContract(contractRequest));
@@ -106,6 +138,9 @@ public class ContractController {
     }
 
     @PutMapping("contracts/{id}")
+    @Operation(summary = "Update hợp đồng với id ", parameters = {
+            @Parameter(name = "id", description = "ID của hợp đồng muốn tìm", example = "1")
+    })
     ResponseEntity<?> updateContract(@PathVariable Long id,
             @RequestBody @Valid ContractUpdateRequest contractRequest) {
         try {
@@ -116,6 +151,9 @@ public class ContractController {
     }
 
     @PutMapping("contracts/{id}/status")
+    @Operation(summary = "Update status hợp đồng với id ", parameters = {
+            @Parameter(name = "id", description = "ID của hợp đồng muốn tìm", example = "1")
+    })
     ResponseEntity<?> updateStatusContract(@PathVariable Long id,
             @RequestBody @Valid ContractUpdateStatusRequest contractRequest) {
         try {
@@ -126,6 +164,9 @@ public class ContractController {
     }
 
     @DeleteMapping("contracts/{id}")
+    @Operation(summary = "Delete hợp đồng với id ", parameters = {
+            @Parameter(name = "id", description = "ID của hợp đồng muốn tìm", example = "1")
+    })
     ResponseEntity<?> deleteContract(@PathVariable Long id) {
         try {
             contractService.deleteContract(id);
