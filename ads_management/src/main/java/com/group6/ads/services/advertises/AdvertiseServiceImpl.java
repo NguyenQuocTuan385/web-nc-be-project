@@ -254,7 +254,7 @@ public class AdvertiseServiceImpl implements AdvertiseService {
 
             advertiseEditRepository.save(advertiseEdit);
 
-            advertise.setStatusEdit(false);
+            advertise.setStatusEdit(true);
             advertise.setAdvertiseEdit(advertiseEdit);
             advertise.setUpdatedAt(LocalDateTime.now());
 
