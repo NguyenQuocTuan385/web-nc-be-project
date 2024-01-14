@@ -53,4 +53,13 @@ public class ReportClientController {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
     }
+
+    @GetMapping("reports-client/{id}")
+    ResponseEntity<?> findReportById(@PathVariable Integer id){
+        try {
+            return ResponseEntity.status(HttpStatus.OK).body(reportService.findReportById(id));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
+        }
+    }
 }

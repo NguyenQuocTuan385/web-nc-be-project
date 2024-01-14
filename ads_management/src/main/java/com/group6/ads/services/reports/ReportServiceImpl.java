@@ -5,6 +5,8 @@ import com.group6.ads.controllers.admin.reports.models.ReportCreateRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
+import com.group6.ads.repositories.database.properties.Property;
+import com.group6.ads.repositories.database.properties.PropertyRepository;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
 import com.group6.ads.repositories.database.reports.Report;
@@ -26,6 +28,7 @@ public class ReportServiceImpl implements ReportService{
     private final ReportRepository reportRepository;
     private final AdvertiseRepository advertiseRepository;
     private final ReportFormRepository reportFormRepository;
+    private final PropertyRepository propertyRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
@@ -91,6 +94,7 @@ public class ReportServiceImpl implements ReportService{
                         .address(null)
                         .latitude(null)
                         .longitude(null)
+                        .property(null)
                         .reportForm(rpForm)
                         .advertise(ad)
                         .createdAt(LocalDateTime.now())
@@ -100,6 +104,7 @@ public class ReportServiceImpl implements ReportService{
                 return reportRepository.save(newReport);
             } else {
                 ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
+                Property property = propertyRepository.findById(reportRequest.getPropertyId()).orElseThrow();
                 Report newReport = Report.builder()
                         .fullName(reportRequest.getFullName())
                         .email(reportRequest.getEmail())
@@ -113,6 +118,7 @@ public class ReportServiceImpl implements ReportService{
                         .latitude(reportRequest.getLatitude())
                         .longitude(reportRequest.getLongitude())
                         .reportForm(rpForm)
+                        .property(property)
                         .advertise(null)
                         .createdAt(LocalDateTime.now())
                         .images(reportRequest.getImages())
