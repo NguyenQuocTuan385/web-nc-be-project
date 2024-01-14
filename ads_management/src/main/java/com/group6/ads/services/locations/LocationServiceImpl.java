@@ -110,7 +110,7 @@ public class LocationServiceImpl implements LocationService {
                     .property(property)
                     .createdAt(LocalDateTime.now())
                     .updatedAt(LocalDateTime.now())
-                    .images(locationCreateRequest.getImages())
+                    .images(locationCreateRequest.getImage())
                     .build();
 
             return locationRepository.save(location);
