@@ -32,7 +32,7 @@ public class ReportServiceImpl implements ReportService{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, Integer status,
+    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, Integer status, Integer adminPropertyId,
                                 String search, PageRequestCustom pageRequestCustom) {
         try {
             logger.info("Find all report");
@@ -54,6 +54,9 @@ public class ReportServiceImpl implements ReportService{
                                     pageRequestCustom.pageRequest());
                         }
                     }
+                }
+                else if (adminPropertyId != null) {
+                    return reportRepository.findAllByPropertyId(adminPropertyId, reportTypeName, search, pageRequestCustom.pageRequest());
                 }
                 return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
             }
