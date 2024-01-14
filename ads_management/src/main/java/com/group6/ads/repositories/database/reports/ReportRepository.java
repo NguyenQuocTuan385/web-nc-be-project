@@ -39,9 +39,33 @@ public interface ReportRepository extends JpaRepository<Report, Integer> {
     @Query("""
             SELECT r
             FROM Report r
+            WHERE (r.guestEmail = :email AND r.advertise.location.id = :locationId) AND (r.status = 1 OR r.status = 2)
+            AND (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
+            """)
+    Page<Report> findAllReportExceptSuccessfullyByEmailAndLocation(Integer locationId, String email, String search, Pageable pageable);
+
+    @Query("""
+            SELECT r
+            FROM Report r
             WHERE r.guestEmail = :email AND (r.reportTypeName = :reportTypeName or :reportTypeName is null)
             AND (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
             """)
     Page<Report> findAllByEmailAndReportTypeName(String email, String reportTypeName, String search, Pageable pageable);
+
+    @Query("""
+            SELECT r
+            FROM Report r
+            WHERE (r.advertise.location.id = :locationId)
+            AND (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
+            """)
+    Page<Report> findAllByLocationId(Integer locationId, String search, Pageable pageable);
+
+    @Query("""
+            SELECT r
+            FROM Report r
+            WHERE (r.advertise.location.id = :locationId) AND (r.status = 1 OR r.status = 2)
+            AND (r.fullName LIKE %:search% OR r.email LIKE %:search% OR r.phone LIKE %:search%)
+            """)
+    Page<Report> findAllReportsExceptSuccessfullyByLocation(Integer locationId, String search, Pageable pageable);
 
 }

@@ -5,7 +5,6 @@ import com.group6.ads.controllers.admin.reports.models.ReportCreateRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
-import com.group6.ads.repositories.database.locations.LocationRepository;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
 import com.group6.ads.repositories.database.reports.Report;
@@ -29,15 +28,31 @@ public class ReportServiceImpl implements ReportService{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
+    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, Integer status,
+                                String search, PageRequestCustom pageRequestCustom) {
         try {
             logger.info("Find all report");
             if (email != null) {
                 if (locationId != null)
                     return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
-                return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
+                else {
+                    return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
+                }
             }
-            return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
+            else {
+                if (locationId != null)
+                {
+                    if (status != null) {
+                        if (status == 1) {
+                            return reportRepository.findAllByLocationId(locationId, search, pageRequestCustom.pageRequest());
+                        } else {
+                            return reportRepository.findAllReportsExceptSuccessfullyByLocation(locationId, search,
+                                    pageRequestCustom.pageRequest());
+                        }
+                    }
+                }
+                return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new NotFoundException("Not found report");

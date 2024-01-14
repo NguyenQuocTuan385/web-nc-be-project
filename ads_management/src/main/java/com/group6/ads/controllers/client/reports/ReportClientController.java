@@ -28,6 +28,8 @@ public class ReportClientController {
         Integer locationId,
         @RequestParam (required = false, value = "email")
         String email,
+        @RequestParam (required = false, value = "status")
+        Integer status,
         @RequestParam(required = false, value = "search", defaultValue = "")
         String search,
         @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
@@ -37,7 +39,7 @@ public class ReportClientController {
     ){
         try {
             PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-            return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, search, pageRequestCustom));
+            return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, status, search, pageRequestCustom));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
