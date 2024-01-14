@@ -18,6 +18,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -74,28 +75,51 @@ public class ReportServiceImpl implements ReportService{
     public Report createReport(ReportCreateRequest reportRequest) {
         try {
             logger.info("Create new report");
-            Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
-            ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
+            if (Objects.equals(reportRequest.getReportTypeName(), "ADVERTISE")) {
+                Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
+                ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
 
-            Report newReport = Report.builder()
-                    .fullName(reportRequest.getFullName())
-                    .email(reportRequest.getEmail())
-                    .phone(reportRequest.getPhone())
-                    .content(reportRequest.getContent())
-                    .reply(null)
-                    .status(1)
-                    .guestEmail(reportRequest.getGuestEmail())
-                    .reportTypeName(reportRequest.getReportTypeName())
-                    .address(reportRequest.getAddress())
-                    .latitude(reportRequest.getLatitude())
-                    .longitude(reportRequest.getLongitude())
-                    .reportForm(rpForm)
-                    .advertise(ad)
-                    .createdAt(LocalDateTime.now())
-                    .images(reportRequest.getImages())
-                    .build();
+                Report newReport = Report.builder()
+                        .fullName(reportRequest.getFullName())
+                        .email(reportRequest.getEmail())
+                        .phone(reportRequest.getPhone())
+                        .content(reportRequest.getContent())
+                        .reply(null)
+                        .status(1)
+                        .guestEmail(reportRequest.getGuestEmail())
+                        .reportTypeName(reportRequest.getReportTypeName())
+                        .address(null)
+                        .latitude(null)
+                        .longitude(null)
+                        .reportForm(rpForm)
+                        .advertise(ad)
+                        .createdAt(LocalDateTime.now())
+                        .images(reportRequest.getImages())
+                        .build();
 
-            return reportRepository.save(newReport);
+                return reportRepository.save(newReport);
+            } else {
+                ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
+                Report newReport = Report.builder()
+                        .fullName(reportRequest.getFullName())
+                        .email(reportRequest.getEmail())
+                        .phone(reportRequest.getPhone())
+                        .content(reportRequest.getContent())
+                        .reply(null)
+                        .status(1)
+                        .guestEmail(reportRequest.getGuestEmail())
+                        .reportTypeName(reportRequest.getReportTypeName())
+                        .address(reportRequest.getAddress())
+                        .latitude(reportRequest.getLatitude())
+                        .longitude(reportRequest.getLongitude())
+                        .reportForm(rpForm)
+                        .advertise(null)
+                        .createdAt(LocalDateTime.now())
+                        .images(reportRequest.getImages())
+                        .build();
+
+                return reportRepository.save(newReport);
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new NotFoundException("Not found report");
