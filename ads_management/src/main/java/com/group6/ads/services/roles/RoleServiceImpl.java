@@ -5,6 +5,8 @@ import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.roles.Role;
 import com.group6.ads.repositories.database.roles.RoleRepository;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,38 +15,63 @@ import java.util.List;
 @RequiredArgsConstructor
 public class RoleServiceImpl implements RoleService {
     private final RoleRepository roleRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
     public List<Role> findAll() {
-        return roleRepository.findAll();
+        try {
+            logger.info("Find all role");
+            return roleRepository.findAll();
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found role");
+        }
     }
 
     @Override
     public Role createRole(RoleRequest role) {
-        Role roleCreated = Role.builder()
-                .code(role.getCode())
-                .description(role.getDescription())
-                .build();
-        return roleRepository.save(roleCreated);
+        try {
+            logger.info("Create new role");
+            Role roleCreated = Role.builder()
+                    .code(role.getCode())
+                    .description(role.getDescription())
+                    .build();
+            return roleRepository.save(roleCreated);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found role");
+        }
     }
 
     @Override
     public Role updateRole(RoleRequest role, Integer theId) {
-        Role foundRole = roleRepository.findById(theId).orElseThrow(() -> new NotFoundException("Role not found"));
+        try {
+            logger.info("Update role");
+            Role foundRole = roleRepository.findById(theId).orElseThrow(() -> new NotFoundException("Role not found"));
 
-        foundRole.setCode(role.getCode());
-        foundRole.setDescription(role.getDescription());
+            foundRole.setCode(role.getCode());
+            foundRole.setDescription(role.getDescription());
 
-        return roleRepository.save(foundRole);
+            return roleRepository.save(foundRole);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found role");
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        if(roleRepository.existsById(id)) {
-           roleRepository.deleteById(id);
-        }
-        else {
-            throw new NotFoundException("Role not found");
+        try {
+            logger.info("Delete role");
+            if(roleRepository.existsById(id)) {
+                roleRepository.deleteById(id);
+            }
+            else {
+                throw new NotFoundException("Role not found");
+            }
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found role");
         }
     }
 }

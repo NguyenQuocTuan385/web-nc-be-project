@@ -3,6 +3,8 @@ package com.group6.ads.services.email;
 import com.group6.ads.controllers.email.models.OTPRequest;
 import jakarta.mail.MessagingException;
 import jakarta.mail.internet.MimeMessage;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.beans.factory.annotation.Value;
 import org.springframework.mail.SimpleMailMessage;
@@ -21,10 +23,12 @@ public class EmailSenderService {
 
     @Autowired
     private TemplateEngine templateEngine;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     public void sendOTPToEmail(OTPRequest otpRequest, String subject, String templateName, Context context) {
         MimeMessage message = mailSender.createMimeMessage();
         try {
+            logger.info("Send OTP to email: {}", otpRequest.getEmail());
             MimeMessageHelper helper = new MimeMessageHelper(message, true, "UTF-8");
             helper.setTo(otpRequest.getEmail());
             helper.setSubject(subject);
@@ -36,6 +40,7 @@ public class EmailSenderService {
 
         } catch (MessagingException e) {
             // Xử lý ngoại lệ nếu có lỗi khi gửi email
+            logger.error(e.getMessage());
             e.printStackTrace();
         }
     }
@@ -44,13 +49,19 @@ public class EmailSenderService {
     public void sendTextEmail(String toEmail,
                           String subject,
                           String body) {
-        SimpleMailMessage message = new SimpleMailMessage();
-        message.setFrom(emailFrom);
-        message.setTo(toEmail);
-        message.setText(body);
-        message.setSubject(subject);
+        try {
+            logger.info("Send text email to email: {}", toEmail);
+            SimpleMailMessage message = new SimpleMailMessage();
+            message.setFrom(emailFrom);
+            message.setTo(toEmail);
+            message.setText(body);
+            message.setSubject(subject);
 
-        mailSender.send(message);
+            mailSender.send(message);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            e.printStackTrace();
+        }
     }
 
     public void sendHtmlEmail(String to, String subject, String htmlBody) throws MessagingException {
@@ -62,5 +73,6 @@ public class EmailSenderService {
         mimeMessageHelper.setText(htmlBody, true);
 
         mailSender.send(mimeMessage);
+        logger.info("Send html email to email: {}", to);
     }
 }

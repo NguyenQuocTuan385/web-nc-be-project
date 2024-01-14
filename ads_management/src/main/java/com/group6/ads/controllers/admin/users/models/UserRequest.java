@@ -31,7 +31,6 @@ public class UserRequest {
     @Column(name = "role_id")
     private Integer roleId;
 
-    @NotNull(message = "Property Id must not be null")
     @Column(name = "property_id")
     private Integer propertyId;
 

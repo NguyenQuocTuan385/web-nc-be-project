@@ -7,6 +7,8 @@ import com.group6.ads.repositories.database.location.types.LocationTypeRepositor
 import com.group6.ads.util.PageRequestCustom;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
@@ -23,33 +25,58 @@ import java.time.LocalDateTime;
 public class LocationTypeServiceImpl implements LocationTypeService{
     @NonNull
     final LocationTypeRepository locationTypeRepository;
+    private final Logger logger = LoggerFactory.getLogger(this.getClass());
     @Override
     public LocationType create(LocationTypeRequest locationTypeRequest) {
-        LocationType newLocationType = LocationType.builder()
-                .name(locationTypeRequest.getName())
-                .description(locationTypeRequest.getDescription())
-                .createdAt(LocalDateTime.now())
-                .build();
-        return locationTypeRepository.save(newLocationType);
+        try {
+            logger.info("Create new location type");
+            LocationType newLocationType = LocationType.builder()
+                    .name(locationTypeRequest.getName())
+                    .description(locationTypeRequest.getDescription())
+                    .createdAt(LocalDateTime.now())
+                    .build();
+            return locationTypeRepository.save(newLocationType);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found location type");
+        }
     }
 
     @Override
     public Page<LocationType> findAll(String search, PageRequestCustom pageRequestCustom) {
-        return locationTypeRepository.findAll(search, pageRequestCustom.pageRequest());
+        try {
+            logger.info("Find all location type");
+            return locationTypeRepository.findAll(search, pageRequestCustom.pageRequest());
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found location type");
+        }
     }
 
     @Override
     public LocationType update(Integer id, LocationTypeRequest locationTypeRequest) {
-        LocationType locationType = locationTypeRepository
-                .findById(id)
-                .orElseThrow(() -> new NotFoundException("Location type not found"));
-        locationType.setName(locationTypeRequest.getName());
-        locationType.setDescription(locationTypeRequest.getDescription());
-        return locationTypeRepository.save(locationType);
+        try {
+            logger.info("Update location type");
+            LocationType locationType = locationTypeRepository
+                    .findById(id)
+                    .orElseThrow(() -> new NotFoundException("Location type not found"));
+            locationType.setName(locationTypeRequest.getName());
+            locationType.setDescription(locationTypeRequest.getDescription());
+            return locationTypeRepository.save(locationType);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found location type");
+        }
     }
 
     @Override
     public void delete(Integer id) {
-        locationTypeRepository.deleteById(id);
+        try {
+            logger.info("Delete location type");
+            locationTypeRepository.deleteById(id);
+        } catch (Exception e) {
+            logger.error(e.getMessage());
+            throw new NotFoundException("Not found location type");
+        }
     }
 }
