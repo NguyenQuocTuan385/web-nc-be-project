@@ -7,7 +7,7 @@ import com.group6.ads.util.PageRequestCustom;
 import org.springframework.data.domain.Page;
 
 public interface ReportService {
-    Page<Report> findAll(String reportTypeName,Integer advertiseId, String email, Integer statusGetReports, String search, PageRequestCustom pageRequestCustom);
+    Page<Report> findAll(String reportTypeName,Integer advertiseId, String email, Integer status, Integer adminPropertyId, String search, PageRequestCustom pageRequestCustom);
 
     Page<Report> findAll(Integer[] propertyId, Integer[] parentId, String search, PageRequestCustom pageRequestCustom);
 

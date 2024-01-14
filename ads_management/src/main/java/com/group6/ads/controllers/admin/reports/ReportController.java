@@ -33,12 +33,14 @@ public class ReportController {
         String search,
         @RequestParam(required = false, value = "current", defaultValue = "1") @Min(1)
         Integer currentPage,
+        @RequestParam(required = false, value = "adminPropertyId") @Min(1)
+        Integer adminPropertyId,
         @RequestParam(required = false, value = "pageSize", defaultValue = "10")
         Integer pageSize
     ){
         try {
             PageRequestCustom pageRequestCustom = PageRequestCustom.of(currentPage, pageSize);
-            return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, status, search, pageRequestCustom));
+            return ResponseEntity.status(HttpStatus.OK).body(reportService.findAll(reportTypeName,locationId, email, status, adminPropertyId, search, pageRequestCustom));
         } catch (Exception e) {
             return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR).body(e.getMessage());
         }
