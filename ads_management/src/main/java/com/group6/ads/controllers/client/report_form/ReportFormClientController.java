@@ -1,12 +1,10 @@
-package com.group6.ads.controllers.client.forms;
+package com.group6.ads.controllers.client.report_form;
 
-import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.services.report.forms.ReportFormService;
 import com.group6.ads.util.PageRequestCustom;
 import jakarta.validation.constraints.Min;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
-import org.springframework.data.domain.Page;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;

@@ -15,6 +15,7 @@ import org.slf4j.LoggerFactory;
 import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.Arrays;
 
 @Service
@@ -85,6 +86,7 @@ public class ContractServiceImpl implements ContractService {
                     .images(contractRequest.getImages())
                     .status(2)
                     .advertise(advertiseOfContract)
+                    .createdAt(LocalDateTime.now())
                     .build();
 
             logger.info("Update contract with data {} successful", newContract);

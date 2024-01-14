@@ -39,6 +39,22 @@ public class PropertyController {
         }
     }
 
+    @Operation(summary = "Find Property By Ward District Address")
+    @GetMapping("/findByWardAndDistrict")
+    ResponseEntity<?> findPropertyByWardDistrictAddress(
+            @RequestParam(required = false, value = "ward")
+            String ward,
+            @RequestParam(required = false, value = "district")
+            String district) {
+        try {
+            return ResponseEntity
+                    .status(HttpStatus.OK)
+                    .body(propertyService.findPropertyByWardDistrictAddress(ward, district));
+        } catch (Exception e) {
+            return ResponseEntity.status(HttpStatus.NOT_FOUND).body(e.getMessage());
+        }
+    }
+
     @Operation(summary = "Find all ward by district id")
     @GetMapping("{propertyParentId}")
     ResponseEntity<?> findAllByPropertyParentId(

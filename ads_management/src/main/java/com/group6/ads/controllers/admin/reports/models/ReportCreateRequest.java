@@ -14,6 +14,7 @@ public class ReportCreateRequest {
     private Double longitude;
     private String address;
     private Integer reportFormId;
+    private Integer propertyId;
     private Integer advertiseId;
     private String images;
 }

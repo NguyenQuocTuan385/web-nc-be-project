@@ -26,4 +26,11 @@ public interface PropertyRepository extends JpaRepository<Property, Integer> {
                 AND (p.code LIKE %:search% OR p.name LIKE %:search%)
             """)
     Page<Property> findAllDistrict(String search, Pageable pageable);
+
+    @Query("""
+            SELECT p
+            FROM Property p
+            WHERE p.name LIKE %:ward% AND p.propertyParent.name LIKE %:district%
+            """)
+    Property findPropertyByWardDistrictAddress(String ward, String district);
 }

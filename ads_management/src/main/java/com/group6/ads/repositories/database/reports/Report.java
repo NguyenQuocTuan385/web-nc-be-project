@@ -1,6 +1,7 @@
 package com.group6.ads.repositories.database.reports;
 
 import com.group6.ads.repositories.database.advertises.Advertise;
+import com.group6.ads.repositories.database.properties.Property;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -38,6 +39,10 @@ public class Report {
     @ManyToOne
     @JoinColumn(name = "report_form_id", nullable = false)
     private ReportForm reportForm;
+
+    @ManyToOne
+    @JoinColumn(name = "property_id", nullable = true)
+    private Property property;
 
     @ManyToOne
     @JoinColumn(name = "ads_id", nullable = true)

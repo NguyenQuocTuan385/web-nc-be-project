@@ -73,6 +73,16 @@ public class PropertyServiceImpl implements PropertyService{
     }
 
     @Override
+    public Property findPropertyByWardDistrictAddress(String ward, String district) {
+        logger.info("Find Property By Ward District Address");
+        Property property =  propertyRepository.findPropertyByWardDistrictAddress(ward, district);
+        if (Objects.isNull(property)) {
+            throw new NotFoundException("Property not found");
+        }
+        return property;
+    }
+
+    @Override
     public Property update(Integer id, PropertyUpdateRequest propertyRequest) {
         try {
             logger.info("Update property");

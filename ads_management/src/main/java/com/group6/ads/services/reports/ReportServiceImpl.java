@@ -5,7 +5,8 @@ import com.group6.ads.controllers.admin.reports.models.ReportCreateRequest;
 import com.group6.ads.exceptions.NotFoundException;
 import com.group6.ads.repositories.database.advertises.Advertise;
 import com.group6.ads.repositories.database.advertises.AdvertiseRepository;
-import com.group6.ads.repositories.database.locations.LocationRepository;
+import com.group6.ads.repositories.database.properties.Property;
+import com.group6.ads.repositories.database.properties.PropertyRepository;
 import com.group6.ads.repositories.database.report.forms.ReportForm;
 import com.group6.ads.repositories.database.report.forms.ReportFormRepository;
 import com.group6.ads.repositories.database.reports.Report;
@@ -19,6 +20,7 @@ import org.springframework.data.domain.Page;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.Objects;
 
 @Service
 @RequiredArgsConstructor
@@ -26,18 +28,35 @@ public class ReportServiceImpl implements ReportService{
     private final ReportRepository reportRepository;
     private final AdvertiseRepository advertiseRepository;
     private final ReportFormRepository reportFormRepository;
+    private final PropertyRepository propertyRepository;
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
 
     @Override
-    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, String search, PageRequestCustom pageRequestCustom) {
+    public Page<Report> findAll(String reportTypeName,Integer locationId, String email, Integer status,
+                                String search, PageRequestCustom pageRequestCustom) {
         try {
             logger.info("Find all report");
             if (email != null) {
                 if (locationId != null)
                     return reportRepository.findAllByEmailAndLocation(locationId, email, search, pageRequestCustom.pageRequest());
-                return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
+                else {
+                    return reportRepository.findAllByEmailAndReportTypeName(email, reportTypeName, search, pageRequestCustom.pageRequest());
+                }
             }
-            return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
+            else {
+                if (locationId != null)
+                {
+                    if (status != null) {
+                        if (status == 1) {
+                            return reportRepository.findAllByLocationId(locationId, search, pageRequestCustom.pageRequest());
+                        } else {
+                            return reportRepository.findAllReportsExceptSuccessfullyByLocation(locationId, search,
+                                    pageRequestCustom.pageRequest());
+                        }
+                    }
+                }
+                return reportRepository.findAll(reportTypeName,search, pageRequestCustom.pageRequest());
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new NotFoundException("Not found report");
@@ -59,28 +78,54 @@ public class ReportServiceImpl implements ReportService{
     public Report createReport(ReportCreateRequest reportRequest) {
         try {
             logger.info("Create new report");
-            Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
-            ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
+            if (Objects.equals(reportRequest.getReportTypeName(), "ADVERTISE")) {
+                Advertise ad = advertiseRepository.findById(reportRequest.getAdvertiseId()).orElseThrow();
+                ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
 
-            Report newReport = Report.builder()
-                    .fullName(reportRequest.getFullName())
-                    .email(reportRequest.getEmail())
-                    .phone(reportRequest.getPhone())
-                    .content(reportRequest.getContent())
-                    .reply(null)
-                    .status(1)
-                    .guestEmail(reportRequest.getGuestEmail())
-                    .reportTypeName(reportRequest.getReportTypeName())
-                    .address(reportRequest.getAddress())
-                    .latitude(reportRequest.getLatitude())
-                    .longitude(reportRequest.getLongitude())
-                    .reportForm(rpForm)
-                    .advertise(ad)
-                    .createdAt(LocalDateTime.now())
-                    .images(reportRequest.getImages())
-                    .build();
+                Report newReport = Report.builder()
+                        .fullName(reportRequest.getFullName())
+                        .email(reportRequest.getEmail())
+                        .phone(reportRequest.getPhone())
+                        .content(reportRequest.getContent())
+                        .reply(null)
+                        .status(1)
+                        .guestEmail(reportRequest.getGuestEmail())
+                        .reportTypeName(reportRequest.getReportTypeName())
+                        .address(null)
+                        .latitude(null)
+                        .longitude(null)
+                        .property(null)
+                        .reportForm(rpForm)
+                        .advertise(ad)
+                        .createdAt(LocalDateTime.now())
+                        .images(reportRequest.getImages())
+                        .build();
 
-            return reportRepository.save(newReport);
+                return reportRepository.save(newReport);
+            } else {
+                ReportForm rpForm = reportFormRepository.findById(reportRequest.getReportFormId()).orElseThrow();
+                Property property = propertyRepository.findById(reportRequest.getPropertyId()).orElseThrow();
+                Report newReport = Report.builder()
+                        .fullName(reportRequest.getFullName())
+                        .email(reportRequest.getEmail())
+                        .phone(reportRequest.getPhone())
+                        .content(reportRequest.getContent())
+                        .reply(null)
+                        .status(1)
+                        .guestEmail(reportRequest.getGuestEmail())
+                        .reportTypeName(reportRequest.getReportTypeName())
+                        .address(reportRequest.getAddress())
+                        .latitude(reportRequest.getLatitude())
+                        .longitude(reportRequest.getLongitude())
+                        .reportForm(rpForm)
+                        .property(property)
+                        .advertise(null)
+                        .createdAt(LocalDateTime.now())
+                        .images(reportRequest.getImages())
+                        .build();
+
+                return reportRepository.save(newReport);
+            }
         } catch (Exception e) {
             logger.error(e.getMessage());
             throw new NotFoundException("Not found report");
